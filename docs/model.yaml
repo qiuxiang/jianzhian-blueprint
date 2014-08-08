@@ -1,0 +1,21 @@
+width: 深度，单位为一个标准板的长
+length: 并排房间数
+height: 层数
+merge:
+  -
+    height: 所在层
+    start: 起始房间序号
+    end: 结束房间序号
+  ...
+rooms:
+  - # 第i层
+    - # 半间，每个标准间有两个半间，默认是门窗
+      1 # 门
+      2 # 窗
+      3 # 墙
+      ...
+options:
+  stairs: # 楼梯
+    -
+      left # 在左边放置楼梯
+      right # 在右边放置楼梯

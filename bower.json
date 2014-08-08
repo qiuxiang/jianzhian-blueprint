@@ -1,0 +1,8 @@
+{
+  "name": "jza_sales",
+  "dependencies": {
+    "Snap.svg": "0.3.*",
+    "jquery": "1.11.*",
+    "bootstrap": "3.2.*"
+  }
+}
