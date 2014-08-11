@@ -39,6 +39,21 @@ module.exports = function(grunt) {
         }
       }
     },
+    uglify: {
+      scripts: {
+        files: {
+          'public/scripts/vendor.js': 'public/scripts/vendor.js',
+          'public/scripts/app.js': 'public/scripts/app.js'
+        }
+      }
+    },
+    cssmin: {
+      css: {
+        files: {
+          'public/styles/app.css': 'public/styles/app.css'
+        }
+      }
+    },
     watch: {
       scripts: {
         files: 'assets/scripts/*.js',
@@ -59,7 +74,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat')
   grunt.loadNpmTasks('grunt-contrib-jade')
   grunt.loadNpmTasks('grunt-contrib-less')
+  grunt.loadNpmTasks('grunt-contrib-uglify')
+  grunt.loadNpmTasks('grunt-contrib-cssmin')
   grunt.loadNpmTasks('grunt-contrib-watch')
 
+  grunt.registerTask('compress', ['uglify', 'cssmin'])
   grunt.registerTask('default', ['concat', 'jade', 'less'])
 }
