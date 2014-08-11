@@ -1,0 +1,26 @@
+.well
+  form.form-horizontal
+    .form-group
+      label.control-label.col-xs-2(for='input-height') 房间深度
+      .col-xs-4
+        input#input-height.form-control(type='text' ng-model='options.height')
+    .form-group
+      label.control-label.col-xs-2(for='input-width') 总长度
+      .col-xs-4
+        input#input-width.form-control(type='text' ng-model='options.width')
+    .form-group
+      label.control-label.col-xs-2(for='input-layer') 高度
+      .col-xs-4
+        input#input-layer.form-control(type='text' ng-model='options.layer')
+    .form-group
+      label.control-label.col-xs-2(for='input-scale') 缩放
+      .col-xs-4
+        input#input-scale.form-control(type='text' ng-model='options.scale')
+
+ul.nav.nav-tabs
+  li.active
+    a(href='#foundation' data-toggle='tab') 基础图
+
+.tab-content.blueprints
+  .tab-pane.active
+    blueprint-foundation(width='{{options.width}}' height='{{options.height}}' scale='{{options.scale}}')

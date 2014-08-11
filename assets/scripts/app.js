@@ -1,13 +1,22 @@
-$(document).ready(function () {
-  var snap = Snap('#svg')
-    , bigCircle = snap.circle(150, 150, 100).attr({
-        fill: '#bada55',
-        stroke: '#000',
-        strokeWidth: 5
+angular
+  .module('app', [
+    'ngRoute',
+    'controllers',
+    'directives',
+    'services',
+    'filters'
+  ])
+  .config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: 'views/app/main.html',
+        controller: 'Main'
       })
+  }])
+  .run(['$rootScope', function ($scope) {
+    $scope.kx = 1820
+  }])
 
-  Snap.load('../demo.svg', function (f) {
-    f.select('#base-right').transform((new Snap.Matrix()).scale(0.2))
-    snap.append(f)
-  })
+angular.element(document).ready(function () {
+  angular.bootstrap(document, ['app'])
 })

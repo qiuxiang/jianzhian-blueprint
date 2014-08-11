@@ -1,8 +1,9 @@
 {
   "name": "jza_sales",
   "dependencies": {
-    "Snap.svg": "0.3.*",
     "jquery": "1.11.*",
-    "bootstrap": "3.2.*"
+    "bootstrap": "3.2.*",
+    "angular": "1.2.*",
+    "angular-route": "1.2.*"
   }
 }
