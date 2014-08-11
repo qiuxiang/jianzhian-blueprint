@@ -1,6 +1,7 @@
 {
   "private": true,
   "devDependencies": {
+    "express": "4.8.*",
     "glob": "4.0.*",
     "grunt": "0.4.*",
     "grunt-contrib-copy": "0.5.*",
