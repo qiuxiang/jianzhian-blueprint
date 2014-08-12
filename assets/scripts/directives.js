@@ -4,7 +4,11 @@ angular.module('directives', [])
       restrict: 'E',
       templateUrl: 'views/directives/blueprints/foundation.html',
       controller: ['$scope', function ($scope) {
-        $scope.$watch('metadata', function () {
+        $scope.$watch('metadata.width', calculate)
+        $scope.$watch('metadata.height', calculate)
+        $scope.$watch('metadata.scale', calculate)
+
+        function calculate() {
           $scope.base_side = parseInt(1820 * $scope.metadata.scale)
           $scope.base_width = $scope.metadata.width * $scope.base_side
           $scope.base_height = $scope.metadata.height * $scope.base_side
@@ -22,7 +26,7 @@ angular.module('directives', [])
           $scope.inner_offset = parseInt(($scope.outer_diff - $scope.inner_diff) / 2)
           $scope.inner_width = $scope.base_width + $scope.inner_diff
           $scope.inner_height = $scope.base_height + $scope.inner_diff
-        })
+        }
       }]
     }
   })
