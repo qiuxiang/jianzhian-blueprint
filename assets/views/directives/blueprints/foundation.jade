@@ -1,7 +1,8 @@
 include ../../mixins
 +blueprint('基础图')
   +defs
-  text(x=20 y=40 style='font-size: 20') {{metadata.height}}KX{{metadata.width}}KX{{metadata.layer}}P板房基础图
+  text(x=20 y=40 style='font-size: 20')
+    | {{metadata.height}}KX{{metadata.width}}KX{{metadata.layer}}P板房基础图 (1:{{1/metadata.scale}})
   g(transform='translate({{(1100 - outer_width) / 2}}, 100)')
     g(fill='transparent')
       rect(

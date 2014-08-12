@@ -25,8 +25,12 @@
 
 ul.nav.nav-tabs
   li.active
-    a(href='#foundation' data-toggle='tab') 基础图
+    a(href='#blueprint-foundation' data-toggle='tab') 基础图
+  li
+    a(href='#blueprint-side' data-toggle='tab') 侧视图
 
 .tab-content.blueprints
-  .tab-pane.active
+  #blueprint-foundation.tab-pane.active
     blueprint-foundation
+  #blueprint-side.tab-pane
+    blueprint-side

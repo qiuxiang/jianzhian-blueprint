@@ -30,3 +30,9 @@ angular.module('directives', [])
       }]
     }
   })
+  .directive('blueprintSide', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'views/directives/blueprints/side.html'
+    }
+  })
