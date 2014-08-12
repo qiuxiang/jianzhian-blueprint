@@ -9,7 +9,7 @@ angular.module('directives', [])
         $scope.$watch('metadata.scale', calculate)
 
         function calculate() {
-          $scope.base_side = parseInt(1820 * $scope.metadata.scale)
+          $scope.base_side = parseInt($scope.defines.K * $scope.metadata.scale)
           $scope.base_width = $scope.metadata.width * $scope.base_side
           $scope.base_height = $scope.metadata.height * $scope.base_side
 
