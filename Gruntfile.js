@@ -86,6 +86,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin')
   grunt.loadNpmTasks('grunt-contrib-watch')
 
+  grunt.registerTask('build', ['copy', 'concat', 'jade', 'less'])
   grunt.registerTask('compress', ['uglify', 'cssmin'])
-  grunt.registerTask('default', ['copy', 'concat', 'jade', 'less'])
+  grunt.registerTask('default', ['build', 'compress'])
 }
