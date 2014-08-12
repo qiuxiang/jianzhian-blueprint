@@ -13,9 +13,6 @@ angular
         controller: 'Main'
       })
   }])
-  .run(['$rootScope', function ($scope) {
-    $scope.kx = 1820
-  }])
 
 angular.element(document).ready(function () {
   angular.bootstrap(document, ['app'])

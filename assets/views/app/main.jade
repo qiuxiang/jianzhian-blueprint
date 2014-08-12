@@ -2,20 +2,26 @@
   form.form-horizontal
     .form-group
       label.control-label.col-xs-2(for='input-height') 房间深度
-      .col-xs-4
-        input#input-height.form-control(type='text' ng-model='options.height')
+      .col-xs-3
+        .input-group
+          input#input-height.form-control(type='text' ng-model='metadata.height')
+          span.input-group-addon K
     .form-group
       label.control-label.col-xs-2(for='input-width') 总长度
-      .col-xs-4
-        input#input-width.form-control(type='text' ng-model='options.width')
+      .col-xs-3
+        .input-group
+          input#input-width.form-control(type='text' ng-model='metadata.width')
+          span.input-group-addon K
     .form-group
       label.control-label.col-xs-2(for='input-layer') 高度
-      .col-xs-4
-        input#input-layer.form-control(type='text' ng-model='options.layer')
+      .col-xs-3
+        .input-group
+          input#input-layer.form-control(type='text' ng-model='metadata.layer')
+          span.input-group-addon P
     .form-group
       label.control-label.col-xs-2(for='input-scale') 缩放
-      .col-xs-4
-        input#input-scale.form-control(type='text' ng-model='options.scale')
+      .col-xs-3
+        input#input-scale.form-control(type='text' ng-model='metadata.scale')
 
 ul.nav.nav-tabs
   li.active
@@ -23,4 +29,4 @@ ul.nav.nav-tabs
 
 .tab-content.blueprints
   .tab-pane.active
-    blueprint-foundation(width='{{options.width}}' height='{{options.height}}' scale='{{options.scale}}')
+    blueprint-foundation(width='{{metadata.width}}' height='{{metadata.height}}' scale='{{metadata.scale}}')

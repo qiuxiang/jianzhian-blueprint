@@ -1,6 +1,6 @@
 {
   "private": true,
-  "dependencies": {
+  "devDependencies": {
     "express": "4.8.*",
     "glob": "4.0.*",
     "grunt": "0.4.*",
