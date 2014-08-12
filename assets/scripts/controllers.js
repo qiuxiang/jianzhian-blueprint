@@ -8,6 +8,7 @@ angular.module('controllers', [])
       K: 1820,
       P: 950
     }
+
     $scope.metadata = {
       width: 6,
       height: 3,
@@ -15,9 +16,16 @@ angular.module('controllers', [])
       scale: 0.04,
       options: {
        stairs: {
-         left: false,
+         left: true,
          right: false
        }
       }
+    }
+
+    $scope.$watch('metadata.width', resetRooms)
+    $scope.$watch('metadata.layer', resetRooms)
+
+    function resetRooms() {
+      $scope.rooms = []
     }
   }])
