@@ -4,6 +4,14 @@ var path = require('path')
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    copy: {
+      fonts: {
+        expand: true,
+        flatten: true,
+        src: 'bower_components/bootstrap/fonts/*',
+        dest: 'public/fonts/'
+      }
+    },
     concat: {
       vendor: {
         src: [
@@ -79,5 +87,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch')
 
   grunt.registerTask('compress', ['uglify', 'cssmin'])
-  grunt.registerTask('default', ['concat', 'jade', 'less'])
+  grunt.registerTask('default', ['copy', 'concat', 'jade', 'less'])
 }
