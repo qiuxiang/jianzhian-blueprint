@@ -33,6 +33,18 @@ angular.module('directives', [])
   .directive('blueprintSide', function () {
     return {
       restrict: 'E',
-      templateUrl: 'views/directives/blueprints/side.html'
+      templateUrl: 'views/directives/blueprints/side.html',
+      controller: ['$scope', function ($scope) {
+        ;
+      }]
+    }
+  })
+  .directive('blueprintFlat', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'views/directives/blueprints/flat.html',
+      controller: ['$scope', function ($scope) {
+        ;
+      }]
     }
   })
