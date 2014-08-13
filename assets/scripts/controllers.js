@@ -5,6 +5,11 @@ angular.module('controllers', [])
         width: 1200,
         height: 800
       },
+      board_types: {
+        1: '窗',
+        2: '门',
+        3: '墙'
+      },
       K: 1820,
       P: 950
     }
@@ -27,6 +32,15 @@ angular.module('controllers', [])
     $scope.$watch('metadata.layer', resetRooms)
 
     function resetRooms() {
-      $scope.rooms = []
+      $scope.metadata.rooms = _.map(_.range(3, Number($scope.metadata.layer) + 1, 3), function () {
+        return [
+          _.map(_.range(0, $scope.metadata.width), function (i) {
+            return i % 2 ? 2 : 1
+          }),
+          _.map(_.range(0, $scope.metadata.width), function (i) {
+            return i % 2 ? 3 : 1
+          })
+        ]
+      })
     }
   }])

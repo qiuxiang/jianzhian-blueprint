@@ -9,32 +9,39 @@ br
         .page-header
           h3 基础
         .form-group
-          label.control-label.col-xs-2(for='input-height') 深度
-          .col-xs-4
+          label.control-label.col-xs-1(for='input-height') 深度
+          .col-xs-3
             .input-group
               input#input-height.form-control(type='text' ng-model='metadata.height')
               span.input-group-addon K
         .form-group
-          label.control-label.col-xs-2(for='input-width') 长度
-          .col-xs-4
+          label.control-label.col-xs-1(for='input-width') 长度
+          .col-xs-3
             .input-group
               input#input-width.form-control(type='text' ng-model='metadata.width')
               span.input-group-addon K
         .form-group
-          label.control-label.col-xs-2(for='input-layer') 高度
-          .col-xs-4
+          label.control-label.col-xs-1(for='input-layer') 高度
+          .col-xs-3
             .input-group
               input#input-layer.form-control(type='text' ng-model='metadata.layer')
               span.input-group-addon P
         .form-group
-          label.control-label.col-xs-2(for='input-scale') 缩放
-          .col-xs-4
+          label.control-label.col-xs-1(for='input-scale') 缩放
+          .col-xs-3
             input#input-scale.form-control(type='text' ng-model='metadata.scale')
+
+        .page-header
+          h3 房间布置
+        .form-group
+          h4.col-xs-12(ng-repeat='layer in metadata.rooms') 第{{$index}}层
+            p ……
+
         .page-header
           h3 选项
         .form-group
-          label.control-label.col-xs-2(for='input-stairs') 楼梯
-          .col-xs-4
+          label.control-label.col-xs-1(for='input-stairs') 楼梯
+          .col-xs-3
             .checkbox-inline
               label
                 input(type='checkbox' ng-model='metadata.options.stairs.left')

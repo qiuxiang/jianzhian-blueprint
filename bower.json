@@ -1,6 +1,7 @@
 {
   "name": "jza_sales",
   "dependencies": {
+    "lodash": "2.4.*",
     "jquery": "1.11.*",
     "bootstrap": "3.2.*",
     "angular": "1.2.*",
