@@ -15,6 +15,7 @@ module.exports = function(grunt) {
     concat: {
       vendor: {
         src: [
+          'bower_components/lodash/dist/lodash.js',
           'bower_components/jquery/dist/jquery.js',
           'bower_components/bootstrap/dist/js/bootstrap.js',
           'bower_components/angular/angular.js',

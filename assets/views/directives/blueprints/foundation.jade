@@ -3,80 +3,80 @@ include ../../mixins
   +defs
   text(x=20 y=40 style='font-size: 20')
     | {{metadata.height}}KX{{metadata.width}}KX{{metadata.layer}}P板房基础图 (1:{{1/metadata.scale}})
-  g(transform='translate({{(defines.blueprint.width - outer_width - 100) / 2}}, 100)')
+  g(transform='translate({{(defines.blueprint.width - outer.width - 100) / 2}}, 100)')
     g(fill='transparent')
       rect(
         x=0 y=0
-        width='{{outer_width}}'
-        height='{{outer_height}}')
+        width='{{outer.width}}'
+        height='{{outer.height}}')
       rect(
-        x='{{center_offset}}'
-        y='{{center_offset}}'
-        width='{{center_width}}'
-        height='{{center_height}}'
+        x='{{center.offset}}'
+        y='{{center.offset}}'
+        width='{{center.width}}'
+        height='{{center.height}}'
         stroke-dasharray='10 5')
       rect(
-        x='{{inner_offset}}'
-        y='{{inner_offset}}'
-        width='{{inner_width}}'
-        height='{{inner_height}}')
+        x='{{inner.offset}}'
+        y='{{inner.offset}}'
+        width='{{inner.width}}'
+        height='{{inner.height}}')
     g(text-anchor='middle')
-      g(transform='translate(0, {{outer_height + 20}})')
+      g(transform='translate(0, {{outer.height + 20}})')
         g
-          line(x1='{{center_offset}}' y1=0 x2='{{center_offset}}' y2=40)
-          line(x1='{{center_offset}}' y1=32 x2='{{center_width + center_offset}}' y2=32)
-          line(x1='{{center_width + center_offset}}' y1=0 x2='{{center_width + center_offset}}' y2=40)
-          text(x='{{center_width / 2 + center_offset}}' y=28)
+          line(x1='{{center.offset}}' y1=0 x2='{{center.offset}}' y2=40)
+          line(x1='{{center.offset}}' y1=32 x2='{{center.width + center.offset}}' y2=32)
+          line(x1='{{center.width + center.offset}}' y1=0 x2='{{center.width + center.offset}}' y2=40)
+          text(x='{{center.width / 2 + center.offset}}' y=28)
             | 中线尺寸 {{defines.K * metadata.width + 80}}
         g
           line(x1=0 y1=0 x2=0 y2=60)
-          line(x1=0 y1=52 x2='{{outer_width}}' y2=52)
-          line(x1='{{outer_width}}' y1=0 x2='{{outer_width}}' y2=60)
-          text(x='{{outer_width / 2}}' y=48) 边线尺寸 {{defines.K * metadata.width + 380}}
-      g.text-vertical(transform='translate({{outer_width + 20}}, 0)' letter-spacing=2)
+          line(x1=0 y1=52 x2='{{outer.width}}' y2=52)
+          line(x1='{{outer.width}}' y1=0 x2='{{outer.width}}' y2=60)
+          text(x='{{outer.width / 2}}' y=48) 边线尺寸 {{defines.K * metadata.width + 380}}
+      g.text-vertical(transform='translate({{outer.width + 20}}, 0)' letter-spacing=2)
         g
-          line(x1=0 y1='{{center_offset}}' x2=40 y2='{{center_offset}}')
-          line(x1=32 y1='{{center_offset}}' x2=32 y2='{{center_height + center_offset}}')
-          line(x1=0 y1='{{center_height + center_offset}}' x2=40 y2='{{center_height + center_offset}}')
-          text(x=24 y='{{outer_height / 2}}')
+          line(x1=0 y1='{{center.offset}}' x2=40 y2='{{center.offset}}')
+          line(x1=32 y1='{{center.offset}}' x2=32 y2='{{center.height + center.offset}}')
+          line(x1=0 y1='{{center.height + center.offset}}' x2=40 y2='{{center.height + center.offset}}')
+          text(x=24 y='{{outer.height / 2}}')
             tspan(letter-spacing=-1.2) 中线尺寸&nbsp
             tspan(letter-spacing=-3) {{defines.K * metadata.height + 80}}
         g
           line(x1=0 y1=0 x2=60 y2=0)
-          line(x1=0 y1='{{outer_height}}' x2=60 y2='{{outer_height}}')
-          line(x1=52 y1=0 x2=52 y2='{{outer_height}}')
-          text(x=44 y='{{outer_height / 2}}')
+          line(x1=0 y1='{{outer.height}}' x2=60 y2='{{outer.height}}')
+          line(x1=52 y1=0 x2=52 y2='{{outer.height}}')
+          text(x=44 y='{{outer.height / 2}}')
             tspan(letter-spacing=-1.2) 边线尺寸&nbsp
             tspan(letter-spacing=-3) {{defines.K * metadata.height + 380}}
       g
         line(
           x1=-20
-          y1='{{outer_height / 2}}'
+          y1='{{outer.height / 2}}'
           x2=0
-          y2='{{outer_height / 2}}'
+          y2='{{outer.height / 2}}'
           marker-end='url(#ArrowMend)')
         line(
-          x1='{{inner_offset + 28}}'
-          y1='{{outer_height / 2}}'
-          x2='{{inner_offset}}'
-          y2='{{outer_height / 2}}'
+          x1='{{inner.offset + 28}}'
+          y1='{{outer.height / 2}}'
+          x2='{{inner.offset}}'
+          y2='{{outer.height / 2}}'
           marker-end='url(#ArrowMend)')
-        text(x='{{inner_offset + 8}}' y='{{outer_height / 2 - 4}}' text-anchor='start') 300
+        text(x='{{inner.offset + 8}}' y='{{outer.height / 2 - 4}}' text-anchor='start') 300
       g
         line(
-          x1='{{outer_width / 2}}'
+          x1='{{outer.width / 2}}'
           y1=-20
-          x2='{{outer_width / 2}}'
+          x2='{{outer.width / 2}}'
           y2=0
           marker-end='url(#ArrowMend)')
         line(
-          x1='{{outer_width / 2}}'
-          y1='{{inner_offset + 38}}'
-          x2='{{outer_width / 2}}'
-          y2='{{inner_offset}}'
+          x1='{{outer.width / 2}}'
+          y1='{{inner.offset + 38}}'
+          x2='{{outer.width / 2}}'
+          y2='{{inner.offset}}'
           marker-end='url(#ArrowMend)')
         text.text-vertical(
-          x='{{outer_width / 2 - 8}}'
-          y='{{inner_offset + 8}}'
+          x='{{outer.width / 2 - 8}}'
+          y='{{inner.offset + 8}}'
           text-anchor='start'
           letter-spacing=-3) 300

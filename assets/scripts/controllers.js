@@ -28,11 +28,23 @@ angular.module('controllers', [])
       }
     }
 
-    $scope.$watch('metadata.width', resetRooms)
-    $scope.$watch('metadata.layer', resetRooms)
+    $scope.$watch('metadata.scale', function () {
+      $scope.scaled = { K: parseInt($scope.defines.K * $scope.metadata.scale) }
+      $scope.scaled.width = $scope.metadata.width * $scope.scaled.K
+      $scope.scaled.height = $scope.metadata.height * $scope.scaled.K
+    })
+
+    $scope.$watch('metadata.width', function () {
+      resetRooms()
+    })
+
+    $scope.$watch('metadata.layer', function () {
+      resetRooms()
+    })
 
     function resetRooms() {
       $scope.metadata.rooms = _.map(_.range(3, Number($scope.metadata.layer) + 1, 3), function () {
+        console.log($scope)
         return [
           _.map(_.range(0, $scope.metadata.width), function (i) {
             return i % 2 ? 2 : 1
