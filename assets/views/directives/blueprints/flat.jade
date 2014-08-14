@@ -1,2 +1,41 @@
 include ../../mixins
-+blueprint('平面布置图')
++blueprint('{{$parent.defines.numbers[$attrs.layer]}}层平面布置图')
+  g(transform='translate(160, 80)')
+    g(
+      ng-repeat='room in rooms'
+      transform='translate({{$parent.scaled.K * $index}}, 0)'
+      font-size=16
+      font-weight='bold'
+      text-anchor='middle')
+      rect.board(
+        ng-if='$first'
+        x=0 y=0
+        width=2.5 height='{{$parent.scaled.K * 3}}')
+      rect.board(
+        ng-if='room.board'
+        x='{{$parent.scaled.K}}' y=0
+        width=2.5 height='{{$parent.scaled.K * 3}}')
+      rect.board(
+        ng-if='room.back == $parent.defines.board_types.board'
+        x=0 y=0
+        width='{{$parent.scaled.K}}' height=2.5)
+      g(ng-if='room.back == $parent.defines.board_types.window')
+        rect.window(
+          x=0 y=0
+          width='{{$parent.scaled.K}}' height=2.5)
+        text(x='{{$parent.scaled.K / 2}}' y=16) C
+      g(ng-if='room.front == $parent.defines.board_types.window')
+        rect.window(
+          x=0 y='{{$parent.scaled.K * 3}}'
+          width='{{$parent.scaled.K}}' height=2.5)
+        text(x='{{$parent.scaled.K / 2}}' y='{{$parent.scaled.K * 3 - 2}}') C
+      g(ng-if='room.front == $parent.defines.board_types.gate')
+        rect.board(
+          x=0 y='{{$parent.scaled.K * 3}}'
+          width='{{$parent.scaled.K / 2}}' height=2.5)
+        rect.window(
+          x='{{$parent.scaled.K - 2.5}}' y='{{$parent.scaled.K * 2.5}}'
+          width=2.5 height='{{$parent.scaled.K / 2}}')
+        text(x='{{$parent.scaled.K * 0.75}}' y='{{$parent.scaled.K * 3 - 2}}') M
+        path(d='M{{$parent.scaled.K / 2}},{{$parent.scaled.K * 3}} Q{{$parent.scaled.K * 0.5}},{{$parent.scaled.K * 3 - $parent.scaled.K * 0.5}} {{$parent.scaled.K}},{{$parent.scaled.K * 3 - $parent.scaled.K * 0.5}}' stroke='silver' fill='none')
+

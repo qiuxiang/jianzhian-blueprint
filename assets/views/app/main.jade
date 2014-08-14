@@ -4,7 +4,7 @@ br
     .panel-heading
       h4.panel-title
         a(data-toggle='collapse' href='#panel-metadata') 表单
-    #panel-metadata.panel-collapse.collapse.in
+    #panel-metadata.panel-collapse.collapse
       form.form-horizontal.panel-body
         .page-header
           h3 基础
@@ -34,7 +34,7 @@ br
         .page-header
           h3 房间布置
         .form-group
-          h4.col-xs-12(ng-repeat='layer in metadata.rooms') 第{{$index}}层
+          h4.col-xs-12(ng-repeat='layer in metadata.rooms') 第{{defines.numbers[$index]}}层
             p ……
 
         .page-header
@@ -52,17 +52,17 @@ br
                 | 右
 
   ul.nav.nav-tabs
-    li.active
+    li
       a(href='#blueprint-foundation' data-toggle='tab') 基础图
     li
       a(href='#blueprint-side' data-toggle='tab') 侧视图
-    li
+    li.active
       a(href='#blueprint-flat' data-toggle='tab') 平面布置图
 
-.tab-content.blueprints
-  #blueprint-foundation.tab-pane.active
-    blueprint-foundation
-  #blueprint-side.tab-pane
-    blueprint-side
-  #blueprint-flat.tab-pane
-    blueprint-flat
+  .tab-content.blueprints
+    #blueprint-foundation.tab-pane
+      blueprint-foundation
+    #blueprint-side.tab-pane
+      blueprint-side
+    #blueprint-flat.tab-pane.active
+      blueprint-flat(ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
