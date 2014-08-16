@@ -1,1 +1,141 @@
-angular.module("app",["ngRoute","controllers","directives","services","filters"]).config(["$routeProvider",function(a){a.when("/",{templateUrl:"views/app/main.html",controller:"Main"})}]),angular.element(document).ready(function(){angular.bootstrap(document,["app"])}),angular.module("controllers",[]).controller("Main",["$scope",function(a){function b(){a.metadata.rooms=_.map(_.range(3,Number(a.metadata.layer)+1,3),function(){return _.map(_.range(0,a.metadata.width),function(b){return{front:b%2?a.defines.board_types.gate:a.defines.board_types.window,back:b%2?a.defines.board_types.board:a.defines.board_types.window,board:b%2==1}})})}a.defines={blueprint:{width:1140,height:760},board_types:{window:1,gate:2,board:3},K:1820,P:950},a.metadata={width:10,height:3,layer:6,scale:.04,merges:[],options:{stairs:{left:!0,right:!1}}},a.$watch("metadata.scale",function(){a.scaled={K:parseInt(a.defines.K*a.metadata.scale)},a.scaled.width=a.metadata.width*a.scaled.K,a.scaled.height=a.metadata.height*a.scaled.K}),a.$watch("metadata.width",function(){b()}),a.$watch("metadata.layer",function(){b()})}]),angular.module("directives",[]).directive("blueprintFoundation",function(){return{restrict:"E",templateUrl:"views/directives/blueprints/foundation.html",controller:["$scope",function(a){function b(){a.outer={diff:parseInt(380*a.metadata.scale)},a.outer.width=a.scaled.width+a.outer.diff,a.outer.height=a.scaled.height+a.outer.diff,a.center={diff:parseInt(80*a.metadata.scale)},a.center.offset=parseInt((a.outer.diff-a.center.diff)/2),a.center.width=a.scaled.width+a.center.diff,a.center.height=a.scaled.height+a.center.diff,a.inner={diff:parseInt(-220*a.metadata.scale)},a.inner.offset=parseInt((a.outer.diff-a.inner.diff)/2),a.inner.width=a.scaled.width+a.inner.diff,a.inner.height=a.scaled.height+a.inner.diff}a.$watch("metadata.width",b),a.$watch("metadata.height",b),a.$watch("metadata.scale",b)}]}}).directive("blueprintSide",function(){return{restrict:"E",templateUrl:"views/directives/blueprints/side.html",controller:["$scope",function(){}]}}).directive("blueprintFlat",function(){return{restrict:"E",templateUrl:"views/directives/blueprints/flat.html",controller:["$scope","$attrs",function(a,b){a.$attrs=b,a.clicked=function(b){$("#modal-flat").modal("show"),a.$parent.room=b}}]}}),angular.module("filters",[]).filter("t",function(){return function(a){var b={0:"一",1:"二",2:"三"};return b[a]}}),angular.module("services",[]);
+angular
+  .module('app', [
+    'ngRoute',
+    'controllers',
+    'directives',
+    'services',
+    'filters'
+  ])
+  .config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: 'views/app/main.html',
+        controller: 'Main'
+      })
+  }])
+
+angular.element(document).ready(function () {
+  angular.bootstrap(document, ['app'])
+})
+
+angular.module('controllers', [])
+  .controller('Main', ['$scope', function ($scope) {
+    $scope.defines = {
+      blueprint: {
+        width: 1140,
+        height: 760
+      },
+      board_types: {
+        window: 1,
+        gate: 2,
+        board: 3
+      },
+      K: 1820,
+      P: 950
+    }
+
+    $scope.metadata = {
+      width: 10,
+      height: 3,
+      layer: 6,
+      scale: 0.04,
+      options: {
+       stairs: {
+         left: true,
+         right: false
+       }
+      }
+    }
+
+    $scope.$watch('metadata.scale', function () {
+      $scope.scaled = { K: parseInt($scope.defines.K * $scope.metadata.scale) }
+      $scope.scaled.width = $scope.metadata.width * $scope.scaled.K
+      $scope.scaled.height = $scope.metadata.height * $scope.scaled.K
+    })
+
+    $scope.$watch('metadata.width', function () {
+      resetRooms()
+    })
+
+    $scope.$watch('metadata.layer', function () {
+      resetRooms()
+    })
+
+    function resetRooms() {
+      $scope.metadata.rooms = _.map(_.range(3, Number($scope.metadata.layer) + 1, 3), function () {
+        return  _.map(_.range(0, $scope.metadata.width), function (i) {
+          return {
+            front: i % 2 ? $scope.defines.board_types.gate : $scope.defines.board_types.window,
+            back: i % 2 ? $scope.defines.board_types.board : $scope.defines.board_types.window,
+            board: i % 2 == 1
+          }
+        })
+      })
+    }
+  }])
+
+angular.module('directives', [])
+  .directive('blueprintFoundation', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'views/directives/blueprints/foundation.html',
+      controller: ['$scope', function ($scope) {
+        $scope.$watch('metadata.width', calculate)
+        $scope.$watch('metadata.height', calculate)
+        $scope.$watch('metadata.scale', calculate)
+
+        function calculate() {
+          $scope.outer = { diff: parseInt(380 * $scope.metadata.scale) }
+          $scope.outer.width = $scope.scaled.width + $scope.outer.diff
+          $scope.outer.height = $scope.scaled.height + $scope.outer.diff
+
+          $scope.center = { diff: parseInt(80 * $scope.metadata.scale) }
+          $scope.center.offset = parseInt(($scope.outer.diff - $scope.center.diff) / 2)
+          $scope.center.width = $scope.scaled.width + $scope.center.diff
+          $scope.center.height = $scope.scaled.height + $scope.center.diff
+
+          $scope.inner = { diff: parseInt(-220 * $scope.metadata.scale) }
+          $scope.inner.offset = parseInt(($scope.outer.diff - $scope.inner.diff) / 2)
+          $scope.inner.width = $scope.scaled.width + $scope.inner.diff
+          $scope.inner.height = $scope.scaled.height + $scope.inner.diff
+        }
+      }]
+    }
+  })
+  .directive('blueprintSide', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'views/directives/blueprints/side.html',
+      controller: ['$scope', function ($scope) {
+        ;
+      }]
+    }
+  })
+  .directive('blueprintFlat', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'views/directives/blueprints/flat.html',
+      controller: ['$scope', '$attrs', function ($scope, $attrs) {
+        $scope.$attrs = $attrs
+        $scope.clicked = function (room) {
+          $('#modal-flat').modal('show')
+          $scope.$parent.room = room
+        }
+      }]
+    }
+  })
+
+angular.module('filters', [])
+  .filter('t', function () {
+    return function (text) {
+      var translations = {
+        0: '一',
+        1: '二',
+        2: '三'
+      }
+
+      return translations[text]
+    }
+  })
+
+angular.module('services', [])
