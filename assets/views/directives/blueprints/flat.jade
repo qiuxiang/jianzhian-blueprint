@@ -3,7 +3,7 @@ include ../../mixins
   g(transform='translate(160, 80)')
     g(
       ng-repeat='room in rooms'
-      transform='translate({{$parent.scaled.K * $index}}, 0)'
+      ng-attr-transform='translate({{$parent.scaled.K * $index}}, 0)'
       font-size=16
       font-weight='bold'
       text-anchor='middle')
@@ -11,36 +11,36 @@ include ../../mixins
         ng-click='clicked(room)'
         x=0 y=0
         title='hello'
-        width='{{$parent.scaled.K}}' height='{{$parent.scaled.K * 3}}')
+        ng-attr-width='{{$parent.scaled.K}}' ng-attr-height='{{$parent.scaled.K * 3}}')
       rect.board(
         ng-if='$first'
         x=0 y=0
-        width=2.5 height='{{$parent.scaled.K * 3}}')
+        width=2.5 ng-attr-height='{{$parent.scaled.K * 3}}')
       rect.board(
         ng-if='room.board'
-        x='{{$parent.scaled.K}}' y=0
-        width=2.5 height='{{$parent.scaled.K * 3}}')
+        ng-attr-x='{{$parent.scaled.K}}' y=0
+        width=2.5 ng-attr-height='{{$parent.scaled.K * 3}}')
       rect.board(
         ng-if='room.back == $parent.defines.board_types.board'
         x=0 y=0
-        width='{{$parent.scaled.K}}' height=2.5)
+        ng-attr-width='{{$parent.scaled.K}}' height=2.5)
       g(ng-if='room.back == $parent.defines.board_types.window')
         rect.window(
           x=0 y=0
-          width='{{$parent.scaled.K}}' height=2.5)
-        text(x='{{$parent.scaled.K / 2}}' y=16) C
+          ng-attr-width='{{$parent.scaled.K}}' height=2.5)
+        text(ng-attr-x='{{$parent.scaled.K / 2}}' y=16) C
       g(ng-if='room.front == $parent.defines.board_types.window')
         rect.window(
-          x=0 y='{{$parent.scaled.K * 3}}'
-          width='{{$parent.scaled.K}}' height=2.5)
-        text(x='{{$parent.scaled.K / 2}}' y='{{$parent.scaled.K * 3 - 2}}') C
+          x=0 ng-attr-y='{{$parent.scaled.K * 3}}'
+          ng-attr-width='{{$parent.scaled.K}}' height=2.5)
+        text(ng-attr-x='{{$parent.scaled.K / 2}}' ng-attr-y='{{$parent.scaled.K * 3 - 2}}') C
       g(ng-if='room.front == $parent.defines.board_types.gate')
         rect.board(
-          x=0 y='{{$parent.scaled.K * 3}}'
-          width='{{$parent.scaled.K / 2}}' height=2.5)
+          x=0 ng-attr-y='{{$parent.scaled.K * 3}}'
+          ng-attr-width='{{$parent.scaled.K / 2}}' height=2.5)
         rect.window(
-          x='{{$parent.scaled.K - 2.5}}' y='{{$parent.scaled.K * 2.5}}'
-          width=2.5 height='{{$parent.scaled.K / 2}}')
-        text(x='{{$parent.scaled.K * 0.75}}' y='{{$parent.scaled.K * 3 - 2}}') M
-        path(d='M{{$parent.scaled.K / 2}},{{$parent.scaled.K * 3}} Q{{$parent.scaled.K * 0.5}},{{$parent.scaled.K * 3 - $parent.scaled.K * 0.5}} {{$parent.scaled.K}},{{$parent.scaled.K * 3 - $parent.scaled.K * 0.5}}' stroke='silver' fill='none')
+          ng-attr-x='{{$parent.scaled.K - 2.5}}' ng-attr-y='{{$parent.scaled.K * 2.5}}'
+          width=2.5 ng-attr-height='{{$parent.scaled.K / 2}}')
+        text(ng-attr-x='{{$parent.scaled.K * 0.75}}' ng-attr-y='{{$parent.scaled.K * 3 - 2}}') M
+        path(ng-attr-d='M{{$parent.scaled.K / 2}},{{$parent.scaled.K * 3}} Q{{$parent.scaled.K * 0.5}},{{$parent.scaled.K * 3 - $parent.scaled.K * 0.5}} {{$parent.scaled.K}},{{$parent.scaled.K * 3 - $parent.scaled.K * 0.5}}' stroke='silver' fill='none')
 

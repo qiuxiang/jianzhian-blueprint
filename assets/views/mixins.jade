@@ -6,11 +6,11 @@ mixin defs
       transform='scale(0.4) rotate(180) translate(10, 0)')
 
 mixin blueprint(title)
-  svg.blueprint(width='{{defines.blueprint.width}}' height='{{defines.blueprint.height}}')
+  svg.blueprint(ng-attr-width='{{defines.blueprint.width}}' ng-attr-height='{{defines.blueprint.height}}')
     g(fill='white')
-      rect(x=0 y=0 width='{{defines.blueprint.width}}' height='{{defines.blueprint.height}}')
+      rect(x=0 y=0 ng-attr-width='{{defines.blueprint.width}}' ng-attr-height='{{defines.blueprint.height}}')
       g(transform='translate(10, 10)')
-        rect(x=40 y=0 width='{{defines.blueprint.width - 60}}' height='{{defines.blueprint.height - 20}}')
+        rect(x=40 y=0 ng-attr-width='{{defines.blueprint.width - 60}}' ng-attr-height='{{defines.blueprint.height - 20}}')
         rect(x=0 y=0 width=40 height=200)
         line(x1=10 y1=0 x2=10 y2=200)
         line(x1=20 y1=0 x2=20 y2=200)
@@ -23,7 +23,7 @@ mixin blueprint(title)
           text(x=-50 y=-1) （签名）
           text(x=-100 y=-1) （实名）
           text(x=-150 y=-1) （专业）
-      g(transform='translate({{defines.blueprint.width - 590}}, {{defines.blueprint.height - 90}})')
+      g(ng-attr-transform='translate({{defines.blueprint.width - 590}}, {{defines.blueprint.height - 90}})')
         rect(x=0 y=0 width=580 height=80)
         line(x1=0 y1=20 x2=580 y2=20)
         line(x1=0 y1=40 x2=580 y2=40)

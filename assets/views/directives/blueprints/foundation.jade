@@ -3,80 +3,80 @@ include ../../mixins
   +defs
   text(x=20 y=40 style='font-size: 20')
     | {{metadata.height}}KX{{metadata.width}}KX{{metadata.layer}}P板房基础图 (1:{{1/metadata.scale}})
-  g(transform='translate({{(defines.blueprint.width - outer.width - 100) / 2}}, 100)')
+  g(ng-attr-transform='translate({{(defines.blueprint.width - outer.width - 100) / 2}}, 100)')
     g(fill='transparent')
       rect(
         x=0 y=0
-        width='{{outer.width}}'
-        height='{{outer.height}}')
+        ng-attr-width='{{outer.width}}'
+        ng-attr-height='{{outer.height}}')
       rect(
-        x='{{center.offset}}'
-        y='{{center.offset}}'
-        width='{{center.width}}'
-        height='{{center.height}}'
+        ng-attr-x='{{center.offset}}'
+        ng-attr-y='{{center.offset}}'
+        ng-attr-width='{{center.width}}'
+        ng-attr-height='{{center.height}}'
         stroke-dasharray='10 5')
       rect(
-        x='{{inner.offset}}'
-        y='{{inner.offset}}'
-        width='{{inner.width}}'
-        height='{{inner.height}}')
+        ng-attr-x='{{inner.offset}}'
+        ng-attr-y='{{inner.offset}}'
+        ng-attr-width='{{inner.width}}'
+        ng-attr-height='{{inner.height}}')
     g(text-anchor='middle')
-      g(transform='translate(0, {{outer.height + 20}})')
+      g(ng-attr-transform='translate(0, {{outer.height + 20}})')
         g
-          line(x1='{{center.offset}}' y1=0 x2='{{center.offset}}' y2=40)
-          line(x1='{{center.offset}}' y1=32 x2='{{center.width + center.offset}}' y2=32)
-          line(x1='{{center.width + center.offset}}' y1=0 x2='{{center.width + center.offset}}' y2=40)
-          text(x='{{center.width / 2 + center.offset}}' y=28)
+          line(ng-attr-x1='{{center.offset}}' y1=0 ng-attr-x2='{{center.offset}}' y2=40)
+          line(ng-attr-x1='{{center.offset}}' y1=32 ng-attr-x2='{{center.width + center.offset}}' y2=32)
+          line(ng-attr-x1='{{center.width + center.offset}}' y1=0 ng-attr-x2='{{center.width + center.offset}}' y2=40)
+          text(ng-attr-x='{{center.width / 2 + center.offset}}' y=28)
             | 中线尺寸 {{defines.K * metadata.width + 80}}
         g
           line(x1=0 y1=0 x2=0 y2=60)
-          line(x1=0 y1=52 x2='{{outer.width}}' y2=52)
-          line(x1='{{outer.width}}' y1=0 x2='{{outer.width}}' y2=60)
-          text(x='{{outer.width / 2}}' y=48) 边线尺寸 {{defines.K * metadata.width + 380}}
-      g.text-vertical(transform='translate({{outer.width + 20}}, 0)' letter-spacing=2)
+          line(x1=0 y1=52 ng-attr-x2='{{outer.width}}' y2=52)
+          line(ng-attr-x1='{{outer.width}}' y1=0 ng-attr-x2='{{outer.width}}' y2=60)
+          text(ng-attr-x='{{outer.width / 2}}' y=48) 边线尺寸 {{defines.K * metadata.width + 380}}
+      g.text-vertical(ng-attr-transform='translate({{outer.width + 20}}, 0)' letter-spacing=2)
         g
-          line(x1=0 y1='{{center.offset}}' x2=40 y2='{{center.offset}}')
-          line(x1=32 y1='{{center.offset}}' x2=32 y2='{{center.height + center.offset}}')
-          line(x1=0 y1='{{center.height + center.offset}}' x2=40 y2='{{center.height + center.offset}}')
-          text(x=24 y='{{outer.height / 2}}')
+          line(x1=0 ng-attr-y1='{{center.offset}}' x2=40 ng-attr-y2='{{center.offset}}')
+          line(x1=32 ng-attr-y1='{{center.offset}}' x2=32 ng-attr-y2='{{center.height + center.offset}}')
+          line(x1=0 ng-attr-y1='{{center.height + center.offset}}' x2=40 ng-attr-y2='{{center.height + center.offset}}')
+          text(x=24 ng-attr-y='{{outer.height / 2}}')
             tspan(letter-spacing=-1.2) 中线尺寸&nbsp
             tspan(letter-spacing=-3) {{defines.K * metadata.height + 80}}
         g
           line(x1=0 y1=0 x2=60 y2=0)
-          line(x1=0 y1='{{outer.height}}' x2=60 y2='{{outer.height}}')
-          line(x1=52 y1=0 x2=52 y2='{{outer.height}}')
-          text(x=44 y='{{outer.height / 2}}')
+          line(x1=0 ng-attr-y1='{{outer.height}}' x2=60 ng-attr-y2='{{outer.height}}')
+          line(x1=52 y1=0 x2=52 ng-attr-y2='{{outer.height}}')
+          text(x=44 ng-attr-y='{{outer.height / 2}}')
             tspan(letter-spacing=-1.2) 边线尺寸&nbsp
             tspan(letter-spacing=-3) {{defines.K * metadata.height + 380}}
       g
         line(
           x1=-20
-          y1='{{outer.height / 2}}'
+          ng-attr-y1='{{outer.height / 2}}'
           x2=0
-          y2='{{outer.height / 2}}'
+          ng-attr-y2='{{outer.height / 2}}'
           marker-end='url(#ArrowMend)')
         line(
-          x1='{{inner.offset + 28}}'
-          y1='{{outer.height / 2}}'
-          x2='{{inner.offset}}'
-          y2='{{outer.height / 2}}'
+          ng-attr-x1='{{inner.offset + 28}}'
+          ng-attr-y1='{{outer.height / 2}}'
+          ng-attr-x2='{{inner.offset}}'
+          ng-attr-y2='{{outer.height / 2}}'
           marker-end='url(#ArrowMend)')
-        text(x='{{inner.offset + 8}}' y='{{outer.height / 2 - 4}}' text-anchor='start') 300
+        text(ng-attr-x='{{inner.offset + 8}}' ng-attr-y='{{outer.height / 2 - 4}}' text-anchor='start') 300
       g
         line(
-          x1='{{outer.width / 2}}'
+          ng-attr-x1='{{outer.width / 2}}'
           y1=-20
-          x2='{{outer.width / 2}}'
+          ng-attr-x2='{{outer.width / 2}}'
           y2=0
           marker-end='url(#ArrowMend)')
         line(
-          x1='{{outer.width / 2}}'
-          y1='{{inner.offset + 38}}'
-          x2='{{outer.width / 2}}'
-          y2='{{inner.offset}}'
+          ng-attr-x1='{{outer.width / 2}}'
+          ng-attr-y1='{{inner.offset + 38}}'
+          ng-attr-x2='{{outer.width / 2}}'
+          ng-attr-y2='{{inner.offset}}'
           marker-end='url(#ArrowMend)')
         text.text-vertical(
-          x='{{outer.width / 2 - 8}}'
-          y='{{inner.offset + 8}}'
+          ng-attr-x='{{outer.width / 2 - 8}}'
+          ng-attr-y='{{inner.offset + 8}}'
           text-anchor='start'
           letter-spacing=-3) 300
