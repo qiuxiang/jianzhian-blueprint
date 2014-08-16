@@ -66,3 +66,13 @@ br
       blueprint-side
     #blueprint-flat.tab-pane.active
       blueprint-flat(ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
+
+  #modal-flat.modal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button' data-dismiss='modal')
+            span(aria-hidden='true') &times;
+          h4.modal-title title
+        .modal-body
+          p hello

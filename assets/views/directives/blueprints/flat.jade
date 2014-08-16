@@ -7,6 +7,11 @@ include ../../mixins
       font-size=16
       font-weight='bold'
       text-anchor='middle')
+      rect.background(
+        ng-click='clicked(room)'
+        x=0 y=0
+        title='hello'
+        width='{{$parent.scaled.K}}' height='{{$parent.scaled.K * 3}}')
       rect.board(
         ng-if='$first'
         x=0 y=0

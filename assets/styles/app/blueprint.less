@@ -41,9 +41,15 @@ svg.blueprint {
       stroke: silver;
     }
 
-    &.gate {
-      fill: blue;
-      stroke: blue;
+    &.background {
+      fill: none;
+      stroke: none;
+      pointer-events: all;
+
+      &:hover {
+        fill: #eee;
+        stroke: #eee;
+      }
     }
   }
 
