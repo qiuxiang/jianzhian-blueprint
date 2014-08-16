@@ -1,5 +1,5 @@
 include ../../mixins
-+blueprint('{{$parent.defines.numbers[$attrs.layer]}}层平面布置图')
++blueprint('{{$attrs.layer|t}}层平面布置图')
   g(transform='translate(160, 80)')
     g(
       ng-repeat='room in rooms'
@@ -34,6 +34,10 @@ include ../../mixins
           x=0 ng-attr-y='{{$parent.scaled.K * 3}}'
           ng-attr-width='{{$parent.scaled.K}}' height=2.5)
         text(ng-attr-x='{{$parent.scaled.K / 2}}' ng-attr-y='{{$parent.scaled.K * 3 - 2}}') C
+      g(ng-if='room.front == $parent.defines.board_types.board')
+        rect.board(
+          x=0 ng-attr-y='{{$parent.scaled.K * 3}}'
+          ng-attr-width='{{$parent.scaled.K}}' height=2.5)
       g(ng-if='room.front == $parent.defines.board_types.gate')
         rect.board(
           x=0 ng-attr-y='{{$parent.scaled.K * 3}}'

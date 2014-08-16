@@ -32,12 +32,6 @@ br
             input#input-scale.form-control(type='text' ng-model='metadata.scale')
 
         .page-header
-          h3 房间布置
-        .form-group
-          h4.col-xs-12(ng-repeat='layer in metadata.rooms') 第{{defines.numbers[$index]}}层
-            p ……
-
-        .page-header
           h3 选项
         .form-group
           label.control-label.col-xs-1(for='input-stairs') 楼梯
@@ -67,12 +61,36 @@ br
     #blueprint-flat.tab-pane.active
       blueprint-flat(ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
 
-  #modal-flat.modal
+  #modal-flat.modal.fade
     .modal-dialog
       .modal-content
         .modal-header
           button.close(type='button' data-dismiss='modal')
             span(aria-hidden='true') &times;
-          h4.modal-title title
+          h4.modal-title 房间设置
         .modal-body
-          p hello
+         form.form-horizontal
+          .form-group
+            label.col-sm-4.control-label(for='input-room-front') 前
+            .col-sm-6
+              select#input-room-front.form-control(ng-model='room.front')
+                option(value='1') 窗
+                option(value='2') 门
+                option(value='3') 墙
+          .form-group
+            label.col-sm-4.control-label(for='input-room-back') 后
+            .col-sm-6
+              select#input-room-back.form-control(ng-model='room.back')
+                option(value='1') 窗
+                option(value='3') 墙
+          .form-group
+            .col-sm-6.col-sm-offset-4
+              .checkbox
+                label
+                  input#input-room-board(ng-model='room.board' type='checkbox')
+                  | 作为间隔
+          .form-group
+            .col-sm-6.col-sm-offset-4
+              button.btn.btn-primary
+                span
+                | 确定
