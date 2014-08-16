@@ -10,11 +10,6 @@ angular.module('controllers', [])
         gate: 2,
         board: 3
       },
-      numbers: {
-        0: '一',
-        1: '二',
-        2: '三'
-      },
       K: 1820,
       P: 950
     }
