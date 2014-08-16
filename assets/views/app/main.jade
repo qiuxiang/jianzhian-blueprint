@@ -88,9 +88,9 @@ br
               .checkbox
                 label
                   input#input-room-board(ng-model='room.board' type='checkbox')
-                  | 作为间隔
+                  | 作为隔间
           .form-group
             .col-sm-6.col-sm-offset-4
-              button.btn.btn-primary
-                span
+              button.btn.btn-primary(data-dismiss='modal' aria-hidden='true')
+                span.glyphicon.glyphicon-ok.right-space
                 | 确定

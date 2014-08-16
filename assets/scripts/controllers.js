@@ -19,7 +19,6 @@ angular.module('controllers', [])
       height: 3,
       layer: 6,
       scale: 0.04,
-      merges: [],
       options: {
        stairs: {
          left: true,
