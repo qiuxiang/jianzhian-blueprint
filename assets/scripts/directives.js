@@ -40,6 +40,7 @@ angular.module('directives', [])
       restrict: 'E',
       templateUrl: 'views/directives/blueprints/flat.html',
       controller: ['$scope', '$attrs', function ($scope, $attrs) {
+        $scope._ = _
         $scope.$attrs = $attrs
         $scope.clicked = function (room) {
           $('#modal-flat').modal('show')

@@ -4,6 +4,9 @@ mixin defs
       id='ArrowPath'
       d='M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 Z'
       transform='scale(0.4) rotate(180) translate(10, 0)')
+  pattern(id='StairsPattern' width=.1 height=.1)
+    line(x1=0 y1=0 x2=10 y2=0)
+
 
 mixin blueprint(title)
   svg.blueprint(ng-attr-width='{{defines.blueprint.width}}' ng-attr-height='{{defines.blueprint.height}}')

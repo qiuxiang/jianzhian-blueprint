@@ -10,3 +10,8 @@ angular.module('filters', [])
       return translations[text]
     }
   })
+  .filter('letter', function () {
+    return function (number) {
+      return String.fromCharCode(65 + number)
+    }
+  })

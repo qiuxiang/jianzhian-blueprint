@@ -10,6 +10,8 @@ angular.module('controllers', [])
         gate: 2,
         board: 3
       },
+      aisle_width: 1000,
+      stairs_height: 3000,
       K: 1820,
       P: 950
     }
@@ -31,6 +33,8 @@ angular.module('controllers', [])
       $scope.scaled = { K: parseInt($scope.defines.K * $scope.metadata.scale) }
       $scope.scaled.width = $scope.metadata.width * $scope.scaled.K
       $scope.scaled.height = $scope.metadata.height * $scope.scaled.K
+      $scope.scaled.aisle_width = $scope.defines.aisle_width * $scope.metadata.scale
+      $scope.scaled.stairs_height = $scope.defines.stairs_height * $scope.metadata.scale
     })
 
     $scope.$watch('metadata.width', function () {
