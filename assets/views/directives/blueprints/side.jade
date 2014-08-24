@@ -1,2 +1,161 @@
 include ../../mixins
-+blueprint('侧视图')
++blueprint('{{metadata.height|letter}}-{{0|letter}} 轴立面图')
+  g(ng-attr-transform='translate({{(defines.blueprint.width - scaled.height - 200) / 2}}, 100)')
+    line(
+      x1=-40 ng-attr-y1='{{scaled.layer}}'
+      ng-attr-x2='{{scaled.height + 150}}' ng-attr-y2='{{scaled.layer}}')
+    // 房顶
+    g
+      line(
+        ng-attr-x1='{{-metadata.scale * 300}}' y1=0
+        ng-attr-x2='{{scaled.height / 2}}' ng-attr-y2='{{-metadata.scale * 500}}')
+      line(
+        ng-attr-x1='{{scaled.height / 2}}' ng-attr-y1='{{-metadata.scale * 500}}'
+        ng-attr-x2='{{scaled.height + metadata.scale * 300}}' y2=0)
+      line(
+        ng-attr-x1='{{-metadata.scale * 300}}' ng-attr-y1='{{-metadata.scale * 100}}'
+        ng-attr-x2='{{scaled.height / 2}}' ng-attr-y2='{{-metadata.scale * 600}}')
+      line(
+        ng-attr-x1='{{scaled.height / 2}}' ng-attr-y1='{{-metadata.scale * 600}}'
+        ng-attr-x2='{{scaled.height + metadata.scale * 300}}' ng-attr-y2='{{-metadata.scale * 100}}')
+      line(
+        ng-attr-x1='{{-metadata.scale * 300}}' ng-attr-y1='{{-metadata.scale * 100}}'
+        ng-attr-x2='{{-metadata.scale * 300}}' y2=0)
+      line(
+        ng-attr-x1='{{scaled.height + metadata.scale * 300}}' ng-attr-y1='{{-metadata.scale * 100}}'
+        ng-attr-x2='{{scaled.height + metadata.scale * 300}}' y2=0)
+    // 屋檐
+    g(ng-attr-transform='translate({{scaled.height}}, 0)')
+      line.border(
+        x1=3 y1=0
+        ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{metadata.scale * 200}}')
+      line.border(
+        x1=3 ng-attr-y1='{{metadata.scale * 200}}'
+        ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{metadata.scale * 200}}')
+    // 走廊
+    g(
+      ng-if='metadata.layer > 3'
+      ng-attr-transform='translate({{scaled.height}}, {{scaled.P * 3 - 1200 * metadata.scale}})')
+      line.border(
+        x1=4 y1=0
+        ng-attr-x2='{{scaled.aisle_width}}' y2=0)
+      line.border(
+        x1=4 ng-attr-y1='{{metadata.scale * 300}}'
+        ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{metadata.scale * 300}}')
+      line.border(
+        x1=4 ng-attr-y1='{{metadata.scale * 600}}'
+        ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{metadata.scale * 600}}')
+      line.border(
+        x1=4 ng-attr-y1='{{metadata.scale * 900}}'
+        ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{metadata.scale * 900}}')
+      line.border(
+        x1=4 ng-attr-y1='{{metadata.scale * 1200}}'
+        ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{metadata.scale * 1200}}')
+      line.border(
+        ng-attr-x1='{{scaled.aisle_width}}' y1=0
+        ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.layer - scaled.P * 3 + 1200 * metadata.scale}}')
+    // 楼梯
+    g(
+      ng-if='metadata.options.stairs.left'
+      ng-attr-transform='translate({{scaled.height - 3200 * metadata.scale}}, {{scaled.P * 3 - 1200 * metadata.scale}})')
+      line.border(
+        x1=0 ng-attr-y1='{{scaled.P * 3 + 1200 * metadata.scale}}'
+        ng-attr-x2='{{3200* metadata.scale + 4}}' ng-attr-y2='{{1200 * metadata.scale}}')
+      line.border(
+        x1=0 ng-attr-y1='{{scaled.P * 3 + 900 * metadata.scale}}'
+        ng-attr-x2='{{3200* metadata.scale + 4}}' ng-attr-y2='{{900 * metadata.scale}}')
+      line.border(
+        x1=0 ng-attr-y1='{{scaled.P * 3 + 600 * metadata.scale}}'
+        ng-attr-x2='{{3200* metadata.scale + 4}}' ng-attr-y2='{{600 * metadata.scale}}')
+      line.border(
+        x1=0 ng-attr-y1='{{scaled.P * 3 + 300 * metadata.scale}}'
+        ng-attr-x2='{{3200* metadata.scale + 4}}' ng-attr-y2='{{300 * metadata.scale}}')
+      line.border(
+        x1=0 ng-attr-y1='{{scaled.P * 3}}'
+        ng-attr-x2='{{3200* metadata.scale + 4}}' y2=0)
+
+      line.border(
+        x1=0 ng-attr-y1='{{scaled.P * 3 + 1200 * metadata.scale}}'
+        x2=0 ng-attr-y2='{{scaled.P * 3}}')
+      line.border(
+        ng-attr-x1='{{800 * metadata.scale}}' ng-attr-y1='{{scaled.P * 3 * 0.75 + 1200 * metadata.scale}}'
+        ng-attr-x2='{{800 * metadata.scale}}' ng-attr-y2='{{scaled.P * 3 * 0.75}}')
+      line.border(
+        ng-attr-x1='{{1600 * metadata.scale}}' ng-attr-y1='{{scaled.P * 3 * 0.5 + 1200 * metadata.scale + 1}}'
+        ng-attr-x2='{{1600 * metadata.scale}}' ng-attr-y2='{{scaled.P * 3 * 0.5 + 1}}')
+      line.border(
+        ng-attr-x1='{{2400 * metadata.scale}}' ng-attr-y1='{{scaled.P * 3 * 0.25 + 1200 * metadata.scale + 2}}'
+        ng-attr-x2='{{2400 * metadata.scale}}' ng-attr-y2='{{scaled.P * 3 * 0.25 + 2}}')
+    g(
+      ng-repeat='layer in metadata.rooms'
+      ng-attr-transform='translate(0, {{scaled.P * $index * 3}})')
+      g(
+        ng-repeat='i in _.range(metadata.height)'
+        ng-attr-transform='translate({{scaled.K * $index}}, 0)')
+        line(x1=0 y1=0 x2=0 ng-attr-y2='{{scaled.P * 3}}')
+        line(x1=3 y1=0 x2=3 ng-attr-y2='{{scaled.P * 3}}')
+        line(
+          x1=4 ng-attr-y1='{{scaled.P * 0.5}}'
+          ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{scaled.P * 2.5}}')
+        line(
+          x1=4 ng-attr-y1='{{scaled.P * 2.5}}'
+          ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{scaled.P * 0.5}}')
+        line(
+          ng-if='$last'
+          ng-attr-x1='{{scaled.K}}' y1=0
+          ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{scaled.P * 3}}')
+        line(
+          ng-if='$last'
+          ng-attr-x1='{{scaled.K + 3}}' y1=0
+          ng-attr-x2='{{scaled.K + 3}}' ng-attr-y2='{{scaled.P * 3}}')
+      // 深度为3K时的房顶柱
+      g(ng-if='metadata.height == 3 && $first')
+        line(
+          x1=0 y1=0
+          x2=0 ng-attr-y2='{{-metadata.scale * 30}}')
+        line(
+          x1=3 y1=0
+          x2=3 ng-attr-y2='{{-metadata.scale * 50}}')
+        line(
+          ng-attr-x1='{{scaled.K}}' y1=0
+          ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{-metadata.scale * 330}}')
+        line(
+          ng-attr-x1='{{scaled.K + 3}}' y1=0
+          ng-attr-x2='{{scaled.K + 3}}' ng-attr-y2='{{-metadata.scale * 350}}')
+        line(
+          ng-attr-x1='{{scaled.K * 2}}' y1=0
+          ng-attr-x2='{{scaled.K * 2}}' ng-attr-y2='{{-metadata.scale * 330}}')
+        line(
+          ng-attr-x1='{{scaled.K * 2 + 3}}' y1=0
+          ng-attr-x2='{{scaled.K * 2 + 3}}' ng-attr-y2='{{-metadata.scale * 350}}')
+        line(
+          ng-attr-x1='{{scaled.K * 3 + 3}}' y1=0
+          ng-attr-x2='{{scaled.K * 3 + 3}}' ng-attr-y2='{{-metadata.scale * 30}}')
+        line(
+          ng-attr-x1='{{scaled.K * 3}}' y1=0
+          ng-attr-x2='{{scaled.K * 3}}' ng-attr-y2='{{-metadata.scale * 50}}')
+    // 标尺
+    g(ng-attr-transform='translate(0, {{scaled.layer + 20}})')
+      line(x1=0 y1=10 ng-attr-x2='{{scaled.height}}' y2=10)
+      line(x1=-4 y1=30 ng-attr-x2='{{scaled.height + 4}}' y2=30)
+      line(x1=-4 y1=0 x2=-4 y2=35)
+      line(ng-attr-x1='{{scaled.height + 4}}' y1=0 ng-attr-x2='{{scaled.height + 4}}' y2=35)
+      text(text-anchor='middle' ng-attr-x='{{scaled.height / 2}}' y=28) {{defines.K * metadata.height + 160}}
+      text(x=-8) 80
+      text(ng-attr-x='{{scaled.height - 2}}') 80
+      g(ng-attr-transform='translate({{scaled.height}}, 0)')
+        line(x1=4 y1=10 ng-attr-x2='{{scaled.aisle_width}}' y2=10)
+        line(ng-attr-x1='{{scaled.aisle_width}}' y1=0 ng-attr-x2='{{scaled.aisle_width}}' y2=20)
+        text(ng-attr-x='{{scaled.aisle_width / 2}}' y=8 text-anchor='middle') {{defines.aisle_width}}
+      g(
+        ng-repeat='i in _.range(metadata.height)'
+        ng-attr-transform='translate({{scaled.K * $index}}, 0)')
+        line(x1=0 y1=0 x2=0 y2=40)
+        line(ng-if='$last' ng-attr-x1='{{scaled.K}}' y1=0 ng-attr-x2='{{scaled.K}}' y2=40)
+        text(ng-attr-x='{{scaled.K / 2}}' y=8 text-anchor='middle') {{$parent.defines.K}}
+        g(transform='translate(0, 50)')
+          circle(cx=0 cy=0 r=8 fill='transparent' stroke='black')
+          text(x=-3 y=3) {{metadata.height - $index|letter}}
+        g(ng-attr-transform='translate({{$parent.scaled.K}}, 50)' ng-if='$last')
+          circle(cx=0 cy=0 r=8 fill='transparent' stroke='black')
+          text(x=-4 y=3) A

@@ -1,5 +1,6 @@
 angular.module('controllers', [])
   .controller('Main', ['$scope', function ($scope) {
+    $scope._ = _
     $scope.defines = {
       blueprint: {
         width: 1140,
@@ -30,11 +31,16 @@ angular.module('controllers', [])
     }
 
     $scope.$watch('metadata.scale', function () {
-      $scope.scaled = { K: parseInt($scope.defines.K * $scope.metadata.scale) }
+      $scope.scaled = {
+        K: parseInt($scope.defines.K * $scope.metadata.scale),
+        P: parseInt($scope.defines.P * $scope.metadata.scale),
+        aisle_width: $scope.defines.aisle_width * $scope.metadata.scale,
+        stairs_height: $scope.defines.stairs_height * $scope.metadata.scale
+      }
+
       $scope.scaled.width = $scope.metadata.width * $scope.scaled.K
       $scope.scaled.height = $scope.metadata.height * $scope.scaled.K
-      $scope.scaled.aisle_width = $scope.defines.aisle_width * $scope.metadata.scale
-      $scope.scaled.stairs_height = $scope.defines.stairs_height * $scope.metadata.scale
+      $scope.scaled.layer = $scope.metadata.layer * $scope.scaled.P
     })
 
     $scope.$watch('metadata.width', function () {
@@ -43,6 +49,11 @@ angular.module('controllers', [])
 
     $scope.$watch('metadata.layer', function () {
       resetRooms()
+
+      if ($scope.metadata.layer <=3) {
+        $scope.metadata.options.stairs.left = false
+        $scope.metadata.options.stairs.right = false
+      }
     })
 
     function resetRooms() {
