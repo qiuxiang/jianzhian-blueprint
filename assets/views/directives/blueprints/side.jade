@@ -134,6 +134,38 @@ include ../../mixins
         line(
           ng-attr-x1='{{scaled.K * 3}}' y1=0
           ng-attr-x2='{{scaled.K * 3}}' ng-attr-y2='{{-metadata.scale * 50}}')
+      // 深度为4K时的房顶柱
+      g(ng-if='metadata.height == 4 && $first')
+        line(
+          x1=0 y1=0
+          x2=0 ng-attr-y2='{{-metadata.scale * 30}}')
+        line(
+          x1=3 y1=0
+          x2=3 ng-attr-y2='{{-metadata.scale * 40}}')
+        line(
+          ng-attr-x1='{{scaled.K}}' y1=0
+          ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{-metadata.scale * 260}}')
+        line(
+          ng-attr-x1='{{scaled.K + 3}}' y1=0
+          ng-attr-x2='{{scaled.K + 3}}' ng-attr-y2='{{-metadata.scale * 270}}')
+        line(
+          ng-attr-x1='{{scaled.K * 2}}' y1=0
+          ng-attr-x2='{{scaled.K * 2}}' ng-attr-y2='{{-metadata.scale * 500}}')
+        line(
+          ng-attr-x1='{{scaled.K * 2 + 3}}' y1=0
+          ng-attr-x2='{{scaled.K * 2 + 3}}' ng-attr-y2='{{-metadata.scale * 500}}')
+        line(
+          ng-attr-x1='{{scaled.K * 3 + 3}}' y1=0
+          ng-attr-x2='{{scaled.K * 3 + 3}}' ng-attr-y2='{{-metadata.scale * 260}}')
+        line(
+          ng-attr-x1='{{scaled.K * 3}}' y1=0
+          ng-attr-x2='{{scaled.K * 3}}' ng-attr-y2='{{-metadata.scale * 270}}')
+        line(
+          ng-attr-x1='{{scaled.K * 4 + 3}}' y1=0
+          ng-attr-x2='{{scaled.K * 4 + 3}}' ng-attr-y2='{{-metadata.scale * 30}}')
+        line(
+          ng-attr-x1='{{scaled.K * 4}}' y1=0
+          ng-attr-x2='{{scaled.K * 4}}' ng-attr-y2='{{-metadata.scale * 40}}')
     // 标尺
     g(ng-attr-transform='translate(0, {{scaled.layer + 20}})')
       line(x1=0 y1=10 ng-attr-x2='{{scaled.height}}' y2=10)
