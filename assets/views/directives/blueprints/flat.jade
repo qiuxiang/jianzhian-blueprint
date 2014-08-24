@@ -54,7 +54,8 @@ include ../../mixins
           ng-attr-x2='{{$parent.scaled.aisle_width}}' ng-attr-y2='{{$parent.scaled.stairs_height + $parent.scaled.aisle_width}}')
         line.border(
           x1=0 y1=0 x2=0 ng-attr-y2='{{$parent.scaled.stairs_height + $parent.scaled.aisle_width}}')
-        g(ng-attr-transform='translate(0, {{$parent.scaled.stairs_height + $parent.scaled.aisle_width + 20}})') // 下标尺
+        // 下标尺
+        g(ng-attr-transform='translate(0, {{$parent.scaled.stairs_height + $parent.scaled.aisle_width + 20}})')
           line(x1=0 y1=0 x2=0 y2=20)
           line(x1=0 y1=15 ng-attr-x2='{{$parent.scaled.aisle_width - $parent.metadata.scale * 80}}' y2=15)
           text(ng-attr-x='{{$parent.scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{$parent.defines.aisle_width}}
@@ -73,7 +74,8 @@ include ../../mixins
         line.border(
           ng-attr-x1='{{$parent.scaled.aisle_width}}' y1=0
           ng-attr-x2='{{$parent.scaled.aisle_width}}' ng-attr-y2='{{$parent.scaled.stairs_height + $parent.scaled.aisle_width}}')
-        g(ng-attr-transform='translate(0, {{$parent.scaled.stairs_height + $parent.scaled.aisle_width + 20}})') // 下标尺
+        // 下标尺
+        g(ng-attr-transform='translate(0, {{$parent.scaled.stairs_height + $parent.scaled.aisle_width + 20}})')
           line(ng-attr-x1='{{$parent.scaled.aisle_width}}' y1=0 ng-attr-x2='{{$parent.scaled.aisle_width}}' y2=20)
           line(ng-attr-x1='{{$parent.metadata.scale * 80}}' y1=15 ng-attr-x2='{{$parent.scaled.aisle_width}}' y2=15)
           text(ng-attr-x='{{$parent.scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{$parent.defines.aisle_width}}

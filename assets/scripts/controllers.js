@@ -44,6 +44,7 @@ angular.module('controllers', [])
     })
 
     $scope.$watch('metadata.width', function () {
+      $scope.metadata.width = parseInt($scope.metadata.width)
       resetRooms()
     })
 

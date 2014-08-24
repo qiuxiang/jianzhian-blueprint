@@ -6,7 +6,10 @@ mixin defs
       transform='scale(0.4) rotate(180) translate(10, 0)')
   pattern(id='StairsPattern' width=.1 height=.1)
     line(x1=0 y1=0 x2=10 y2=0)
-
+  pattern(id='RailingPattern' width=100 ng-attr-height='{{metadata.scale * 312}}' patternUnits='userSpaceOnUse')
+    line(x1=0 y1=0 x2=100 y2=0 stroke-width=5)
+  pattern(id='RoofPattern' ng-attr-width='{{metadata.scale * 310}}' height=100 patternUnits='userSpaceOnUse')
+    line(x1=0 y1=0 x2=0 y2=100 stroke-width=5)
 
 mixin blueprint(title)
   svg.blueprint(ng-attr-width='{{defines.blueprint.width}}' ng-attr-height='{{defines.blueprint.height}}')
