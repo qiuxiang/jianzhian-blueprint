@@ -48,17 +48,17 @@ br
   ul.nav.nav-tabs
     li
       a(href='#blueprint-foundation' data-toggle='tab') 基础图
-    li
-      a(href='#blueprint-side' data-toggle='tab') 侧视图
     li.active
+      a(href='#blueprint-side' data-toggle='tab') 侧视图
+    li
       a(href='#blueprint-flat' data-toggle='tab') 平面布置图
 
   .tab-content.blueprints
     #blueprint-foundation.tab-pane
       blueprint-foundation
-    #blueprint-side.tab-pane
+    #blueprint-side.tab-pane.active
       blueprint-side
-    #blueprint-flat.tab-pane.active
+    #blueprint-flat.tab-pane
       blueprint-flat(ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
 
   #modal-flat.modal.fade
@@ -71,18 +71,18 @@ br
         .modal-body
          form.form-horizontal
           .form-group
-            label.col-sm-4.control-label(for='input-room-front') 前
-            .col-sm-6
-              select#input-room-front.form-control(ng-model='room.front')
-                option(value='1') 窗
-                option(value='2') 门
-                option(value='3') 墙
-          .form-group
             label.col-sm-4.control-label(for='input-room-back') 后
             .col-sm-6
               select#input-room-back.form-control(ng-model='room.back')
                 option(value='1') 窗
                 option(value='3') 墙
+           .form-group
+             label.col-sm-4.control-label(for='input-room-front') 前
+             .col-sm-6
+               select#input-room-front.form-control(ng-model='room.front')
+                 option(value='1') 窗
+                 option(value='2') 门
+                 option(value='3') 墙
           .form-group
             .col-sm-6.col-sm-offset-4
               .checkbox
