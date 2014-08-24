@@ -29,6 +29,10 @@ include ../../mixins
           circle(cx=0 cy=0 r=8 fill='transparent' stroke='black')
           line(x1=10 y1=0 x2=70 y2=0)
           text(x=-3 y=3) {{$index + 1|letter}}
+      g(ng-attr-transform='translate(50, {{$parent.scaled.height}})')
+        line(x1=0 ng-attr-y1='{{$parent.metadata.scale * 80}}' x2=0 ng-attr-y2='{{$parent.scaled.aisle_width}}')
+        line(x1=-10 ng-attr-y1='{{$parent.scaled.aisle_width}}' x2=20 ng-attr-y2='{{$parent.scaled.aisle_width}}')
+        text.text-vertical(x=-6 ng-attr-y='{{$parent.scaled.aisle_width / 2}}' text-anchor='middle') {{$parent.defines.aisle_width}}
     g(ng-attr-transform='translate({{100 + $parent.metadata.options.stairs.left * $parent.scaled.aisle_width}}, 0)')
       // 左楼梯
       g(
@@ -43,6 +47,11 @@ include ../../mixins
           ng-attr-x2='{{$parent.scaled.aisle_width}}' ng-attr-y2='{{$parent.scaled.stairs_height + $parent.scaled.aisle_width}}')
         line.border(
           x1=0 y1=0 x2=0 ng-attr-y2='{{$parent.scaled.stairs_height + $parent.scaled.aisle_width}}')
+        g(ng-attr-transform='translate(0, {{$parent.scaled.stairs_height + $parent.scaled.aisle_width + 20}})') // 下标尺
+          line(x1=0 y1=0 x2=0 y2=20)
+          line(x1=0 y1=15 ng-attr-x2='{{$parent.scaled.aisle_width - $parent.metadata.scale * 80}}' y2=15)
+          text(ng-attr-x='{{$parent.scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{$parent.defines.aisle_width}}
+
       // 右楼梯
       g(
         ng-if='$parent.metadata.options.stairs.right'
@@ -57,6 +66,10 @@ include ../../mixins
         line.border(
           ng-attr-x1='{{$parent.scaled.aisle_width}}' y1=0
           ng-attr-x2='{{$parent.scaled.aisle_width}}' ng-attr-y2='{{$parent.scaled.stairs_height + $parent.scaled.aisle_width}}')
+        g(ng-attr-transform='translate(0, {{$parent.scaled.stairs_height + $parent.scaled.aisle_width + 20}})') // 下标尺
+          line(ng-attr-x1='{{$parent.scaled.aisle_width}}' y1=0 ng-attr-x2='{{$parent.scaled.aisle_width}}' y2=20)
+          line(x1='{{$parent.metadata.scale * 80}}' y1=15 ng-attr-x2='{{$parent.scaled.aisle_width}}' y2=15)
+          text(ng-attr-x='{{$parent.scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{$parent.defines.aisle_width}}
       g(
         ng-repeat='room in rooms'
         ng-attr-transform='translate({{$parent.scaled.K * $index}}, 0)'
