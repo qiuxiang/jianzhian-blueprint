@@ -45,6 +45,7 @@ angular.module('directives', [])
         $scope.clicked = function (room) {
           $('#modal-flat').modal('show')
           $scope.$parent.room = room
+          console.log($scope.$parent.metadata)
         }
       }]
     }

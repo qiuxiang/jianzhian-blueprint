@@ -18,17 +18,19 @@ include ../../mixins
       line(
         x1=22 ng-attr-y1='{{$parent.scaled.height + $parent.metadata.scale * 80}}'
         x2=70 ng-attr-y2='{{$parent.scaled.height + $parent.metadata.scale * 80}}')
-      text.text-vertical(x=22 ng-attr-y='{{$parent.scaled.height / 2}}' text-anchor='middle')
-        | {{$parent.metadata.height * $parent.defines.K + 160}}
-      text.text-vertical(x=74 y=0 text-anchor='middle') 80
-      text.text-vertical(x=74 ng-attr-y='{{$parent.scaled.height + 2}}' text-anchor='middle') 80
+      g.text-vertical
+        text(x=22 ng-attr-y='{{$parent.scaled.height / 2}}' text-anchor='middle')
+          | {{$parent.metadata.height * $parent.defines.K + 160}}
+        text(x=74 y=0 text-anchor='middle') 80
+        text(x=74 ng-attr-y='{{$parent.scaled.height + 2}}' text-anchor='middle') 80
       g(
         ng-repeat='i in _.range($parent.metadata.height)'
         ng-attr-transform='translate(0, {{$parent.scaled.K * $index}})')
         line(x1=10 y1=0 x2=70 y2=0)
         circle(cx=0 cy=0 r=8 fill='transparent' stroke='black')
         text(x=-3 y=3) {{$index|letter}}
-        text.text-vertical(x=44 ng-attr-y='{{$parent.scaled.K / 2}}' text-anchor='middle') {{$parent.defines.K}}
+        g.text-vertical
+          text.text-vertical(x=44 ng-attr-y='{{$parent.scaled.K / 2}}' text-anchor='middle') {{$parent.defines.K}}
         g(ng-attr-transform='translate(0, {{$parent.scaled.K}})' ng-if='$last')
           circle(cx=0 cy=0 r=8 fill='transparent' stroke='black')
           line(x1=10 y1=0 x2=70 y2=0)
@@ -36,7 +38,8 @@ include ../../mixins
       g(ng-attr-transform='translate(50, {{$parent.scaled.height}})')
         line(x1=0 ng-attr-y1='{{$parent.metadata.scale * 80}}' x2=0 ng-attr-y2='{{$parent.scaled.aisle_width}}')
         line(x1=-10 ng-attr-y1='{{$parent.scaled.aisle_width}}' x2=20 ng-attr-y2='{{$parent.scaled.aisle_width}}')
-        text.text-vertical(x=-6 ng-attr-y='{{$parent.scaled.aisle_width / 2}}' text-anchor='middle') {{$parent.defines.aisle_width}}
+        g.text-vertical
+          text(x=-6 ng-attr-y='{{$parent.scaled.aisle_width / 2}}' text-anchor='middle') {{$parent.defines.aisle_width}}
     g(ng-attr-transform='translate({{100 + $parent.metadata.options.stairs.left * $parent.scaled.aisle_width}}, 0)')
       // 左楼梯
       g(
@@ -166,5 +169,3 @@ include ../../mixins
             g(ng-attr-transform='translate({{$parent.scaled.K}}, 70)' ng-if='$last')
               circle(cx=0 cy=0 r=8 fill='transparent' stroke='black')
               text(x=-4 y=3) {{$index + 2}}
-
-
