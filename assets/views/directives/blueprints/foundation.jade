@@ -2,7 +2,7 @@ include ../../mixins
 +blueprint('基础图')
   +defs
   text(x=20 y=40 style='font-size: 20')
-    | {{metadata.height}}KX{{metadata.width}}KX{{metadata.layer}}P板房基础图 (1:{{1/metadata.scale}})
+    | {{metadata.height}}KX{{metadata.width}}KX{{metadata.layer}}P板房基础图
   g(ng-attr-transform='translate({{(defines.blueprint.width - outer.width - 100) / 2}}, 100)')
     g(fill='transparent')
       rect(
