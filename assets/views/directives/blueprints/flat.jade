@@ -1,6 +1,10 @@
 include ../../mixins
 +blueprint('{{$attrs.layer|t}}层平面布置图')
   +defs
+  g(ng-attr-transform='translate(20, {{$parent.defines.blueprint.height - 60}})')
+    text(style='font-size: 14px;')
+      tspan M:B820XH2000单开防盗门
+      tspan(x=0 y=20) C:B1740XH955塑钢推拉窗
   g(ng-attr-transform='translate({{($parent.defines.blueprint.width - $parent.scaled.width - 200) / 2}}, 100)')
     g(transform='translate(0, 0)' letter-spacing=-3) // 纵向标尺
       line(x1=50 y1=0 x2=50 ng-attr-y2='{{$parent.scaled.height}}')
