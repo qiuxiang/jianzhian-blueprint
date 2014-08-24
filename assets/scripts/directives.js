@@ -35,6 +35,15 @@ angular.module('directives', [])
       }]
     }
   })
+  .directive('blueprintFront', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'views/directives/blueprints/front.html',
+      controller: ['$scope', function ($scope) {
+        ;
+      }]
+    }
+  })
   .directive('blueprintFlat', function () {
     return {
       restrict: 'E',
