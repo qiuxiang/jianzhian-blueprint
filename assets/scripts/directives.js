@@ -55,7 +55,29 @@ angular.module('directives', [])
       }]
     }
   })
-  .directive('blueprintFlat', function () {
+  .directive('blueprintBaseFlat', function () {
+    return {
+      templateUrl: 'views/directives/blueprints/base/flat.html',
+      controller: ['$scope', '$attrs', function ($scope, $attrs) {
+        $scope._ = _
+        $scope.metadata = $scope.$parent.metadata
+        $scope.defines = $scope.$parent.defines
+        $scope.attrs = $attrs
+        $scope.clicked = function (room) {
+          $('#modal-flat').modal('show')
+          $scope.$parent.room = room
+          console.log($scope.$parent.metadata)
+        }
+      }]
+    }
+  })
+  .directive('blueprintSimpleFlat', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'views/directives/blueprints/simple/flat.html'
+    }
+  })
+  .directive('blueprintCompleteFlat', function () {
     return {
       restrict: 'E',
       templateUrl: 'views/directives/blueprints/flat.html',

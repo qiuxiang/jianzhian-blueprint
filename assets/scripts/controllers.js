@@ -11,8 +11,11 @@ angular.module('controllers', [])
         gate: 2,
         board: 3
       },
-      aisle_width: 1000,
-      stairs_height: 3000,
+      ruler: {
+        margin: 20 // 标尺与图的间隔宽度
+      },
+      aisle_width: 1000, // 走道宽度
+      stairs_height: 3000, // 楼梯的俯视高度
       K: 1820,
       P: 950
     }
