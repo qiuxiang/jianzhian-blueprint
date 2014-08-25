@@ -1,8 +1,7 @@
 angular.module('directives', [])
-  .directive('blueprintFoundation', function () {
+  .directive('blueprintBaseFoundation', function () {
     return {
-      restrict: 'E',
-      templateUrl: 'views/directives/blueprints/foundation.html',
+      templateUrl: 'views/directives/blueprints/base/foundation.html',
       controller: ['$scope', function ($scope) {
         $scope.$watch('metadata.width', calculate)
         $scope.$watch('metadata.height', calculate)
@@ -24,6 +23,18 @@ angular.module('directives', [])
           $scope.inner.height = $scope.scaled.height + $scope.inner.diff
         }
       }]
+    }
+  })
+  .directive('blueprintSimpleFoundation', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'views/directives/blueprints/simple/foundation.html'
+    }
+  })
+  .directive('blueprintCompleteFoundation', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'views/directives/blueprints/complete/foundation.html'
     }
   })
   .directive('blueprintSide', function () {

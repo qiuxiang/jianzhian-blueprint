@@ -65,3 +65,7 @@ mixin blueprint(title)
 
     g(transform='translate(50, 10)')
       block
+
+mixin blueprint-simple
+  svg.blueprint(ng-attr-width='{{defines.blueprint.width}}' ng-attr-height='{{defines.blueprint.height}}')
+    block
