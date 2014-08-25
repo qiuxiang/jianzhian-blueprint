@@ -26,6 +26,13 @@ include ../../mixins
             style='stroke: silver; stroke-width: 3px;'
             ng-attr-x1='{{scaled.K * 0.7}}' ng-attr-y1='{{scaled.P * 1.6}}'
             ng-attr-x2='{{scaled.K * 0.8}}' ng-attr-y2='{{scaled.P * 1.4}}')
+          g
+            line(
+              x1=0 ng-attr-y1='{{scaled.P * 0.5}}'
+              ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{scaled.P * 2.5}}')
+            line(
+              x1=0 ng-attr-y1='{{scaled.P * 2.5}}'
+              ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{scaled.P * 0.5}}')
         g(ng-if='room.front == defines.board_types.gate')
           line(
             ng-attr-x1='{{scaled.K / 2}}' y1=0
