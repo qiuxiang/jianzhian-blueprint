@@ -1,87 +1,87 @@
 include ../../mixins
-+blueprint('{{$attrs.layer|t}}层平面布置图')
++blueprint('{{attrs.layer|t}}层平面布置图')
   +defs
-  g(ng-attr-transform='translate(20, {{$parent.defines.blueprint.height - 60}})')
+  g(ng-attr-transform='translate(20, {{defines.blueprint.height - 60}})')
     text(style='font-size: 14px;')
       tspan M:B820XH2000单开防盗门
       tspan(x=0 y=20) C:B1740XH955塑钢推拉窗
-  g(ng-attr-transform='translate({{($parent.defines.blueprint.width - $parent.scaled.width - 200) / 2}}, 100)')
+  g(ng-attr-transform='translate({{(defines.blueprint.width - scaled.width - 200) / 2}}, 100)')
     // 纵向标尺
     g(transform='translate(0, 0)' letter-spacing=-3)
-      line(x1=50 y1=0 x2=50 ng-attr-y2='{{$parent.scaled.height}}')
+      line(x1=50 y1=0 x2=50 ng-attr-y2='{{scaled.height}}')
       line(
-        x1=30 ng-attr-y1='{{-$parent.metadata.scale * 80}}'
-        x2=30 ng-attr-y2='{{$parent.scaled.height + $parent.metadata.scale * 80}}')
+        x1=30 ng-attr-y1='{{-metadata.scale * 80}}'
+        x2=30 ng-attr-y2='{{scaled.height + metadata.scale * 80}}')
       line(
-        x1=22 ng-attr-y1='{{-$parent.metadata.scale * 80}}'
-        x2=70 ng-attr-y2='{{-$parent.metadata.scale * 80}}')
+        x1=22 ng-attr-y1='{{-metadata.scale * 80}}'
+        x2=70 ng-attr-y2='{{-metadata.scale * 80}}')
       line(
-        x1=22 ng-attr-y1='{{$parent.scaled.height + $parent.metadata.scale * 80}}'
-        x2=70 ng-attr-y2='{{$parent.scaled.height + $parent.metadata.scale * 80}}')
+        x1=22 ng-attr-y1='{{scaled.height + metadata.scale * 80}}'
+        x2=70 ng-attr-y2='{{scaled.height + metadata.scale * 80}}')
       g.text-vertical
-        text(x=22 ng-attr-y='{{$parent.scaled.height / 2}}' text-anchor='middle')
-          | {{$parent.metadata.height * $parent.defines.K + 160}}
+        text(x=22 ng-attr-y='{{scaled.height / 2}}' text-anchor='middle')
+          | {{metadata.height * defines.K + 160}}
         text(x=74 y=0 text-anchor='middle') 80
-        text(x=74 ng-attr-y='{{$parent.scaled.height + 2}}' text-anchor='middle') 80
+        text(x=74 ng-attr-y='{{scaled.height + 2}}' text-anchor='middle') 80
       g(
-        ng-repeat='i in _.range($parent.metadata.height)'
-        ng-attr-transform='translate(0, {{$parent.scaled.K * $index}})')
+        ng-repeat='i in _.range(metadata.height)'
+        ng-attr-transform='translate(0, {{scaled.K * $index}})')
         line(x1=10 y1=0 x2=70 y2=0)
         circle(cx=0 cy=0 r=8 fill='transparent' stroke='black')
         text(x=-3 y=3) {{$index|letter}}
         g.text-vertical
-          text.text-vertical(x=44 ng-attr-y='{{$parent.scaled.K / 2}}' text-anchor='middle') {{$parent.defines.K}}
-        g(ng-attr-transform='translate(0, {{$parent.scaled.K}})' ng-if='$last')
+          text.text-vertical(x=44 ng-attr-y='{{scaled.K / 2}}' text-anchor='middle') {{defines.K}}
+        g(ng-attr-transform='translate(0, {{scaled.K}})' ng-if='$last')
           circle(cx=0 cy=0 r=8 fill='transparent' stroke='black')
           line(x1=10 y1=0 x2=70 y2=0)
           text(x=-3 y=3) {{$index + 1|letter}}
-      g(ng-attr-transform='translate(50, {{$parent.scaled.height}})')
-        line(x1=0 ng-attr-y1='{{$parent.metadata.scale * 80}}' x2=0 ng-attr-y2='{{$parent.scaled.aisle_width}}')
-        line(x1=-10 ng-attr-y1='{{$parent.scaled.aisle_width}}' x2=20 ng-attr-y2='{{$parent.scaled.aisle_width}}')
+      g(ng-attr-transform='translate(50, {{scaled.height}})')
+        line(x1=0 ng-attr-y1='{{metadata.scale * 80}}' x2=0 ng-attr-y2='{{scaled.aisle_width}}')
+        line(x1=-10 ng-attr-y1='{{scaled.aisle_width}}' x2=20 ng-attr-y2='{{scaled.aisle_width}}')
         g.text-vertical
-          text(x=-6 ng-attr-y='{{$parent.scaled.aisle_width / 2}}' text-anchor='middle') {{$parent.defines.aisle_width}}
-    g(ng-attr-transform='translate({{100 + $parent.metadata.options.stairs.left * $parent.scaled.aisle_width}}, 0)')
+          text(x=-6 ng-attr-y='{{scaled.aisle_width / 2}}' text-anchor='middle') {{defines.aisle_width}}
+    g(ng-attr-transform='translate({{100 + metadata.options.stairs.left * scaled.aisle_width}}, 0)')
       // 左楼梯
       g(
-        ng-if='$parent.metadata.options.stairs.left'
-        ng-attr-transform='translate({{-$parent.scaled.aisle_width}}, {{$parent.scaled.height - $parent.scaled.stairs_height}})')
+        ng-if='metadata.options.stairs.left'
+        ng-attr-transform='translate({{-scaled.aisle_width}}, {{scaled.height - scaled.stairs_height}})')
         rect(
           fill='url(#StairsPattern)'
           x=0 y=0
-          ng-attr-width='{{$parent.scaled.aisle_width}}' ng-attr-height='{{$parent.scaled.stairs_height}}')
+          ng-attr-width='{{scaled.aisle_width}}' ng-attr-height='{{scaled.stairs_height}}')
         line.border(
-          x1=0 ng-attr-y1='{{$parent.scaled.stairs_height + $parent.scaled.aisle_width}}'
-          ng-attr-x2='{{$parent.scaled.aisle_width}}' ng-attr-y2='{{$parent.scaled.stairs_height + $parent.scaled.aisle_width}}')
+          x1=0 ng-attr-y1='{{scaled.stairs_height + scaled.aisle_width}}'
+          ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.stairs_height + scaled.aisle_width}}')
         line.border(
-          x1=0 y1=0 x2=0 ng-attr-y2='{{$parent.scaled.stairs_height + $parent.scaled.aisle_width}}')
+          x1=0 y1=0 x2=0 ng-attr-y2='{{scaled.stairs_height + scaled.aisle_width}}')
         // 下标尺
-        g(ng-attr-transform='translate(0, {{$parent.scaled.stairs_height + $parent.scaled.aisle_width + 20}})')
+        g(ng-attr-transform='translate(0, {{scaled.stairs_height + scaled.aisle_width + 20}})')
           line(x1=0 y1=0 x2=0 y2=20)
-          line(x1=0 y1=15 ng-attr-x2='{{$parent.scaled.aisle_width - $parent.metadata.scale * 80}}' y2=15)
-          text(ng-attr-x='{{$parent.scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{$parent.defines.aisle_width}}
+          line(x1=0 y1=15 ng-attr-x2='{{scaled.aisle_width - metadata.scale * 80}}' y2=15)
+          text(ng-attr-x='{{scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{defines.aisle_width}}
 
       // 右楼梯
       g(
-        ng-if='$parent.metadata.options.stairs.right'
-        ng-attr-transform='translate({{$parent.scaled.width}}, {{$parent.scaled.height - $parent.scaled.stairs_height}})')
+        ng-if='metadata.options.stairs.right'
+        ng-attr-transform='translate({{scaled.width}}, {{scaled.height - scaled.stairs_height}})')
         rect(
           fill='url(#StairsPattern)'
           x=0 y=0
-          ng-attr-width='{{$parent.scaled.aisle_width}}' ng-attr-height='{{$parent.scaled.stairs_height}}')
+          ng-attr-width='{{scaled.aisle_width}}' ng-attr-height='{{scaled.stairs_height}}')
         line.border(
-          x1=0 ng-attr-y1='{{$parent.scaled.stairs_height + $parent.scaled.aisle_width}}'
-          ng-attr-x2='{{$parent.scaled.aisle_width}}' ng-attr-y2='{{$parent.scaled.stairs_height + $parent.scaled.aisle_width}}')
+          x1=0 ng-attr-y1='{{scaled.stairs_height + scaled.aisle_width}}'
+          ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.stairs_height + scaled.aisle_width}}')
         line.border(
-          ng-attr-x1='{{$parent.scaled.aisle_width}}' y1=0
-          ng-attr-x2='{{$parent.scaled.aisle_width}}' ng-attr-y2='{{$parent.scaled.stairs_height + $parent.scaled.aisle_width}}')
+          ng-attr-x1='{{scaled.aisle_width}}' y1=0
+          ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.stairs_height + scaled.aisle_width}}')
         // 下标尺
-        g(ng-attr-transform='translate(0, {{$parent.scaled.stairs_height + $parent.scaled.aisle_width + 20}})')
-          line(ng-attr-x1='{{$parent.scaled.aisle_width}}' y1=0 ng-attr-x2='{{$parent.scaled.aisle_width}}' y2=20)
-          line(ng-attr-x1='{{$parent.metadata.scale * 80}}' y1=15 ng-attr-x2='{{$parent.scaled.aisle_width}}' y2=15)
-          text(ng-attr-x='{{$parent.scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{$parent.defines.aisle_width}}
+        g(ng-attr-transform='translate(0, {{scaled.stairs_height + scaled.aisle_width + 20}})')
+          line(ng-attr-x1='{{scaled.aisle_width}}' y1=0 ng-attr-x2='{{scaled.aisle_width}}' y2=20)
+          line(ng-attr-x1='{{metadata.scale * 80}}' y1=15 ng-attr-x2='{{scaled.aisle_width}}' y2=15)
+          text(ng-attr-x='{{scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{defines.aisle_width}}
       g(
         ng-repeat='room in rooms'
-        ng-attr-transform='translate({{$parent.scaled.K * $index}}, 0)'
+        ng-attr-transform='translate({{scaled.K * $index}}, 0)'
         font-size=16
         font-weight='bold'
         text-anchor='middle')
@@ -89,85 +89,85 @@ include ../../mixins
           ng-click='clicked(room)'
           x=0 y=0
           title='hello'
-          ng-attr-width='{{$parent.scaled.K}}' ng-attr-height='{{$parent.scaled.height}}')
+          ng-attr-width='{{scaled.K}}' ng-attr-height='{{scaled.height}}')
         rect.board(
           ng-if='$first'
           x=0 y=0
-          width=2.5 ng-attr-height='{{$parent.scaled.height}}')
+          width=2.5 ng-attr-height='{{scaled.height}}')
         rect.board(
           ng-if='room.board'
-          ng-attr-x='{{$parent.scaled.K}}' y=0
-          width=2.5 ng-attr-height='{{$parent.scaled.height}}')
+          ng-attr-x='{{scaled.K}}' y=0
+          width=2.5 ng-attr-height='{{scaled.height}}')
         rect.board(
-          ng-if='room.back == $parent.defines.board_types.board'
+          ng-if='room.back == defines.board_types.board'
           x=0 y=0
-          ng-attr-width='{{$parent.scaled.K}}' height=2.5)
-        g(ng-if='room.back == $parent.defines.board_types.window')
+          ng-attr-width='{{scaled.K}}' height=2.5)
+        g(ng-if='room.back == defines.board_types.window')
           rect.window(
             x=0 y=0
-            ng-attr-width='{{$parent.scaled.K}}' height=2.5)
-          text(ng-attr-x='{{$parent.scaled.K / 2}}' y=16) C
-        g(ng-if='room.front == $parent.defines.board_types.window')
+            ng-attr-width='{{scaled.K}}' height=2.5)
+          text(ng-attr-x='{{scaled.K / 2}}' y=16) C
+        g(ng-if='room.front == defines.board_types.window')
           rect.window(
-            x=0 ng-attr-y='{{$parent.scaled.height}}'
-            ng-attr-width='{{$parent.scaled.K}}' height=2.5)
-          text(ng-attr-x='{{$parent.scaled.K / 2}}' ng-attr-y='{{$parent.scaled.height - 2}}') C
-        g(ng-if='room.front == $parent.defines.board_types.board')
+            x=0 ng-attr-y='{{scaled.height}}'
+            ng-attr-width='{{scaled.K}}' height=2.5)
+          text(ng-attr-x='{{scaled.K / 2}}' ng-attr-y='{{scaled.height - 2}}') C
+        g(ng-if='room.front == defines.board_types.board')
           rect.board(
-            x=0 ng-attr-y='{{$parent.scaled.height}}'
-            ng-attr-width='{{$parent.scaled.K}}' height=2.5)
-        g(ng-if='room.front == $parent.defines.board_types.gate')
+            x=0 ng-attr-y='{{scaled.height}}'
+            ng-attr-width='{{scaled.K}}' height=2.5)
+        g(ng-if='room.front == defines.board_types.gate')
           rect.board(
-            x=0 ng-attr-y='{{$parent.scaled.height}}'
-            ng-attr-width='{{$parent.scaled.K / 2}}' height=2.5)
+            x=0 ng-attr-y='{{scaled.height}}'
+            ng-attr-width='{{scaled.K / 2}}' height=2.5)
           rect.window(
-            ng-attr-x='{{$parent.scaled.K - 2.5}}' ng-attr-y='{{$parent.scaled.height - $parent.scaled.K / 2}}'
-            width=2.5 ng-attr-height='{{$parent.scaled.K / 2}}')
-          text(ng-attr-x='{{$parent.scaled.K * 0.75}}' ng-attr-y='{{$parent.scaled.height - 2}}') M
-          path(ng-attr-d='M{{$parent.scaled.K / 2}},{{$parent.scaled.height}} Q{{$parent.scaled.K * 0.5}},{{$parent.scaled.height - $parent.scaled.K * 0.5}} {{$parent.scaled.K}},{{$parent.scaled.height - $parent.scaled.K * 0.5}}' stroke='silver' fill='none')
-      g(ng-attr-transform='translate(0, {{$parent.scaled.height}})')
+            ng-attr-x='{{scaled.K - 2.5}}' ng-attr-y='{{scaled.height - scaled.K / 2}}'
+            width=2.5 ng-attr-height='{{scaled.K / 2}}')
+          text(ng-attr-x='{{scaled.K * 0.75}}' ng-attr-y='{{scaled.height - 2}}') M
+          path(ng-attr-d='M{{scaled.K / 2}},{{scaled.height}} Q{{scaled.K * 0.5}},{{scaled.height - scaled.K * 0.5}} {{scaled.K}},{{scaled.height - scaled.K * 0.5}}' stroke='silver' fill='none')
+      g(ng-attr-transform='translate(0, {{scaled.height}})')
         // 走廊
         g
           line.border(
-            x1=0 ng-attr-y1='{{$parent.scaled.aisle_width}}'
-            ng-attr-x2='{{$parent.scaled.width}}' ng-attr-y2='{{$parent.scaled.aisle_width}}')
+            x1=0 ng-attr-y1='{{scaled.aisle_width}}'
+            ng-attr-x2='{{scaled.width}}' ng-attr-y2='{{scaled.aisle_width}}')
           line.border(
-            ng-if='!$parent.metadata.options.stairs.left'
+            ng-if='!metadata.options.stairs.left'
             x1=0 ng-attr-y1=0
-            x2=0 ng-attr-y2='{{$parent.scaled.aisle_width}}')
+            x2=0 ng-attr-y2='{{scaled.aisle_width}}')
           line.border(
-            ng-if='!$parent.metadata.options.stairs.right'
-            ng-attr-x1='{{$parent.scaled.width}}' ng-attr-y1=0
-            ng-attr-x2='{{$parent.scaled.width}}' ng-attr-y2='{{$parent.scaled.aisle_width}}')
+            ng-if='!metadata.options.stairs.right'
+            ng-attr-x1='{{scaled.width}}' ng-attr-y1=0
+            ng-attr-x2='{{scaled.width}}' ng-attr-y2='{{scaled.aisle_width}}')
         g(transform='translate(0, 60)') // 横向标尺
-          line(x1=0 y1=15 ng-attr-x2='{{$parent.scaled.width}}' y2=15)
+          line(x1=0 y1=15 ng-attr-x2='{{scaled.width}}' y2=15)
           line(
-            ng-attr-x1='{{-$parent.metadata.scale * 80}}' y1=45
-            ng-attr-x2='{{$parent.scaled.width + $parent.metadata.scale * 80}}' y2=45)
+            ng-attr-x1='{{-metadata.scale * 80}}' y1=45
+            ng-attr-x2='{{scaled.width + metadata.scale * 80}}' y2=45)
           line(
-            ng-attr-x1='{{-$parent.metadata.scale * 80}}' y1=0
-            ng-attr-x2='{{-$parent.metadata.scale * 80}}' y2=50)
+            ng-attr-x1='{{-metadata.scale * 80}}' y1=0
+            ng-attr-x2='{{-metadata.scale * 80}}' y2=50)
           line(
-            ng-attr-x1='{{$parent.scaled.width + $parent.metadata.scale * 80}}' y1=0
-            ng-attr-x2='{{$parent.scaled.width + $parent.metadata.scale * 80}}' y2=50)
-          text(ng-attr-x='{{$parent.scaled.width / 2}}' y=42 text-anchor='middle' font-weight='bold')
-            | {{$parent.metadata.width * $parent.defines.K + 160}}
+            ng-attr-x1='{{scaled.width + metadata.scale * 80}}' y1=0
+            ng-attr-x2='{{scaled.width + metadata.scale * 80}}' y2=50)
+          text(ng-attr-x='{{scaled.width / 2}}' y=42 text-anchor='middle' font-weight='bold')
+            | {{metadata.width * defines.K + 160}}
           text(x=-6 y=0) 80
-          text(ng-attr-x='{{$parent.scaled.width - 3}}' y=0) 80
+          text(ng-attr-x='{{scaled.width - 3}}' y=0) 80
           g(
             ng-repeat='room in rooms'
-            ng-attr-transform='translate({{$parent.scaled.K * $index}}, 0)')
+            ng-attr-transform='translate({{scaled.K * $index}}, 0)')
             line(
               x1=0 y1=0
               x2=0 y2=60)
             line(
               ng-if='$last'
-              ng-attr-x1='{{$parent.scaled.K}}' y1=0
-              ng-attr-x2='{{$parent.scaled.K}}' y2=60)
-            text(ng-attr-x='{{$parent.scaled.K / 2}}' y=10 text-anchor='middle') {{$parent.defines.K}}
+              ng-attr-x1='{{scaled.K}}' y1=0
+              ng-attr-x2='{{scaled.K}}' y2=60)
+            text(ng-attr-x='{{scaled.K / 2}}' y=10 text-anchor='middle') {{defines.K}}
             g(transform='translate(0, 70)')
               circle(cx=0 cy=0 r=8 fill='transparent' stroke='black')
               text(x=-3 y=3) {{$index + 1}}
-            g(ng-attr-transform='translate({{$parent.scaled.K}}, 70)' ng-if='$last')
+            g(ng-attr-transform='translate({{scaled.K}}, 70)' ng-if='$last')
               circle(cx=0 cy=0 r=8 fill='transparent' stroke='black')
               text(x=-4 y=3) {{$index + 2}}

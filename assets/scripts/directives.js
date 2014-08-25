@@ -61,7 +61,9 @@ angular.module('directives', [])
       templateUrl: 'views/directives/blueprints/flat.html',
       controller: ['$scope', '$attrs', function ($scope, $attrs) {
         $scope._ = _
-        $scope.$attrs = $attrs
+        $scope.metadata = $scope.$parent.metadata
+        $scope.defines = $scope.$parent.defines
+        $scope.attrs = $attrs
         $scope.clicked = function (room) {
           $('#modal-flat').modal('show')
           $scope.$parent.room = room
