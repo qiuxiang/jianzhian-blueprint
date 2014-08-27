@@ -16,13 +16,13 @@ div
 
     .tab-content.blueprints
       #blueprint-foundation.tab-pane.active
-        blueprint-complete-foundation
+        blueprint-simple-foundation
       #blueprint-flat.tab-pane
         blueprint-simple-flat(ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
       #blueprint-side.tab-pane
         blueprint-simple-side
       #blueprint-front.tab-pane
-        blueprint-complete-front
+        blueprint-simple-front
 
   #modal-params.modal.fade
     .modal-dialog
