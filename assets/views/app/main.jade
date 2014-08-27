@@ -1,113 +1,112 @@
-div
-  br
-  .container
-    a.btn.btn-primary.btn-fixed(href='#modal-params' data-toggle='modal')
-      span.glyphicon.glyphicon-th-list
+br
+.container
+  a.btn.btn-primary.btn-fixed(href='#modal-params' data-toggle='modal')
+    span.glyphicon.glyphicon-th-list
 
-    ul.nav.nav-tabs
-      li.active
-        a(href='#blueprint-foundation' data-toggle='tab') 基础图
-      li
-        a(href='#blueprint-flat' data-toggle='tab') 平面布置图
-      li
-        a(href='#blueprint-side' data-toggle='tab') {{metadata.height|letter}}-{{0|letter}} 轴立面图
-      li
-        a(href='#blueprint-front' data-toggle='tab') 1-{{metadata.width + 1}} 轴立面图
+  ul.nav.nav-tabs
+    li.active
+      a(href='#blueprint-foundation' data-toggle='tab') 基础图
+    li
+      a(href='#blueprint-flat' data-toggle='tab') 平面布置图
+    li
+      a(href='#blueprint-side' data-toggle='tab') {{metadata.height|letter}}-{{0|letter}} 轴立面图
+    li
+      a(href='#blueprint-front' data-toggle='tab') 1-{{metadata.width + 1}} 轴立面图
 
-    .tab-content.blueprints
-      #blueprint-foundation.tab-pane.active
-        blueprint-simple-foundation
-      #blueprint-flat.tab-pane
-        blueprint-simple-flat(ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
-      #blueprint-side.tab-pane
-        blueprint-simple-side
-      #blueprint-front.tab-pane
-        blueprint-simple-front
+  .tab-content.blueprints
+    #blueprint-foundation.tab-pane.active
+      blueprint-simple-foundation
+    #blueprint-flat.tab-pane
+      blueprint-simple-flat(ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
+    #blueprint-side.tab-pane
+      blueprint-simple-side
+    #blueprint-front.tab-pane
+      blueprint-simple-front
 
-  #modal-params.modal.fade
-    .modal-dialog
-      .modal-content
-        .modal-header
-          button.close(type='button' data-dismiss='modal')
-            span(aria-hidden='true') &times;
-          h4.modal-title 参数
-        .modal-body
-          form.form-horizontal
-            .page-header
-              h4 基础
-            .form-group
-              label.control-label.col-xs-2(for='input-height') 深度
-              .col-xs-9
-                .input-group
-                  input#input-height.form-control(type='text' ng-model='metadata.height')
-                  span.input-group-addon K
-            .form-group
-              label.control-label.col-xs-2(for='input-width') 长度
-              .col-xs-9
-                .input-group
-                  input#input-width.form-control(type='text' ng-model='metadata.width')
-                  span.input-group-addon K
-            .form-group
-              label.control-label.col-xs-2(for='input-layer') 高度
-              .col-xs-9
-                .input-group
-                  input#input-layer.form-control(type='text' ng-model='metadata.layer')
-                  span.input-group-addon P
-            .form-group
-              label.control-label.col-xs-2(for='input-scale') 缩放
-              .col-xs-9
-                input#input-scale.form-control(type='text' ng-model='metadata.scale')
-
-            .page-header
-              h4 选项
-            .form-group
-              label.control-label.col-xs-2(for='input-stairs') 楼梯
-              .col-xs-9
-                .checkbox-inline
-                  label
-                    input(type='checkbox' ng-model='metadata.options.stairs.left')
-                    | 左
-                .checkbox-inline
-                  label
-                    input(type='checkbox' ng-model='metadata.options.stairs.right')
-                    | 右
-            br
-            .form-group
-              .col-sm-10.col-sm-offset-2
-                button.btn.btn-primary(data-dismiss='modal' aria-hidden='true')
-                  span.glyphicon.glyphicon-ok.right-space
-                  | 确定
-
-  #modal-flat.modal.fade
-    .modal-dialog
-      .modal-content
-        .modal-header
-          button.close(type='button' data-dismiss='modal')
-            span(aria-hidden='true') &times;
-          h4.modal-title 房间设置
-        .modal-body
-         form.form-horizontal
+#modal-params.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button' data-dismiss='modal')
+          span(aria-hidden='true') &times;
+        h4.modal-title 参数
+      .modal-body
+        form.form-horizontal
+          .page-header
+            h4 基础
           .form-group
-            label.col-sm-4.control-label(for='input-room-back') 后
-            .col-sm-6
-              select#input-room-back.form-control(ng-model='room.back')
-                option(value='1') 窗
-                option(value='3') 墙
-           .form-group
-             label.col-sm-4.control-label(for='input-room-front') 前
-             .col-sm-6
-               select#input-room-front.form-control(ng-model='room.front')
-                 option(value='1') 窗
-                 option(value='2') 门
-                 option(value='3') 墙
+            label.control-label.col-xs-2(for='input-height') 深度
+            .col-xs-9
+              .input-group
+                input#input-height.form-control(type='text' ng-model='metadata.height')
+                span.input-group-addon K
           .form-group
-            .col-sm-6.col-sm-offset-4
-              .checkbox
+            label.control-label.col-xs-2(for='input-width') 长度
+            .col-xs-9
+              .input-group
+                input#input-width.form-control(type='text' ng-model='metadata.width')
+                span.input-group-addon K
+          .form-group
+            label.control-label.col-xs-2(for='input-layer') 高度
+            .col-xs-9
+              .input-group
+                input#input-layer.form-control(type='text' ng-model='metadata.layer')
+                span.input-group-addon P
+          .form-group
+            label.control-label.col-xs-2(for='input-scale') 缩放
+            .col-xs-9
+              input#input-scale.form-control(type='text' ng-model='metadata.scale')
+
+          .page-header
+            h4 选项
+          .form-group
+            label.control-label.col-xs-2(for='input-stairs') 楼梯
+            .col-xs-9
+              .checkbox-inline
                 label
-                  input#input-room-board(ng-model='room.board' type='checkbox')
-                  | 作为隔间
+                  input(type='checkbox' ng-model='metadata.options.stairs.left')
+                  | 左
+              .checkbox-inline
+                label
+                  input(type='checkbox' ng-model='metadata.options.stairs.right')
+                  | 右
+          br
           .form-group
-            .col-sm-6.col-sm-offset-4
+            .col-sm-10.col-sm-offset-2
               button.btn.btn-primary(data-dismiss='modal' aria-hidden='true')
                 span.glyphicon.glyphicon-ok.right-space
                 | 确定
+
+#modal-flat.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button' data-dismiss='modal')
+          span(aria-hidden='true') &times;
+        h4.modal-title 房间设置
+      .modal-body
+       form.form-horizontal
+        .form-group
+          label.col-sm-4.control-label(for='input-room-back') 后
+          .col-sm-6
+            select#input-room-back.form-control(ng-model='room.back')
+              option(value='1') 窗
+              option(value='3') 墙
+         .form-group
+           label.col-sm-4.control-label(for='input-room-front') 前
+           .col-sm-6
+             select#input-room-front.form-control(ng-model='room.front')
+               option(value='1') 窗
+               option(value='2') 门
+               option(value='3') 墙
+        .form-group
+          .col-sm-6.col-sm-offset-4
+            .checkbox
+              label
+                input#input-room-board(ng-model='room.board' type='checkbox')
+                | 作为隔间
+        .form-group
+          .col-sm-6.col-sm-offset-4
+            button.btn.btn-primary(data-dismiss='modal' aria-hidden='true')
+              span.glyphicon.glyphicon-ok.right-space
+              | 确定
