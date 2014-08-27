@@ -12,6 +12,6 @@ angular.module('filters', [])
   })
   .filter('letter', function () {
     return function (number) {
-      return String.fromCharCode(65 + number)
+      return String.fromCharCode(65 + parseInt(number))
     }
   })

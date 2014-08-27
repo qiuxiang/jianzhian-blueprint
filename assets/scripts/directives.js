@@ -21,6 +21,7 @@ angular.module('directives', [])
           $scope.inner.offset = parseInt(($scope.outer.diff - $scope.inner.diff) / 2)
           $scope.inner.width = $scope.scaled.width + $scope.inner.diff
           $scope.inner.height = $scope.scaled.height + $scope.inner.diff
+          $scope.inner.height = $scope.inner.height < 0 ? 0 : $scope.inner.height
         }
       }]
     }
