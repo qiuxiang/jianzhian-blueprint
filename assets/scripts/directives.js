@@ -37,22 +37,38 @@ angular.module('directives', [])
       templateUrl: 'views/directives/blueprints/complete/foundation.html'
     }
   })
-  .directive('blueprintSide', function () {
+  .directive('blueprintBaseSide', function () {
     return {
-      restrict: 'E',
-      templateUrl: 'views/directives/blueprints/side.html',
-      controller: ['$scope', function ($scope) {
-        ;
-      }]
+      templateUrl: 'views/directives/blueprints/base/side.html'
     }
   })
-  .directive('blueprintFront', function () {
+  .directive('blueprintSimpleSide', function () {
     return {
       restrict: 'E',
-      templateUrl: 'views/directives/blueprints/front.html',
-      controller: ['$scope', function ($scope) {
-        ;
-      }]
+      templateUrl: 'views/directives/blueprints/simple/side.html'
+    }
+  })
+  .directive('blueprintCompleteSide', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'views/directives/blueprints/complete/side.html'
+    }
+  })
+  .directive('blueprintBaseFront', function () {
+    return {
+      templateUrl: 'views/directives/blueprints/base/front.html'
+    }
+  })
+  .directive('blueprintSimpleFront', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'views/directives/blueprints/simple/front.html'
+    }
+  })
+  .directive('blueprintCompleteFront', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'views/directives/blueprints/complete/front.html'
     }
   })
   .directive('blueprintBaseFlat', function () {
