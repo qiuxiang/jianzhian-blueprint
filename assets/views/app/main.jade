@@ -73,9 +73,13 @@ br
           br
           .form-group
             .col-sm-10.col-sm-offset-2
-              button.btn.btn-primary(data-dismiss='modal' aria-hidden='true')
-                span.glyphicon.glyphicon-ok.right-space
-                | 确定
+              .btn-group
+                button.btn.btn-primary(data-dismiss='modal' aria-hidden='true')
+                  span.glyphicon.glyphicon-ok.right-space
+                  | 确定
+                button.btn.btn-default(ng-click='exportMetadata(metadata)')
+                  span.glyphicon.glyphicon-export.right-space
+                  | 导出
 
 #modal-flat.modal.fade
   .modal-dialog

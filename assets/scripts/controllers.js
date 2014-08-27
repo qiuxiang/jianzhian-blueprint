@@ -66,6 +66,10 @@ angular.module('controllers', [])
       }
     })
 
+    $scope.exportMetadata = function (metadata) {
+      exportFile('metadata.json', JSON.stringify(metadata, null, 2))
+    }
+
     function resetRooms() {
       $scope.metadata.rooms = _.map(_.range(3, Number($scope.metadata.layer) + 1, 3), function () {
         return  _.map(_.range(0, $scope.metadata.width), function (i) {
@@ -76,5 +80,16 @@ angular.module('controllers', [])
           }
         })
       })
+    }
+
+    function exportFile(fileName, content) {
+      var anchor = document.createElement('a')
+        , blob = new Blob([content])
+        , event = document.createEvent('HTMLEvents')
+
+      event.initEvent('click', false, false)
+      anchor.download = fileName
+      anchor.href = URL.createObjectURL(blob)
+      anchor.dispatchEvent(event)
     }
   }])
