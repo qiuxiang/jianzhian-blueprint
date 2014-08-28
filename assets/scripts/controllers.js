@@ -47,16 +47,19 @@ angular.module('controllers', [])
     })
 
     $scope.$watch('metadata.height', function () {
+      $scope.metadata.height = parseInt($scope.metadata.height)
       $scope.scaled.height = $scope.metadata.height * $scope.scaled.K
+      resetRooms()
     })
 
     $scope.$watch('metadata.width', function () {
-      $scope.scaled.width = $scope.metadata.width * $scope.scaled.K
       $scope.metadata.width = parseInt($scope.metadata.width)
+      $scope.scaled.width = $scope.metadata.width * $scope.scaled.K
       resetRooms()
     })
 
     $scope.$watch('metadata.layer', function () {
+      $scope.metadata.layer = parseInt($scope.metadata.layer)
       $scope.scaled.layer = $scope.metadata.layer * $scope.scaled.P
       resetRooms()
 
