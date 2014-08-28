@@ -1,6 +1,6 @@
 {
   "private": true,
-  "devDependencies": {
+  "dependencies": {
     "express": "4.8.*",
     "glob": "4.0.*",
     "grunt": "0.4.*",
@@ -15,4 +15,3 @@
   "scripts": {
     "start": "node app.js"
   }
-}
