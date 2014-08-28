@@ -6,7 +6,7 @@ g(ng-attr-transform='translate({{scaled.aisle_width}}, 30)')
       fill='transparent'
       ng-repeat='room in layer'
       ng-attr-transform='translate({{scaled.K * $index}}, 0)')
-      g(ng-if='room.front == defines.board_types.window')
+      g(ng-if='room[metadata.height - 1].front == defines.board_types.window')
         rect(
           style='stroke: silver; stroke-width: 3px;'
           x=0 ng-attr-y='{{scaled.P}}'
@@ -25,12 +25,14 @@ g(ng-attr-transform='translate({{scaled.aisle_width}}, 30)')
           ng-attr-x2='{{scaled.K * 0.8}}' ng-attr-y2='{{scaled.P * 1.4}}')
         g
           line(
+            style='stroke: silver;'
             x1=0 ng-attr-y1='{{scaled.P * 0.5}}'
             ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{scaled.P * 2.5}}')
           line(
+            style='stroke: silver;'
             x1=0 ng-attr-y1='{{scaled.P * 2.5}}'
             ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{scaled.P * 0.5}}')
-      g(ng-if='room.front == defines.board_types.gate')
+      g(ng-if='room[metadata.height - 1].front == defines.board_types.gate')
         line(
           ng-attr-x1='{{scaled.K / 2}}' y1=0
           ng-attr-x2='{{scaled.K / 2}}' ng-attr-y2='{{scaled.P * 3}}')
@@ -51,6 +53,20 @@ g(ng-attr-transform='translate({{scaled.aisle_width}}, 30)')
           x1=0 ng-attr-y1='{{scaled.P * 2.5}}'
           ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{scaled.P * 0.5}}')
       rect(ng-attr-width='{{scaled.K}}' ng-attr-height='{{scaled.P * 3}}')
+    // 走廊
+    g(ng-if='$index != 0')
+      line(
+        stroke-width=3
+        ng-attr-x1='{{-metadata.options.stairs.left * scaled.aisle_width}}'
+        ng-attr-y1='{{scaled.P * 3 - metadata.scale * 1200}}'
+        ng-attr-x2='{{scaled.width + metadata.options.stairs.right * scaled.aisle_width}}'
+        ng-attr-y2='{{scaled.P * 3 - metadata.scale * 1200}}')
+      rect(
+        fill='url(#RailingPattern)'
+        ng-attr-x='{{-metadata.options.stairs.left * scaled.aisle_width}}'
+        ng-attr-y='{{scaled.P * 3 - metadata.scale * 1200}}'
+        ng-attr-width='{{scaled.width + metadata.options.stairs.left * scaled.aisle_width + metadata.options.stairs.right * scaled.aisle_width}}'
+        ng-attr-height='{{metadata.scale * 1200}}')
   // 房顶
   g
     rect(
@@ -65,18 +81,14 @@ g(ng-attr-transform='translate({{scaled.aisle_width}}, 30)')
       fill='url(#RoofPattern)'
       ng-attr-width='{{scaled.width}}'
       ng-attr-height='{{metadata.scale * 200}}')
-  // 走廊
-  g
-    rect(
-      fill='url(#RailingPattern)'
-      ng-attr-x='{{-metadata.options.stairs.left * scaled.aisle_width}}'
-      ng-attr-y='{{scaled.P * 3 - metadata.scale * 1200}}'
-      ng-attr-width='{{scaled.width + metadata.options.stairs.left * scaled.aisle_width + metadata.options.stairs.right * scaled.aisle_width}}'
-      ng-attr-height='{{metadata.scale * 1200}}')
   // 左楼梯
   g(
     ng-if='metadata.options.stairs.left'
     ng-attr-transform='translate({{-scaled.aisle_width}}, {{scaled.P * 3}})')
+    line(
+      stroke-width=3
+      x1=0 ng-attr-y1='{{-metadata.scale * 1200}}'
+      x2=0 ng-attr-y2='{{scaled.P * 3}}')
     rect(
       fill='url(#StairsPattern)'
       x=0 y=0

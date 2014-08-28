@@ -101,7 +101,8 @@ angular.module('directives', [])
           }
 
           if ($scope.rooms.indexOf(w) == $scope.metadata.width - 1) {
-            delete $scope.$parent.room_options.right
+            delete $scope.$parent.room_options.right[$scope.defines.board_types.gate]
+            delete $scope.$parent.room_options.right[$scope.defines.board_types.none]
           }
 
           $('#modal-flat').modal('show')

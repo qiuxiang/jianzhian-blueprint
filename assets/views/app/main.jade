@@ -90,7 +90,7 @@ br
         h4.modal-title 房间设置
       .modal-body
         form.form-horizontal
-          .form-group(ng-if='room_options.front')
+          .form-group
             label.col-sm-4.control-label(for='input-room-front') 前
             .col-sm-6
               select#input-room-front.form-control(ng-model='room.front')
@@ -100,7 +100,7 @@ br
             .col-sm-6
               select#input-room-back.form-control(ng-model='room.back')
                 option(ng-repeat='(value, name) in room_options.back' value='{{value}}') {{name}}
-          .form-group(ng-if='room_options.right')
+          .form-group
             label.col-sm-4.control-label(for='input-room-right') 右
             .col-sm-6
               select#input-room-right.form-control(ng-model='room.right')
