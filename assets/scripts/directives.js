@@ -80,10 +80,36 @@ angular.module('directives', [])
         $scope.metadata = $scope.$parent.metadata
         $scope.defines = $scope.$parent.defines
         $scope.attrs = $attrs
-        $scope.clicked = function (room) {
+        $scope.clicked = function (room, w, h) {
+          var board_types = {}
+          board_types[$scope.defines.board_types.board] = '墙'
+          board_types[$scope.defines.board_types.gate] = '门'
+          board_types[$scope.defines.board_types.window] = '窗'
+          board_types[$scope.defines.board_types.none] = '无'
+
+          $scope.$parent.room_options = {
+            right: _.clone(board_types),
+            front: _.clone(board_types),
+            back: _.clone(board_types)
+          }
+
+          delete $scope.$parent.room_options.back[$scope.defines.board_types.gate]
+          delete $scope.$parent.room_options.back[$scope.defines.board_types.none]
+
+          if (h != 0) {
+            delete $scope.$parent.room_options.back
+          }
+
+          if ($scope.rooms.indexOf(w) == $scope.metadata.width - 1) {
+            delete $scope.$parent.room_options.right
+          }
+
           $('#modal-flat').modal('show')
-          $scope.$parent.room = room
-          console.log($scope.$parent.metadata)
+          setTimeout(function() {
+            $scope.$parent.$apply(function () {
+              $scope.$parent.room = room
+            })
+          }, 100)
         }
       }]
     }
@@ -97,17 +123,6 @@ angular.module('directives', [])
   .directive('blueprintCompleteFlat', function () {
     return {
       restrict: 'E',
-      templateUrl: 'views/directives/blueprints/flat.html',
-      controller: ['$scope', '$attrs', function ($scope, $attrs) {
-        $scope._ = _
-        $scope.metadata = $scope.$parent.metadata
-        $scope.defines = $scope.$parent.defines
-        $scope.attrs = $attrs
-        $scope.clicked = function (room) {
-          $('#modal-flat').modal('show')
-          $scope.$parent.room = room
-          console.log($scope.$parent.metadata)
-        }
-      }]
+      templateUrl: 'views/directives/blueprints/flat.html'
     }
   })

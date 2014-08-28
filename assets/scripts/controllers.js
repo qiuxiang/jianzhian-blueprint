@@ -7,6 +7,7 @@ angular.module('controllers', [])
         height: 760
       },
       board_types: {
+        none: 0,
         window: 1,
         gate: 2,
         board: 3
@@ -63,7 +64,7 @@ angular.module('controllers', [])
       $scope.scaled.layer = $scope.metadata.layer * $scope.scaled.P
       resetRooms()
 
-      if ($scope.metadata.layer <=3) {
+      if ($scope.metadata.layer <= 3) {
         $scope.metadata.options.stairs.left = false
         $scope.metadata.options.stairs.right = false
       }
@@ -75,12 +76,30 @@ angular.module('controllers', [])
 
     function resetRooms() {
       $scope.metadata.rooms = _.map(_.range(3, Number($scope.metadata.layer) + 1, 3), function () {
-        return  _.map(_.range(0, $scope.metadata.width), function (i) {
-          return {
-            front: i % 2 ? $scope.defines.board_types.gate : $scope.defines.board_types.window,
-            back: i % 2 ? $scope.defines.board_types.board : $scope.defines.board_types.window,
-            board: i % 2 == 1
-          }
+        return  _.map(_.range(0, $scope.metadata.width), function (w) {
+          return  _.map(_.range(0, $scope.metadata.height), function (h) {
+            var room = {
+              left: $scope.defines.board_types.none,
+              right: $scope.defines.board_types.none,
+              front: $scope.defines.board_types.none,
+              back: $scope.defines.board_types.none
+            }
+
+            if (w == 0) {
+              room.left = $scope.defines.board_types.board
+            }
+
+            if (h == 0) {
+              room.back = w % 2 ? $scope.defines.board_types.board : $scope.defines.board_types.window
+            }
+
+            if (h == $scope.metadata.height - 1) {
+              room.front = w % 2 ? $scope.defines.board_types.gate : $scope.defines.board_types.window
+            }
+
+            room.right = w % 2 ? $scope.defines.board_types.board : $scope.defines.board_types.none
+            return room
+          })
         })
       })
     }
