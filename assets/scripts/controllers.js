@@ -16,7 +16,8 @@ angular.module('controllers', [])
         margin: 20 // 标尺与图的间隔宽度
       },
       aisle_width: 1000, // 走道宽度
-      stairs_height: 3000, // 楼梯的俯视高度
+      aisle_height: 1200, // 栏杆高度
+      stairs_height: 3200, // 楼梯的俯视高度
       K: 1820,
       P: 950
     }
@@ -39,6 +40,7 @@ angular.module('controllers', [])
         K: parseInt($scope.defines.K * $scope.metadata.scale),
         P: parseInt($scope.defines.P * $scope.metadata.scale),
         aisle_width: $scope.defines.aisle_width * $scope.metadata.scale,
+        aisle_height: $scope.defines.aisle_height * $scope.metadata.scale,
         stairs_height: $scope.defines.stairs_height * $scope.metadata.scale
       }
 

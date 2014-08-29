@@ -33,57 +33,43 @@ g(transform='translate(20, 30)')
   // 走廊
   g(
     ng-if='metadata.layer > 3'
-    ng-attr-transform='translate({{scaled.height}}, {{scaled.P * 3 - 1200 * metadata.scale}})')
+    ng-attr-transform='translate({{scaled.height}}, {{scaled.P * 3 - scaled.aisle_height}})')
     line.border(
-      x1=4 y1=0
-      ng-attr-x2='{{scaled.aisle_width}}' y2=0)
-    line.border(
-      x1=4 ng-attr-y1='{{metadata.scale * 300}}'
-      ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{metadata.scale * 300}}')
-    line.border(
-      x1=4 ng-attr-y1='{{metadata.scale * 600}}'
-      ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{metadata.scale * 600}}')
-    line.border(
-      x1=4 ng-attr-y1='{{metadata.scale * 900}}'
-      ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{metadata.scale * 900}}')
-    line.border(
-      x1=4 ng-attr-y1='{{metadata.scale * 1200}}'
-      ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{metadata.scale * 1200}}')
+      ng-repeat='i in _.range(0, 5)'
+      x1=4 ng-attr-y1='{{scaled.aisle_height * 0.25 * i}}'
+      ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.aisle_height * 0.25 * i}}')
     line.border(
       ng-attr-x1='{{scaled.aisle_width}}' y1=0
-      ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.layer - scaled.P * 3 + 1200 * metadata.scale}}')
-  // 楼梯
+      ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.layer - scaled.P * 3 + scaled.aisle_height}}')
+
+  // 只有两层的楼梯
   g(
-    ng-if='metadata.options.stairs.left'
-    ng-attr-transform='translate({{scaled.height - 3200 * metadata.scale}}, {{scaled.P * 3 - 1200 * metadata.scale}})')
+    ng-if='metadata.options.stairs.left && metadata.layer == 6'
+    ng-attr-transform='translate({{scaled.height - scaled.stairs_height}}, {{scaled.P * 3 - scaled.aisle_height}})')
     line.border(
-      x1=0 ng-attr-y1='{{scaled.P * 3 + 1200 * metadata.scale}}'
-      ng-attr-x2='{{3200* metadata.scale + 4}}' ng-attr-y2='{{1200 * metadata.scale}}')
-    line.border(
-      x1=0 ng-attr-y1='{{scaled.P * 3 + 900 * metadata.scale}}'
-      ng-attr-x2='{{3200* metadata.scale + 4}}' ng-attr-y2='{{900 * metadata.scale}}')
-    line.border(
-      x1=0 ng-attr-y1='{{scaled.P * 3 + 600 * metadata.scale}}'
-      ng-attr-x2='{{3200* metadata.scale + 4}}' ng-attr-y2='{{600 * metadata.scale}}')
-    line.border(
-      x1=0 ng-attr-y1='{{scaled.P * 3 + 300 * metadata.scale}}'
-      ng-attr-x2='{{3200* metadata.scale + 4}}' ng-attr-y2='{{300 * metadata.scale}}')
-    line.border(
-      x1=0 ng-attr-y1='{{scaled.P * 3}}'
-      ng-attr-x2='{{3200* metadata.scale + 4}}' y2=0)
+      ng-repeat='i in _.range(0, 5)'
+      x1=0 ng-attr-y1='{{scaled.P * 3 + 0.25 * i * scaled.aisle_height}}'
+      ng-attr-x2='{{scaled.stairs_height + 4}}' ng-attr-y2='{{0.25 * i * scaled.aisle_height}}')
 
     line.border(
-      x1=0 ng-attr-y1='{{scaled.P * 3 + 1200 * metadata.scale}}'
+      x1=0 ng-attr-y1='{{scaled.P * 3 + scaled.aisle_height}}'
       x2=0 ng-attr-y2='{{scaled.P * 3}}')
     line.border(
-      ng-attr-x1='{{800 * metadata.scale}}' ng-attr-y1='{{scaled.P * 3 * 0.75 + 1200 * metadata.scale}}'
+      ng-attr-x1='{{800 * metadata.scale}}' ng-attr-y1='{{scaled.P * 3 * 0.75 + scaled.aisle_height}}'
       ng-attr-x2='{{800 * metadata.scale}}' ng-attr-y2='{{scaled.P * 3 * 0.75}}')
     line.border(
-      ng-attr-x1='{{1600 * metadata.scale}}' ng-attr-y1='{{scaled.P * 3 * 0.5 + 1200 * metadata.scale + 1}}'
+      ng-attr-x1='{{1600 * metadata.scale}}' ng-attr-y1='{{scaled.P * 3 * 0.5 + scaled.aisle_height + 1}}'
       ng-attr-x2='{{1600 * metadata.scale}}' ng-attr-y2='{{scaled.P * 3 * 0.5 + 1}}')
     line.border(
-      ng-attr-x1='{{2400 * metadata.scale}}' ng-attr-y1='{{scaled.P * 3 * 0.25 + 1200 * metadata.scale + 2}}'
+      ng-attr-x1='{{2400 * metadata.scale}}' ng-attr-y1='{{scaled.P * 3 * 0.25 + scaled.aisle_height + 2}}'
       ng-attr-x2='{{2400 * metadata.scale}}' ng-attr-y2='{{scaled.P * 3 * 0.25 + 2}}')
+
+  // 超过两层的楼梯
+  g(
+    ng-if='metadata.options.stairs.left && metadata.layer > 6'
+    ng-attr-transform='translate({{scaled.height - scaled.stairs_height}}, {{scaled.P * 3 - scaled.aisle_height}})')
+
+  // 主体
   g(
     ng-repeat='layer in metadata.rooms'
     ng-attr-transform='translate(0, {{scaled.P * $index * 3}})')
