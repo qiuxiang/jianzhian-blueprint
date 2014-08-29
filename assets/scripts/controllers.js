@@ -25,7 +25,7 @@ angular.module('controllers', [])
     $scope.metadata = {
       width: 10,
       height: 3,
-      layer: 9,
+      layer: 6,
       scale: 0.04,
       options: {
        stairs: {

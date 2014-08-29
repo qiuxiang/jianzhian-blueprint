@@ -4,21 +4,21 @@ br
     span.glyphicon.glyphicon-th-list
 
   ul.nav.nav-tabs
-    li
+    li.active
       a(href='#blueprint-foundation' data-toggle='tab') 基础图
     li
       a(href='#blueprint-flat' data-toggle='tab') 平面布置图
-    li.active
+    li
       a(href='#blueprint-side' data-toggle='tab') {{metadata.height|letter}}-{{0|letter}} 轴立面图
     li
       a(href='#blueprint-front' data-toggle='tab') 1-{{metadata.width + 1}} 轴立面图
 
   .tab-content.blueprints
-    #blueprint-foundation.tab-pane
+    #blueprint-foundation.tab-pane.active
       blueprint-simple-foundation
     #blueprint-flat.tab-pane
       blueprint-simple-flat(ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
-    #blueprint-side.tab-pane.active
+    #blueprint-side.tab-pane
       blueprint-simple-side
     #blueprint-front.tab-pane
       blueprint-simple-front
