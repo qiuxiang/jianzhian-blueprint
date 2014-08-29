@@ -4,21 +4,21 @@ br
     span.glyphicon.glyphicon-th-list
 
   ul.nav.nav-tabs
-    li.active
+    li
       a(href='#blueprint-foundation' data-toggle='tab') 基础图
     li
       a(href='#blueprint-flat' data-toggle='tab') 平面布置图
-    li
+    li.active
       a(href='#blueprint-side' data-toggle='tab') {{metadata.height|letter}}-{{0|letter}} 轴立面图
     li
       a(href='#blueprint-front' data-toggle='tab') 1-{{metadata.width + 1}} 轴立面图
 
   .tab-content.blueprints
-    #blueprint-foundation.tab-pane.active
+    #blueprint-foundation.tab-pane
       blueprint-simple-foundation
     #blueprint-flat.tab-pane
       blueprint-simple-flat(ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
-    #blueprint-side.tab-pane
+    #blueprint-side.tab-pane.active
       blueprint-simple-side
     #blueprint-front.tab-pane
       blueprint-simple-front
@@ -74,10 +74,7 @@ br
           .form-group
             .col-sm-10.col-sm-offset-2
               .btn-group
-                button.btn.btn-primary(data-dismiss='modal' aria-hidden='true')
-                  span.glyphicon.glyphicon-ok.right-space
-                  | 确定
-                button.btn.btn-default(ng-click='exportMetadata(metadata)')
+                button.btn.btn-primary(ng-click='exportMetadata(metadata)')
                   span.glyphicon.glyphicon-export.right-space
                   | 导出
 
@@ -93,20 +90,18 @@ br
           .form-group
             label.col-sm-4.control-label(for='input-room-front') 前
             .col-sm-6
-              select#input-room-front.form-control(ng-model='room.front')
-                option(ng-repeat='(value, name) in room_options.front' value='{{value}}') {{name}}
+              label.radio-inline(ng-repeat='(value, name) in room_options.front')
+                input(type='radio' value='{{value}}' ng-model='room.front' name='input-front')
+                | {{name}}
           .form-group(ng-if='room_options.back')
             label.col-sm-4.control-label(for='input-room-back') 后
             .col-sm-6
-              select#input-room-back.form-control(ng-model='room.back')
-                option(ng-repeat='(value, name) in room_options.back' value='{{value}}') {{name}}
+              label.radio-inline(ng-repeat='(value, name) in room_options.back')
+                input(type='radio' value='{{value}}' ng-model='room.back' name='input-back')
+                | {{name}}
           .form-group
             label.col-sm-4.control-label(for='input-room-right') 右
             .col-sm-6
-              select#input-room-right.form-control(ng-model='room.right')
-                option(ng-repeat='(value, name) in room_options.right' value='{{value}}') {{name}}
-          .form-group
-            .col-sm-6.col-sm-offset-4
-              button.btn.btn-primary(data-dismiss='modal' aria-hidden='true')
-                span.glyphicon.glyphicon-ok.right-space
-                | 确定
+              label.radio-inline(ng-repeat='(value, name) in room_options.right')
+                input(type='radio' value='{{value}}' ng-model='room.right' name='input-right')
+                | {{name}}

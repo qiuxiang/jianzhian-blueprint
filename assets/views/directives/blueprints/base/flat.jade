@@ -40,11 +40,10 @@ g(transform='translate(10, 10)')
       text.text-vertical(x=-6 ng-attr-y='{{scaled.aisle_width / 2}}' text-anchor='middle')
         tspan {{defines.aisle_width}}
 
-  // 楼梯
-  g(ng-attr-transform='translate({{100 + metadata.options.stairs.left * scaled.aisle_width}}, 0)')
-    // 左楼梯
+  g(ng-attr-transform='translate({{100 + (metadata.options.stairs.left + (metadata.layer > 6)) * scaled.aisle_width}}, 0)')
+    // 只有两层时的左楼梯
     g(
-      ng-if='metadata.options.stairs.left'
+      ng-if='metadata.options.stairs.left && metadata.layer == 6'
       ng-attr-transform='translate({{-scaled.aisle_width}}, {{scaled.height - scaled.stairs_height}})')
       rect(
         fill='url(#StairsPattern)'
@@ -60,6 +59,35 @@ g(transform='translate(10, 10)')
         line(x1=0 y1=0 x2=0 y2=20)
         line(x1=0 y1=15 ng-attr-x2='{{scaled.aisle_width - metadata.scale * 80}}' y2=15)
         text(ng-attr-x='{{scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{defines.aisle_width}}
+
+    // 层数超过两层时的左楼梯
+    g(
+      ng-if='metadata.options.stairs.left && metadata.layer > 6'
+      ng-attr-transform='translate({{-scaled.aisle_width * 2}}, {{scaled.height - scaled.K}})')
+      rect(
+        fill='url(#StairsPattern)'
+        x=0 y=0
+        ng-attr-width='{{scaled.aisle_width}}' ng-attr-height='{{scaled.K}}')
+      rect(
+        fill='url(#StairsPattern)'
+        ng-attr-x='{{scaled.aisle_width}}' y=0
+        ng-attr-width='{{scaled.aisle_width}}' ng-attr-height='{{scaled.K}}')
+      line.border(
+        x1=0 ng-attr-y1='{{-scaled.aisle_width}}'
+        x2=0 ng-attr-y2='{{scaled.K + scaled.aisle_width}}')
+      line.border(
+        x1=0 ng-attr-y1='{{-scaled.aisle_width}}'
+        ng-attr-x2='{{scaled.aisle_width * 2}}' ng-attr-y2='{{-scaled.aisle_width}}')
+      line.border(
+        x1=0 ng-attr-y1='{{scaled.K + scaled.aisle_width}}'
+        ng-attr-x2='{{scaled.aisle_width * 2}}' ng-attr-y2='{{scaled.K + scaled.aisle_width}}')
+      // 下标尺
+      g(ng-attr-transform='translate(0, {{scaled.K + scaled.aisle_width + 20}})')
+        line(x1=0 y1=0 x2=0 y2=20)
+        line(ng-attr-x1='{{scaled.aisle_width}}' y1=0 ng-attr-x2='{{scaled.aisle_width}}' y2=20)
+        line(x1=0 y1=15 ng-attr-x2='{{scaled.aisle_width * 2 - metadata.scale * 80}}' y2=15)
+        text(ng-attr-x='{{scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{defines.aisle_width}}
+        text(ng-attr-x='{{scaled.aisle_width + 8}}' y=10) {{defines.aisle_width}}
 
     // 右楼梯
     g(
@@ -81,6 +109,7 @@ g(transform='translate(10, 10)')
         line(ng-attr-x1='{{metadata.scale * 80}}' y1=15 ng-attr-x2='{{scaled.aisle_width}}' y2=15)
         text(ng-attr-x='{{scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{defines.aisle_width}}
 
+    // 房间
     g(
       ng-repeat='col in rooms'
       ng-attr-transform='translate({{scaled.K * $index}}, 0)'

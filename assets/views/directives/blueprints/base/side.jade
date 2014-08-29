@@ -67,7 +67,31 @@ g(transform='translate(20, 30)')
   // 超过两层的楼梯
   g(
     ng-if='metadata.options.stairs.left && metadata.layer > 6'
-    ng-attr-transform='translate({{scaled.height - scaled.stairs_height}}, {{scaled.P * 3 - scaled.aisle_height}})')
+    ng-attr-transform='translate({{scaled.height - scaled.K}}, {{scaled.P * 3 - scaled.aisle_height}})')
+    line.border(
+      ng-attr-x1='{{-scaled.aisle_width}}' ng-attr-y1='{{scaled.P * 1.5}}'
+      ng-attr-x2='{{-scaled.aisle_width}}' ng-attr-y2='{{scaled.layer - scaled.P * 3 + scaled.aisle_height}}')
+    g(
+      ng-repeat='layer in metadata.rooms'
+      ng-if='!$last'
+      ng-attr-transform='translate(0, {{$index * scaled.P * 3}})')
+      // 斜栏杆
+      g
+        line.border(
+          ng-repeat='i in _.range(0, 5)'
+          x1=0 ng-attr-y1='{{scaled.P * 1.5 + scaled.aisle_height * i / 4}}'
+          ng-attr-x2='{{scaled.K + 4}}' ng-attr-y2='{{i * scaled.aisle_height / 4}}')
+        line.border(
+          ng-repeat='i in _.range(0, 5)'
+          x1=0 ng-attr-y1='{{scaled.P * 1.5 + scaled.aisle_height * i / 4}}'
+          ng-attr-x2='{{scaled.K + 4}}' ng-attr-y2='{{scaled.P * 3 + scaled.aisle_height * i / 4}}')
+      // 转折
+      g(ng-attr-transform='translate({{-scaled.aisle_width}}, {{scaled.P * 1.5}})')
+        line.border(
+          ng-repeat='i in _.range(0, 5)'
+          x1=0 ng-attr-y1='{{scaled.aisle_height * 0.25 * i}}'
+          ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.aisle_height * 0.25 * i}}')
+        line.border(x1=0 y1=0 x2=0 ng-attr-y2='{{scaled.aisle_height}}')
 
   // 主体
   g(
