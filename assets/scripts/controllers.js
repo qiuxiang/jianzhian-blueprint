@@ -30,7 +30,7 @@ angular.module('controllers', [])
       options: {
        stairs: {
          left: true,
-         right: false
+         right: true
        }
       }
     }
