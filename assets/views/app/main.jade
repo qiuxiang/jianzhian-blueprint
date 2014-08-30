@@ -74,9 +74,15 @@ br
           .form-group
             .col-sm-10.col-sm-offset-2
               .btn-group
+                button.btn.btn-warning(ng-click='saveMetadata(metadata)')
+                  span.glyphicon.glyphicon-save.right-space
+                  | 保存
                 button.btn.btn-primary(ng-click='exportMetadata(metadata)')
                   span.glyphicon.glyphicon-export.right-space
                   | 导出
+                button.btn.btn-default(ng-click='importMetadata()')
+                  span.glyphicon.glyphicon-import.right-space
+                  | 导入
 
 #modal-flat.modal.fade
   .modal-dialog

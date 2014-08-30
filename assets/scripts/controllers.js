@@ -1,5 +1,5 @@
 angular.module('controllers', [])
-  .controller('Main', ['$scope', function ($scope) {
+  .controller('Main', ['$scope', '$http', function ($scope, $http) {
     $scope._ = _
     $scope.defines = {
       blueprint: {
@@ -30,12 +30,16 @@ angular.module('controllers', [])
       layer: 6,
       scale: 0.04,
       options: {
-       stairs: {
-         left: true,
-         right: false
-       }
+        stairs: {
+          left: true,
+          right: false
+        }
       }
     }
+
+    $http.get('metadata.json').then(function (response) {
+      $scope.metadata = response.data
+    })
 
     $scope.$watch('metadata.scale', function () {
       $scope.scaled = {
@@ -75,7 +79,23 @@ angular.module('controllers', [])
     })
 
     $scope.exportMetadata = function (metadata) {
+      metadata.rooms = _.map(metadata.rooms, function (layer) {
+        return _.map(layer, function (col) {
+          return _.map(col, function (room) {
+            delete room['$$hashKey']
+            return room
+          })
+        })
+      })
       exportFile('metadata.json', JSON.stringify(metadata, null, 2))
+    }
+
+    $scope.saveMetadata = function (metadata) {
+      $http.post('/save', metadata).then(function () {
+        console.log(true)
+      }, function () {
+        console.log(false)
+      })
     }
 
     function resetRooms() {
