@@ -98,6 +98,10 @@ angular.module('controllers', [])
       })
     }
 
+    $scope.importMetadata = function (metadata) {
+      $scope.metadata = JSON.parse(metadata)
+    }
+
     function resetRooms() {
       $scope.metadata.rooms = _.map(_.range(3, Number($scope.metadata.layer) + 1, 3), function () {
         return  _.map(_.range(0, $scope.metadata.width), function (w) {

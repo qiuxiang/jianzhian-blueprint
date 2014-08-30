@@ -80,7 +80,7 @@ br
                 button.btn.btn-primary(ng-click='exportMetadata(metadata)')
                   span.glyphicon.glyphicon-export.right-space
                   | 导出
-                button.btn.btn-default(ng-click='importMetadata()')
+                a.btn.btn-default(aria-hidden='true' data-dismiss='modal' href='#modal-import' data-toggle='modal')
                   span.glyphicon.glyphicon-import.right-space
                   | 导入
 
@@ -108,3 +108,23 @@ br
             .col-sm-6
               select#input-room-right.form-control(ng-model='room.right')
                 option(ng-repeat='(value, name) in room_options.right' value='{{value}}') {{name}}
+
+#modal-import.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button' data-dismiss='modal')
+          span(aria-hidden='true') &times;
+        h4.modal-title 导入数据
+      .modal-body
+        form
+          .form-group
+            label.control-label(for='input-metadata-file') 从文件
+            input#input-metadata-file(type='file' ng-model='metadata_json')
+          .form-group
+            label.control-label(for='input-metadata-json') 从文本数据
+            textarea#input-metadata-json.form-control(ng-model='metadata_json')
+          .form-group
+            button.btn.btn-primary(ng-click='importMetadata(metadata_json)' data-dismiss='modal' aria-hidden='true')
+              span.glyphicon.glyphicon-ok.right-space
+              | 确定
