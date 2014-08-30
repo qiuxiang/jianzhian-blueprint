@@ -4,23 +4,23 @@ br
     span.glyphicon.glyphicon-th-list
 
   ul.nav.nav-tabs
-    li
+    li.active
       a(href='#blueprint-foundation' data-toggle='tab') 基础图
     li
       a(href='#blueprint-flat' data-toggle='tab') 平面布置图
     li
       a(href='#blueprint-side' data-toggle='tab') {{metadata.height|letter}}-{{0|letter}} 轴立面图
-    li.active
+    li
       a(href='#blueprint-front' data-toggle='tab') 1-{{metadata.width + 1}} 轴立面图
 
   .tab-content.blueprints
-    #blueprint-foundation.tab-pane
+    #blueprint-foundation.tab-pane.active
       blueprint-simple-foundation
     #blueprint-flat.tab-pane
       blueprint-simple-flat(ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
     #blueprint-side.tab-pane
       blueprint-simple-side
-    #blueprint-front.tab-pane.active
+    #blueprint-front.tab-pane
       blueprint-simple-front
 
 #modal-params.modal.fade
@@ -90,18 +90,15 @@ br
           .form-group
             label.col-sm-4.control-label(for='input-room-front') 前
             .col-sm-6
-              label.radio-inline(ng-repeat='(value, name) in room_options.front')
-                input(type='radio' value='{{value}}' ng-model='room.front' name='input-front')
-                | {{name}}
+              select#input-room-front.form-control(ng-model='room.front')
+                option(ng-repeat='(value, name) in room_options.front' value='{{value}}') {{name}}
           .form-group(ng-if='room_options.back')
             label.col-sm-4.control-label(for='input-room-back') 后
             .col-sm-6
-              label.radio-inline(ng-repeat='(value, name) in room_options.back')
-                input(type='radio' value='{{value}}' ng-model='room.back' name='input-back')
-                | {{name}}
+              select#input-room-back.form-control(ng-model='room.back')
+                option(ng-repeat='(value, name) in room_options.back' value='{{value}}') {{name}}
           .form-group
             label.col-sm-4.control-label(for='input-room-right') 右
             .col-sm-6
-              label.radio-inline(ng-repeat='(value, name) in room_options.right')
-                input(type='radio' value='{{value}}' ng-model='room.right' name='input-right')
-                | {{name}}
+              select#input-room-right.form-control(ng-model='room.right')
+                option(ng-repeat='(value, name) in room_options.right' value='{{value}}') {{name}}

@@ -10,7 +10,9 @@ angular.module('controllers', [])
         none: 0,
         window: 1,
         gate: 2,
-        board: 3
+        board: 3,
+        gate_left: 4,
+        gate_right: 5
       },
       ruler: {
         margin: 20 // 标尺与图的间隔宽度

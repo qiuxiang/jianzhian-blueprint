@@ -184,6 +184,24 @@ g(transform='translate(10, 10)')
               width=2.5 ng-attr-height='{{scaled.K / 2}}')
             text(ng-attr-x='{{scaled.K * 0.75}}' ng-attr-y='{{scaled.K - 2}}') M
             path(ng-attr-d='M{{scaled.K / 2}},{{scaled.K}} Q{{scaled.K / 2}},{{scaled.K / 2}} {{scaled.K}},{{scaled.K / 2}}' stroke='silver' fill='none')
+          g(ng-if='room.front == defines.board_types.gate_left')
+            rect.board(
+              x=0 ng-attr-y='{{scaled.K}}'
+              ng-attr-width='{{scaled.K / 2}}' height=2.5)
+            rect.window(
+              ng-attr-x='{{scaled.K / 2}}' ng-attr-y='{{scaled.K / 2}}'
+              width=2.5 ng-attr-height='{{scaled.K / 2}}')
+            text(ng-attr-x='{{scaled.K * 0.75}}' ng-attr-y='{{scaled.K - 2}}') M
+            path(ng-attr-d='M{{scaled.K / 2}},{{scaled.K / 2}} Q{{scaled.K}},{{scaled.K / 2}} {{scaled.K}},{{scaled.K}}' stroke='silver' fill='none')
+          g(ng-if='room.front == defines.board_types.gate_right')
+            rect.board(
+              ng-attr-x='{{scaled.K / 2}}' ng-attr-y='{{scaled.K}}'
+              ng-attr-width='{{scaled.K / 2}}' height=2.5)
+            rect.window(
+              ng-attr-x='{{scaled.K / 2 - 2.5}}' ng-attr-y='{{scaled.K / 2}}'
+              width=2.5 ng-attr-height='{{scaled.K / 2}}')
+            text(ng-attr-x='{{scaled.K * 0.25}}' ng-attr-y='{{scaled.K - 2}}') M
+            path(ng-attr-d='M{{scaled.K / 2}},{{scaled.K / 2}} Q0,{{scaled.K / 2}} 0,{{scaled.K}}' stroke='silver' fill='none')
         // 后
         g
           rect.board(
@@ -221,6 +239,24 @@ g(transform='translate(10, 10)')
               ng-attr-width='{{scaled.K / 2}}' height=2.5)
             text(ng-attr-x='{{scaled.K}}' ng-attr-y='{{scaled.K  * 0.25 + 6}}') M
             path(ng-attr-d='M{{scaled.K / 2}},2.5 Q{{scaled.K / 2}},{{scaled.K / 2}} {{scaled.K}},{{scaled.K / 2}}' stroke='silver' fill='none')
+          g(ng-if='room.right == defines.board_types.gate_left')
+            rect.board(
+              ng-attr-x='{{scaled.K}}' ng-attr-y='{{scaled.K / 2}}'
+              width=2.5 ng-attr-height='{{scaled.K / 2}}')
+            rect.window(
+              ng-attr-x='{{scaled.K / 2}}' ng-attr-y='{{scaled.K / 2 - 2.5}}'
+              ng-attr-width='{{scaled.K / 2}}' height=2.5)
+            text(ng-attr-x='{{scaled.K}}' ng-attr-y='{{scaled.K  * 0.25 + 6}}') M
+            path(ng-attr-d='M{{scaled.K / 2}},{{scaled.K / 2}} Q{{scaled.K / 2}},0 {{scaled.K}},0' stroke='silver' fill='none')
+          g(ng-if='room.right == defines.board_types.gate_right')
+            rect.board(
+              ng-attr-x='{{scaled.K}}' y=0
+              width=2.5 ng-attr-height='{{scaled.K / 2}}')
+            rect.window(
+              ng-attr-x='{{scaled.K / 2}}' ng-attr-y='{{scaled.K / 2}}'
+              ng-attr-width='{{scaled.K / 2}}' height=2.5)
+            text(ng-attr-x='{{scaled.K}}' ng-attr-y='{{scaled.K  * 0.75 + 6}}') M
+            path(ng-attr-d='M{{scaled.K / 2}},{{scaled.K / 2}} Q{{scaled.K / 2}},{{scaled.K}} {{scaled.K}},{{scaled.K}}' stroke='silver' fill='none')
 
     // 走廊
     g(ng-attr-transform='translate(0, {{scaled.height}})')

@@ -32,6 +32,8 @@
         board_types[$scope.defines.board_types.gate] = '门'
         board_types[$scope.defines.board_types.window] = '窗'
         board_types[$scope.defines.board_types.none] = '无'
+        board_types[$scope.defines.board_types.gate_left] = '双开门（左）'
+        board_types[$scope.defines.board_types.gate_right] = '双开门（右）'
 
         $scope.$parent.room_options = {
           right: _.clone(board_types),
@@ -41,6 +43,8 @@
 
         delete $scope.$parent.room_options.back[$scope.defines.board_types.gate]
         delete $scope.$parent.room_options.back[$scope.defines.board_types.none]
+        delete $scope.$parent.room_options.back[$scope.defines.board_types.gate_left]
+        delete $scope.$parent.room_options.back[$scope.defines.board_types.gate_right]
 
         if (h != 0) {
           delete $scope.$parent.room_options.back
@@ -49,6 +53,8 @@
         if ($scope.rooms.indexOf(w) == $scope.metadata.width - 1) {
           delete $scope.$parent.room_options.right[$scope.defines.board_types.gate]
           delete $scope.$parent.room_options.right[$scope.defines.board_types.none]
+          delete $scope.$parent.room_options.right[$scope.defines.board_types.gate_left]
+          delete $scope.$parent.room_options.right[$scope.defines.board_types.gate_right]
         }
 
         $('#modal-flat').modal('show')
