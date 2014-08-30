@@ -4,9 +4,9 @@ mixin defs
       id='ArrowPath'
       d='M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 Z'
       transform='scale(0.4) rotate(180) translate(10, 0)')
-  pattern(id='StairsPattern' width=100 ng-attr-height='{{scaled.aisle_height / 5}}' patternUnits='userSpaceOnUse')
-    line(x1=0 y1=0 x2=100 y2=0)
-  pattern(id='RailingPattern' width=100 ng-attr-height='{{metadata.scale * 312}}' patternUnits='userSpaceOnUse')
+  pattern(id='StairsPattern' width=100 ng-attr-height='{{scaled.aisle_height / 6}}' patternUnits='userSpaceOnUse')
+    line(x1=0 y1=0 x2=100 y2=0 stroke='sliver')
+  pattern(id='RailingPattern' width=100 ng-attr-height='{{(scaled.aisle_height + 1) / 4}}' patternUnits='userSpaceOnUse')
     line(x1=0 y1=0 x2=100 y2=0 stroke-width=5)
   pattern(id='RoofPattern' ng-attr-width='{{metadata.scale * 310}}' height=100 patternUnits='userSpaceOnUse')
     line(x1=0 y1=0 x2=0 y2=100 stroke-width=5)

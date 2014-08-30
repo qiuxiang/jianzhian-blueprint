@@ -41,6 +41,17 @@ g(transform='translate(20, 30)')
     line.border(
       ng-attr-x1='{{scaled.aisle_width}}' y1=0
       ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.layer - scaled.P * 3 + scaled.aisle_height}}')
+  //  三层走廊
+  g(
+    ng-if='metadata.layer > 6'
+    ng-attr-transform='translate({{scaled.height}}, {{scaled.P * 6 - scaled.aisle_height}})')
+    line.border(
+      ng-repeat='i in _.range(0, 5)'
+      x1=4 ng-attr-y1='{{scaled.aisle_height * 0.25 * i}}'
+      ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.aisle_height * 0.25 * i}}')
+    line.border(
+      ng-attr-x1='{{scaled.aisle_width}}' y1=0
+      ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.layer - scaled.P * 3 + scaled.aisle_height}}')
 
   // 只有两层的楼梯
   g(
