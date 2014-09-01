@@ -49,10 +49,14 @@ module.exports = function(grunt) {
       }
     },
     uglify: {
-      scripts: {
+      app: {
         files: {
-          'public/scripts/vendor.js': 'public/scripts/vendor.js',
           'public/scripts/app.js': 'public/scripts/app.js'
+        }
+      },
+      vendor: {
+        files: {
+          'public/scripts/vendor.js': 'public/scripts/vendor.js'
         }
       }
     },
