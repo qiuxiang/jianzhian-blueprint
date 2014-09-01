@@ -103,9 +103,10 @@ angular.module('controllers', [])
     }
 
     function setMetadata(metadata) {
-      $scope.metadata = metadata
+      $scope.metadata = _.cloneDeep(metadata)
       setTimeout(function () {
-        $scope.metadata.rooms = metadata.rooms
+        $scope.metadata.rooms = _.cloneDeep(metadata.rooms)
+        $scope.$apply()
       }, 1000)
     }
 
