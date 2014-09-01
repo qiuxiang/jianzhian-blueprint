@@ -118,13 +118,14 @@ br
         h4.modal-title 导入数据
       .modal-body
         form
+          //
+            .form-group
+              label.control-label(for='input-metadata-file') 从文件
+              input#input-metadata-file(type='file' ng-model='metadata_json')
           .form-group
-            label.control-label(for='input-metadata-file') 从文件
-            input#input-metadata-file(type='file' ng-model='metadata_json')
-          .form-group
-            label.control-label(for='input-metadata-json') 从文本数据
+            // label.control-label(for='input-metadata-json') 从文本数据
             textarea#input-metadata-json.form-control(ng-model='metadata_json')
           .form-group
             button.btn.btn-primary(ng-click='importMetadata(metadata_json)' data-dismiss='modal' aria-hidden='true')
               span.glyphicon.glyphicon-ok.right-space
-              | 确定
+              | 导入
