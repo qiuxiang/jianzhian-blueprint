@@ -1,5 +1,5 @@
 ;(function () {
-  var views_dir = views_dir || 'views'
+  window.views_dir = window.views_dir || 'views'
 
   var foundationCtrl = ['$scope', function ($scope) {
       $scope.$watch('metadata.width', calculate)
@@ -72,52 +72,52 @@
     .directive('blueprintSimpleFoundation', function () {
       return {
         restrict: 'E',
-        templateUrl: views_dir + '/directives/blueprints/simple/foundation.html',
+        templateUrl: window.views_dir + '/directives/blueprints/simple/foundation.html',
         controller: foundationCtrl
       }
     })
     .directive('blueprintCompleteFoundation', function () {
       return {
         restrict: 'E',
-        templateUrl: views_dir + '/directives/blueprints/complete/foundation.html',
+        templateUrl: window.views_dir + '/directives/blueprints/complete/foundation.html',
         controller: foundationCtrl
       }
     })
     .directive('blueprintSimpleSide', function () {
       return {
         restrict: 'E',
-        templateUrl: views_dir + '/directives/blueprints/simple/side.html'
+        templateUrl: window.views_dir + '/directives/blueprints/simple/side.html'
       }
     })
     .directive('blueprintCompleteSide', function () {
       return {
         restrict: 'E',
-        templateUrl: views_dir + '/directives/blueprints/complete/side.html'
+        templateUrl: window.views_dir + '/directives/blueprints/complete/side.html'
       }
     })
     .directive('blueprintSimpleFront', function () {
       return {
         restrict: 'E',
-        templateUrl: views_dir + '/directives/blueprints/simple/front.html'
+        templateUrl: window.views_dir + '/directives/blueprints/simple/front.html'
       }
     })
     .directive('blueprintCompleteFront', function () {
       return {
         restrict: 'E',
-        templateUrl: views_dir + '/directives/blueprints/complete/front.html'
+        templateUrl: window.views_dir + '/directives/blueprints/complete/front.html'
       }
     })
     .directive('blueprintSimpleFlat', function () {
       return {
         restrict: 'E',
-        templateUrl: views_dir + '/directives/blueprints/simple/flat.html',
+        templateUrl: window.views_dir + '/directives/blueprints/simple/flat.html',
         controller: flatCtrl
       }
     })
     .directive('blueprintCompleteFlat', function () {
       return {
         restrict: 'E',
-        templateUrl: views_dir + '/directives/blueprints/flat.html',
+        templateUrl: window.views_dir + '/directives/blueprints/flat.html',
         controller: flatCtrl
       }
     })

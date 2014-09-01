@@ -37,8 +37,8 @@ angular.module('controllers', [])
       }
     }
 
-    var get_url = get_url || 'metadata.json'
-    $http.get(get_url).then(function (response) {
+    window.get_url = window.get_url || 'metadata.json'
+    $http.get(window.get_url).then(function (response) {
       $scope.metadata = response.data
     })
 
@@ -92,8 +92,8 @@ angular.module('controllers', [])
     }
 
     $scope.saveMetadata = function (metadata) {
-      if (typeof post_url != 'undefined') {
-        $http.post(post_url, metadata).then(function () {
+      if (typeof window.post_url != 'undefined') {
+        $http.post(window.post_url, metadata).then(function () {
           console.log(true)
         }, function () {
           console.log(false)
