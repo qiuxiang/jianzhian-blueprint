@@ -14,9 +14,6 @@ angular.module('controllers', [])
         gate_left: 4,
         gate_right: 5
       },
-      ruler: {
-        margin: 20 // 标尺与图的间隔宽度
-      },
       aisle_width: 1000, // 走道宽度
       aisle_height: 1000, // 栏杆高度
       stairs_height: 3200, // 楼梯的俯视高度
