@@ -36,7 +36,7 @@ angular.module('controllers', [])
 
     window.get_url = window.get_url || 'metadata.json'
     $http.get(window.get_url).then(function (response) {
-      $scope.metadata = response.data
+      setMetadata(response.data)
     })
 
     $scope.$watch('metadata.scale', function () {
@@ -99,7 +99,10 @@ angular.module('controllers', [])
     }
 
     $scope.importMetadata = function (metadata) {
-      metadata = JSON.parse(metadata)
+      setMetadata(JSON.parse(metadata))
+    }
+
+    function setMetadata(metadata) {
       $scope.metadata = metadata
       setTimeout(function () {
         $scope.metadata.rooms = metadata.rooms
