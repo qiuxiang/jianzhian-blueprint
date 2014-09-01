@@ -32,8 +32,8 @@ br
         h4.modal-title 参数
       .modal-body
         form.form-horizontal
-          .page-header
-            h4 基础
+          br
+          h4 基础
           .form-group
             label.control-label.col-xs-2(for='input-height') 深度
             .col-xs-9
@@ -57,8 +57,8 @@ br
             .col-xs-9
               input#input-scale.form-control(type='text' ng-model='metadata.scale')
 
-          .page-header
-            h4 选项
+          br
+          h4 选项
           .form-group
             label.control-label.col-xs-2(for='input-stairs') 楼梯
             .col-xs-9
@@ -70,6 +70,7 @@ br
                 label
                   input(type='checkbox' ng-model='metadata.options.stairs.right')
                   | 右
+
           br
           .form-group
             .col-sm-10.col-sm-offset-2
