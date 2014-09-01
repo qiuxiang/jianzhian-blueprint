@@ -1,4 +1,6 @@
 ;(function () {
+  var views_dir = views_dir || 'views'
+
   var foundationCtrl = ['$scope', function ($scope) {
       $scope.$watch('metadata.width', calculate)
       $scope.$watch('metadata.height', calculate)
@@ -70,52 +72,52 @@
     .directive('blueprintSimpleFoundation', function () {
       return {
         restrict: 'E',
-        templateUrl: 'views/directives/blueprints/simple/foundation.html',
+        templateUrl: views_dir + '/directives/blueprints/simple/foundation.html',
         controller: foundationCtrl
       }
     })
     .directive('blueprintCompleteFoundation', function () {
       return {
         restrict: 'E',
-        templateUrl: 'views/directives/blueprints/complete/foundation.html',
+        templateUrl: views_dir + '/directives/blueprints/complete/foundation.html',
         controller: foundationCtrl
       }
     })
     .directive('blueprintSimpleSide', function () {
       return {
         restrict: 'E',
-        templateUrl: 'views/directives/blueprints/simple/side.html'
+        templateUrl: views_dir + '/directives/blueprints/simple/side.html'
       }
     })
     .directive('blueprintCompleteSide', function () {
       return {
         restrict: 'E',
-        templateUrl: 'views/directives/blueprints/complete/side.html'
+        templateUrl: views_dir + '/directives/blueprints/complete/side.html'
       }
     })
     .directive('blueprintSimpleFront', function () {
       return {
         restrict: 'E',
-        templateUrl: 'views/directives/blueprints/simple/front.html'
+        templateUrl: views_dir + '/directives/blueprints/simple/front.html'
       }
     })
     .directive('blueprintCompleteFront', function () {
       return {
         restrict: 'E',
-        templateUrl: 'views/directives/blueprints/complete/front.html'
+        templateUrl: views_dir + '/directives/blueprints/complete/front.html'
       }
     })
     .directive('blueprintSimpleFlat', function () {
       return {
         restrict: 'E',
-        templateUrl: 'views/directives/blueprints/simple/flat.html',
+        templateUrl: views_dir + '/directives/blueprints/simple/flat.html',
         controller: flatCtrl
       }
     })
     .directive('blueprintCompleteFlat', function () {
       return {
         restrict: 'E',
-        templateUrl: 'views/directives/blueprints/flat.html',
+        templateUrl: views_dir + '/directives/blueprints/flat.html',
         controller: flatCtrl
       }
     })

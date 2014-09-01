@@ -37,7 +37,8 @@ angular.module('controllers', [])
       }
     }
 
-    $http.get('metadata.json').then(function (response) {
+    var get_url = get_url || 'metadata.json'
+    $http.get(get_url).then(function (response) {
       $scope.metadata = response.data
     })
 
@@ -91,15 +92,21 @@ angular.module('controllers', [])
     }
 
     $scope.saveMetadata = function (metadata) {
-      $http.post('/save', metadata).then(function () {
-        console.log(true)
-      }, function () {
-        console.log(false)
-      })
+      if (typeof post_url != 'undefined') {
+        $http.post(post_url, metadata).then(function () {
+          console.log(true)
+        }, function () {
+          console.log(false)
+        })
+      }
     }
 
     $scope.importMetadata = function (metadata) {
-      $scope.metadata = JSON.parse(metadata)
+      metadata = JSON.parse(metadata)
+      $scope.metadata = metadata
+      setTimeout(function () {
+        $scope.metadata.rooms = metadata.rooms
+      }, 1000)
     }
 
     function resetRooms() {
