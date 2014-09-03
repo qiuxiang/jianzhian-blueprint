@@ -76,7 +76,7 @@ angular.module('controllers', [])
       }
     })
 
-    $scope.exportMetadata = function (metadata) {
+    $scope.exportMetadataToFile = function (metadata) {
       metadata.rooms = _.map(metadata.rooms, function (layer) {
         return _.map(layer, function (col) {
           return _.map(col, function (room) {

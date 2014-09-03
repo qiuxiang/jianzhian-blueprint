@@ -1,5 +1,5 @@
 {
-  "name": "jza_sales",
+  "name": "JianZhiAn-Blueprint",
   "dependencies": {
     "lodash": "2.4.*",
     "jquery": "1.11.*",
