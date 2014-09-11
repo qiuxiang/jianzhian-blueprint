@@ -1,3 +1,5 @@
+window.views_dir = window.views_dir || 'views'
+
 angular
   .module('app', [
     'ngRoute',
@@ -9,7 +11,7 @@ angular
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/app/main.html',
+        templateUrl: window.views_dir + '/app/main.html',
         controller: 'Main'
       })
   }])

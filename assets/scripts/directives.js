@@ -1,6 +1,4 @@
 ;(function () {
-  window.views_dir = window.views_dir || 'views'
-
   var foundationCtrl = ['$scope', function ($scope) {
       $scope.$watch('metadata.width', calculate)
       $scope.$watch('metadata.height', calculate)
