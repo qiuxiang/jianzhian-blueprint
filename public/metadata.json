@@ -7,7 +7,9 @@
     "stairs": {
       "left": true,
       "right": false
-    }
+    },
+    "fireproof": "1",
+    "gate": "0"
   },
   "rooms": [
     [
