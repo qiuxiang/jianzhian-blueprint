@@ -38,10 +38,11 @@ angular.module('controllers', [])
       }
     }
 
-    window.get_url = window.get_url || 'metadata.json'
-    $http.get(window.get_url).then(function (response) {
-      //setMetadata(response.data)
-    })
+    if (typeof window.get_url != 'undefined') {
+      $http.get(window.get_url).then(function (response) {
+        setMetadata(response.data)
+      })
+    }
 
     $scope.$watch('metadata.scale', function () {
       $scope.scaled = {
