@@ -35,7 +35,7 @@ g(ng-attr-transform='translate({{scaled.aisle_width * (1 + (metadata.layer > 6))
             x1=0 ng-attr-y1='{{scaled.P * 2.5}}'
             ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{scaled.P * 0.5}}')
       // 门
-      g(ng-if='room[metadata.height - 1].front == defines.board_types.gate')
+      g(ng-if='room[metadata.height - 1].front == defines.board_types.gate_right_right')
         line(
           ng-attr-x1='{{scaled.K / 2}}' y1=0
           ng-attr-x2='{{scaled.K / 2}}' ng-attr-y2='{{scaled.P * 3}}')
