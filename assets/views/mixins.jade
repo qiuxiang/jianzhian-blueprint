@@ -21,16 +21,53 @@ mixin ng-text(x, y)
     ng-attr-x='{{'+x+'}}' ng-attr-y='{{'+y+'}}')
     block
 
-mixin ruler(placement, width, height, text)
+mixin circle-label(text, placement, length)
+  - var length = length || 20
   case placement
     when 'left'
-      - var transform = ''
+      - var line = {x1: 10, y1: 0, x2: 10 + length, y2: 0}
+    when 'bottom'
+      - var line = {x1: 0, y1: -10, x2: 0, y2: -10 - length}
 
-  +ng-line(0, 0, 0, height)
-  +ng-line(width, 0, width, height)
-  +ng-line(0, height+'-6', width, height+'-6')
-  +ng-text(width+'/2', height+'-8')(style='text-anchor: middle;')
-    =text
+  line(x1=line.x1 y1=line.y1 x2=line.x2 y2=line.y2)
+  circle(cx=0 cy=0 r=8 fill='transparent' stroke='black')
+  text(x=-3 y=3)= text
+
+// 一个标尺
+mixin ruler(placement, width, height, text)
+  - var transform = ''
+  case placement
+    when 'left'
+      - transform = 'rotate(90 0,0) translate(0,-' + height + ')'
+
+  g(transform=transform)
+    +ng-line(0, 0, 0, height)
+    +ng-line(width, 0, width, height)
+    +ng-line(0, height+'-6', width, height+'-6')
+    +ng-text(width+'/2', height+'-8')(style='text-anchor: middle;')= text
+
+// 一组标尺
+mixin rulers(type, n)
+  case type
+    when 'number'
+      - var label = '{{$index + 1}}'
+      - var label_last = '{{$index + 2}}'
+    when 'letter'
+      - var label = '{{$index|letter}}'
+      - var label_last = '{{$index + 1|letter}}'
+
+  g(ng-attr-transform='translate({{-metadata.scale * 80}}, 0)')
+    +ruler('bottom', '(scaled.K*'+n+'+metadata.scale*160)', 40,
+      '{{defines.K*'+n+'+160}}')
+  text(x=-6 y=0) 80
+  text(ng-attr-x='{{scaled.K*'+n+'-3}}' y=0) 80
+  g(ng-repeat='i in _.range('+n+')'
+    ng-attr-transform='translate({{scaled.K * $index}}, 0)')
+    +ruler('bottom', '(scaled.K)', 20, '{{defines.K}}')
+    g(transform='translate(0, 60)')
+      +circle-label(label, 'bottom', 30)
+      g(ng-attr-transform='translate({{scaled.K}}, 0)' ng-if='$last')
+        +circle-label(label_last, 'bottom', 30)
 
 mixin defs
   marker(id='ArrowMend' overflow='visible' orient="auto")
