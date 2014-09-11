@@ -96,7 +96,7 @@ br
           .form-group
             .col-sm-10.col-sm-offset-2
               .btn-group
-                button.btn.btn-warning(ng-click='saveMetadata(metadata)')
+                button.btn.btn-warning(aria-hidden='true' data-dismiss='modal' ng-click='saveMetadata(metadata)')
                   span.glyphicon.glyphicon-save.right-space
                   | 保存
                 button.btn.btn-primary(aria-hidden='true' data-dismiss='modal' href='#modal-export' data-toggle='modal')
@@ -125,6 +125,11 @@ br
             .col-sm-6
               select#input-room-back.form-control(ng-model='room.back')
                 option(ng-repeat='(value, name) in room_options.back' value='{{value}}') {{name}}
+          .form-group(ng-if='room_options.left')
+            label.col-sm-4.control-label(for='input-room-left') 左
+            .col-sm-6
+              select#input-room-left.form-control(ng-model='room.left')
+                option(ng-repeat='(value, name) in room_options.left' value='{{value}}') {{name}}
           .form-group
             label.col-sm-4.control-label(for='input-room-right') 右
             .col-sm-6

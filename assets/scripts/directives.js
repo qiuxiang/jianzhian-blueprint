@@ -50,6 +50,10 @@
           delete $scope.$parent.room_options.back
         }
 
+        if ($scope.rooms.indexOf(w) == 0) {
+          $scope.$parent.room_options.left = _.clone(board_types)
+        }
+
         $('#modal-flat').modal('show')
         setTimeout(function() {
           $scope.$parent.$apply(function () {
