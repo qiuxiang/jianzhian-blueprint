@@ -9,10 +9,12 @@ angular.module('controllers', [])
       board_types: {
         none: 0,
         window: 1,
-        gate: 2,
-        board: 3,
-        gate_left: 4,
-        gate_right: 5
+        board: 2,
+        gate_dual: 3,
+        gate_left_left: 4,
+        gate_left_right: 5,
+        gate_right_left: 6,
+        gate_right_right: 7
       },
       aisle_width: 1000, // 走道宽度
       aisle_height: 1000, // 栏杆高度
@@ -30,13 +32,15 @@ angular.module('controllers', [])
         stairs: {
           left: true,
           right: false
-        }
+        },
+        fireproof: 0,
+        gate: 0
       }
     }
 
     window.get_url = window.get_url || 'metadata.json'
     $http.get(window.get_url).then(function (response) {
-      setMetadata(response.data)
+      //setMetadata(response.data)
     })
 
     $scope.$watch('metadata.scale', function () {
@@ -118,7 +122,8 @@ angular.module('controllers', [])
               left: $scope.defines.board_types.none,
               right: $scope.defines.board_types.none,
               front: $scope.defines.board_types.none,
-              back: $scope.defines.board_types.none
+              back: $scope.defines.board_types.none,
+              middle: $scope.defines.board_types.none
             }
 
             if (w == 0) {
@@ -130,7 +135,7 @@ angular.module('controllers', [])
             }
 
             if (h == $scope.metadata.height - 1) {
-              room.front = w % 2 ? $scope.defines.board_types.gate : $scope.defines.board_types.window
+              room.front = w % 2 ? $scope.defines.board_types.gate_right_right : $scope.defines.board_types.window
             }
 
             room.right = w % 2 ? $scope.defines.board_types.board : $scope.defines.board_types.none

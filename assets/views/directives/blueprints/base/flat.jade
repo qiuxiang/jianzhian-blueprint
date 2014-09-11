@@ -1,5 +1,7 @@
+include ../../../mixins
+
+// 层数超过两层的楼梯
 mixin stairs_3(placement)
-  // 层数超过两层时的右楼梯
   rect(
     stroke-width=0
     fill='url(#StairsPattern)'
@@ -55,6 +57,60 @@ mixin stairs_3(placement)
         line(x1=2 y1=15 ng-attr-x2='{{scaled.aisle_width * 2 - metadata.scale * 80 + 2}}' y2=15)
         text(ng-attr-x='{{scaled.aisle_width / 2 + 2}}' y=10 text-anchor='middle') {{defines.aisle_width}}
         text(ng-attr-x='{{scaled.aisle_width + 10}}' y=10) {{defines.aisle_width}}
+
+// 门
+mixin gate(placement)
+  case placement
+    when 'left'
+      - var border_x = 0
+      - var text_x = 'scaled.K / 4'
+    when 'right'
+      - var border_x = 'scaled.K - 2.5'
+      - var text_x = 'scaled.K / 4 * 3'
+
+  +ng-rect(border_x, 'scaled.K / 2', 2.5, 'scaled.K / 2')(class='window')
+  +ng-text(text_x, 'scaled.K - 2') M
+  path(
+    ng-attr-d='M{{scaled.K / 2}},{{scaled.K}} Q{{scaled.K / 2}},{{scaled.K / 2}} {{'+border_x+'}},{{scaled.K / 2}}'
+    stroke='silver' fill='none')
+
+// 门、窗、墙
+mixin board(placement)
+  case placement
+    when 'front'
+      - var transform = ''
+    when 'right'
+      - var transform = 'rotate(-90 {{scaled.K / 2}}, {{scaled.K / 2}})'
+    when 'back'
+      - var transform = 'rotate(-180 {{scaled.K / 2}}, {{scaled.K / 2}})'
+    when 'left'
+      - var transform = 'rotate(-270 {{scaled.K / 2}}, {{scaled.K / 2}})'
+    when 'middle'
+      - var transform = 'translate(0, {{-scaled.K / 2}})'
+
+  g(ng-attr-transform=transform)
+    g(ng-if='room.'+placement+' == defines.board_types.window')
+      +ng-rect(0, 'scaled.K', 'scaled.K', 2.5)(class='window')
+      +ng-text('scaled.K / 2', 'scaled.K - 2') C
+    g(ng-if='room.'+placement+' == defines.board_types.board')
+      +ng-rect(0, 'scaled.K', 'scaled.K', 2.5)(class='board')
+    g(ng-if='room.'+placement+' == defines.board_types.gate_dual')
+      +gate('left')
+      +gate('right')
+    g(ng-if='room.'+placement+' == defines.board_types.gate_left_left')
+      +ng-rect('scaled.K / 2', 'scaled.K', 'scaled.K / 2', 2.5)(class='board')
+      +gate('left')
+    g(ng-if='room.'+placement+' == defines.board_types.gate_left_right')
+      +ng-rect('scaled.K / 2', 'scaled.K', 'scaled.K / 2', 2.5)(class='board')
+      g(ng-attr-transform='translate({{-scaled.K / 2}}, 0)')
+        +gate('right')
+    g(ng-if='room.'+placement+' == defines.board_types.gate_right_left')
+      +ng-rect(0, 'scaled.K', 'scaled.K / 2', 2.5)(class='board')
+      g(ng-attr-transform='translate({{scaled.K / 2}}, 0)')
+        +gate('left')
+    g(ng-if='room.'+placement+' == defines.board_types.gate_right_right')
+      +ng-rect(0, 'scaled.K', 'scaled.K / 2', 2.5)(class='board')
+      +gate('right')
 
 g(transform='translate(10, 10)')
   // 纵向标尺
@@ -114,9 +170,8 @@ g(transform='translate(10, 10)')
         x1=0 y1=0 x2=0 ng-attr-y2='{{scaled.stairs_height + scaled.aisle_width}}')
       // 下标尺
       g(ng-attr-transform='translate(0, {{scaled.stairs_height + scaled.aisle_width + 20}})')
-        line(x1=0 y1=0 x2=0 y2=20)
-        line(x1=0 y1=15 ng-attr-x2='{{scaled.aisle_width - metadata.scale * 80}}' y2=15)
-        text(ng-attr-x='{{scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{defines.aisle_width}}
+        +ruler('bottom',
+          '(scaled.aisle_width - metadata.scale * 80)', 24, '{{defines.aisle_width}}')
 
     // 层数超过两层时的左楼梯
     g(
@@ -157,120 +212,26 @@ g(transform='translate(10, 10)')
       font-size=16
       font-weight='bold'
       text-anchor='middle')
-      g(ng-repeat='room in col' ng-attr-transform='translate(0, {{scaled.K * $index}})')
-        // 点击区域
-        rect.hover(
-          ng-click='clicked(room, col, $index)'
-          x=2.5 y=2.5
-          ng-attr-width='{{scaled.K - 2.5}}' ng-attr-height='{{scaled.K - 2.5}}')
-
-        // 前
-        g
-          g(ng-if='room.front == defines.board_types.window')
-            rect.window(
-              x=0 ng-attr-y='{{scaled.K}}'
-              ng-attr-width='{{scaled.K}}' height=2.5)
-            text(ng-attr-x='{{scaled.K / 2}}' ng-attr-y='{{scaled.K - 2}}') C
-          g(ng-if='room.front == defines.board_types.board')
-            rect.board(
-              x=0 ng-attr-y='{{scaled.K}}'
-              ng-attr-width='{{scaled.K}}' height=2.5)
-          g(ng-if='room.front == defines.board_types.gate')
-            rect.board(
-              x=0 ng-attr-y='{{scaled.K}}'
-              ng-attr-width='{{scaled.K / 2}}' height=2.5)
-            rect.window(
-              ng-attr-x='{{scaled.K - 2.5}}' ng-attr-y='{{scaled.K / 2}}'
-              width=2.5 ng-attr-height='{{scaled.K / 2}}')
-            text(ng-attr-x='{{scaled.K * 0.75}}' ng-attr-y='{{scaled.K - 2}}') M
-            path(ng-attr-d='M{{scaled.K / 2}},{{scaled.K}} Q{{scaled.K / 2}},{{scaled.K / 2}} {{scaled.K}},{{scaled.K / 2}}' stroke='silver' fill='none')
-          g(ng-if='room.front == defines.board_types.gate_left')
-            rect.board(
-              x=0 ng-attr-y='{{scaled.K}}'
-              ng-attr-width='{{scaled.K / 2}}' height=2.5)
-            rect.window(
-              ng-attr-x='{{scaled.K / 2}}' ng-attr-y='{{scaled.K / 2}}'
-              width=2.5 ng-attr-height='{{scaled.K / 2}}')
-            text(ng-attr-x='{{scaled.K * 0.75}}' ng-attr-y='{{scaled.K - 2}}') M
-            path(ng-attr-d='M{{scaled.K / 2}},{{scaled.K / 2}} Q{{scaled.K}},{{scaled.K / 2}} {{scaled.K}},{{scaled.K}}' stroke='silver' fill='none')
-          g(ng-if='room.front == defines.board_types.gate_right')
-            rect.board(
-              ng-attr-x='{{scaled.K / 2}}' ng-attr-y='{{scaled.K}}'
-              ng-attr-width='{{scaled.K / 2}}' height=2.5)
-            rect.window(
-              ng-attr-x='{{scaled.K / 2 - 2.5}}' ng-attr-y='{{scaled.K / 2}}'
-              width=2.5 ng-attr-height='{{scaled.K / 2}}')
-            text(ng-attr-x='{{scaled.K * 0.25}}' ng-attr-y='{{scaled.K - 2}}') M
-            path(ng-attr-d='M{{scaled.K / 2}},{{scaled.K / 2}} Q0,{{scaled.K / 2}} 0,{{scaled.K}}' stroke='silver' fill='none')
-        // 后
-        g
-          rect.board(
-            ng-if='room.back == defines.board_types.board'
-            x=0 y=0
-            ng-attr-width='{{scaled.K}}' height=2.5)
-          g(ng-if='room.back == defines.board_types.window')
-            rect.window(
-              x=0 y=0
-              ng-attr-width='{{scaled.K}}' height=2.5)
-            text(ng-attr-x='{{scaled.K / 2}}' y=16) C
-        // 左
-        g
-          rect.board(
-            ng-if='room.left == defines.board_types.board'
-            x=0 y=0
-            width=2.5 ng-attr-height='{{scaled.K}}')
-        // 右
-        g
-          rect.board(
-            ng-if='room.right == defines.board_types.board'
-            ng-attr-x='{{scaled.K}}' y=0
-            width=2.5 ng-attr-height='{{scaled.K}}')
-          g(ng-if='room.right == defines.board_types.window')
-            rect.window(
-              ng-attr-x='{{scaled.K}}' y=0
-              width=2.5 ng-attr-height='{{scaled.K}}')
-            text(ng-attr-x='{{scaled.K + 10}}' ng-attr-y='{{scaled.K / 2 + 6}}') C
-          g(ng-if='room.right == defines.board_types.gate')
-            rect.board(
-              ng-attr-x='{{scaled.K}}' ng-attr-y='{{scaled.K / 2}}'
-              width=2.5 ng-attr-height='{{scaled.K / 2}}')
-            rect.window(
-              ng-attr-x='{{scaled.K / 2}}' y=2.5
-              ng-attr-width='{{scaled.K / 2}}' height=2.5)
-            text(ng-attr-x='{{scaled.K}}' ng-attr-y='{{scaled.K  * 0.25 + 6}}') M
-            path(ng-attr-d='M{{scaled.K / 2}},2.5 Q{{scaled.K / 2}},{{scaled.K / 2}} {{scaled.K}},{{scaled.K / 2}}' stroke='silver' fill='none')
-          g(ng-if='room.right == defines.board_types.gate_left')
-            rect.board(
-              ng-attr-x='{{scaled.K}}' ng-attr-y='{{scaled.K / 2}}'
-              width=2.5 ng-attr-height='{{scaled.K / 2}}')
-            rect.window(
-              ng-attr-x='{{scaled.K / 2}}' ng-attr-y='{{scaled.K / 2 - 2.5}}'
-              ng-attr-width='{{scaled.K / 2}}' height=2.5)
-            text(ng-attr-x='{{scaled.K}}' ng-attr-y='{{scaled.K  * 0.25 + 6}}') M
-            path(ng-attr-d='M{{scaled.K / 2}},{{scaled.K / 2}} Q{{scaled.K / 2}},0 {{scaled.K}},0' stroke='silver' fill='none')
-          g(ng-if='room.right == defines.board_types.gate_right')
-            rect.board(
-              ng-attr-x='{{scaled.K}}' y=0
-              width=2.5 ng-attr-height='{{scaled.K / 2}}')
-            rect.window(
-              ng-attr-x='{{scaled.K / 2}}' ng-attr-y='{{scaled.K / 2}}'
-              ng-attr-width='{{scaled.K / 2}}' height=2.5)
-            text(ng-attr-x='{{scaled.K}}' ng-attr-y='{{scaled.K  * 0.75 + 6}}') M
-            path(ng-attr-d='M{{scaled.K / 2}},{{scaled.K / 2}} Q{{scaled.K / 2}},{{scaled.K}} {{scaled.K}},{{scaled.K}}' stroke='silver' fill='none')
+      g(
+        ng-repeat='room in col'
+        ng-attr-transform='translate(0, {{scaled.K * $index}})')
+        +ng-rect(0, 0, 'scaled.K', 'scaled.K')(
+          class='hover' click='clicked(room, col, $index)')
+        +board('front')
+        +board('right')
+        +board('back')
+        +board('left')
+        +board('middle')
 
     // 走廊
     g(ng-attr-transform='translate(0, {{scaled.height}})')
-      line.border(
-        x1=0 ng-attr-y1='{{scaled.aisle_width}}'
-        ng-attr-x2='{{scaled.width}}' ng-attr-y2='{{scaled.aisle_width}}')
-      line.border(
-        ng-if='!metadata.options.stairs.left'
-        x1=0 ng-attr-y1=0
-        x2=0 ng-attr-y2='{{scaled.aisle_width}}')
-      line.border(
-        ng-if='!metadata.options.stairs.right'
-        ng-attr-x1='{{scaled.width}}' ng-attr-y1=0
-        ng-attr-x2='{{scaled.width}}' ng-attr-y2='{{scaled.aisle_width}}')
+      - var style='stroke-width: 3; stroke: gray;'
+      +ng-line(0, 'scaled.aisle_width', 'scaled.width', 'scaled.aisle_width')(
+        style=style)
+      +ng-line(0, 0, 0, 'scaled.aisle_width')(
+        style=style if='!metadata.options.stairs.left')
+      +ng-line('scaled.width', 0, 'scaled.width', 'scaled.aisle_width')(
+        style=style if='!metadata.options.stairs.right')
 
     // 横向标尺
     g(ng-attr-transform='translate(0, {{scaled.height + scaled.aisle_width + 20}})')

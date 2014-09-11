@@ -1,3 +1,37 @@
+mixin ng-rect(x, y, width, height)
+  rect(
+    class=attributes.class||''
+    style=attributes.style||''
+    ng-click=attributes.click||''
+    ng-attr-x='{{'+x+'}}' ng-attr-y='{{'+y+'}}'
+    ng-attr-width='{{'+width+'}}' ng-attr-height='{{'+height+'}}')
+
+mixin ng-line(x1, y1, x2, y2)
+  line(
+    class=attributes.class||''
+    style=attributes.style||''
+    ng-if=attributes.if||'true'
+    ng-attr-x1='{{'+x1+'}}' ng-attr-y1='{{'+y1+'}}'
+    ng-attr-x2='{{'+x2+'}}' ng-attr-y2='{{'+y2+'}}')
+
+mixin ng-text(x, y)
+  text(
+    class=attributes.class||''
+    style=attributes.style||''
+    ng-attr-x='{{'+x+'}}' ng-attr-y='{{'+y+'}}')
+    block
+
+mixin ruler(placement, width, height, text)
+  case placement
+    when 'left'
+      - var transform = ''
+
+  +ng-line(0, 0, 0, height)
+  +ng-line(width, 0, width, height)
+  +ng-line(0, height+'-6', width, height+'-6')
+  +ng-text(width+'/2', height+'-8')(style='text-anchor: middle;')
+    =text
+
 mixin defs
   marker(id='ArrowMend' overflow='visible' orient="auto")
     path(

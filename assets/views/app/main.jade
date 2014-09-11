@@ -59,7 +59,7 @@ br
           br
           h5 选项
           .form-group
-            label.control-label.col-xs-2(for='input-stairs') 楼梯
+            label.control-label.col-xs-2 楼梯
             .col-xs-9
               .checkbox-inline
                 label
@@ -69,6 +69,28 @@ br
                 label
                   input(type='checkbox' ng-model='metadata.options.stairs.right')
                   | 右
+          .form-group
+            label.control-label.col-xs-2 防火等级
+            .col-xs-9
+              .radio-inline
+                label
+                  input(type='radio' value=0 ng-model='metadata.options.fireproof')
+                  | 阻燃
+              .radio-inline
+                label
+                  input(type='radio' value=1 ng-model='metadata.options.fireproof')
+                  | 防火
+          .form-group
+            label.control-label.col-xs-2 门
+            .col-xs-9
+              .radio-inline
+                label
+                  input(type='radio' value=0 ng-model='metadata.options.gate')
+                  | 防盗门
+              .radio-inline
+                label
+                  input(type='radio' value=1 ng-model='metadata.options.gate')
+                  | 普通门
 
           br
           .form-group
@@ -108,6 +130,11 @@ br
             .col-sm-6
               select#input-room-right.form-control(ng-model='room.right')
                 option(ng-repeat='(value, name) in room_options.right' value='{{value}}') {{name}}
+          .form-group(ng-if='room_options.middle')
+            label.col-sm-4.control-label(for='input-room-middle') 中
+            .col-sm-6
+              select#input-room-middle.form-control(ng-model='room.middle')
+                option(ng-repeat='(value, name) in room_options.middle' value='{{value}}') {{name}}
 
 #modal-import.modal.fade
   .modal-dialog

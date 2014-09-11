@@ -30,33 +30,24 @@
       $scope.attrs = $attrs
       $scope.clicked = function (room, w, h) {
         var board_types = {}
-        board_types[$scope.defines.board_types.board] = '墙'
-        board_types[$scope.defines.board_types.gate] = '门'
-        board_types[$scope.defines.board_types.window] = '窗'
         board_types[$scope.defines.board_types.none] = '无'
-        board_types[$scope.defines.board_types.gate_left] = '双开门（左）'
-        board_types[$scope.defines.board_types.gate_right] = '双开门（右）'
+        board_types[$scope.defines.board_types.board] = '墙'
+        board_types[$scope.defines.board_types.window] = '窗'
+        board_types[$scope.defines.board_types.gate_dual] = '双开门'
+        board_types[$scope.defines.board_types.gate_left_left] = '左侧左开门'
+        board_types[$scope.defines.board_types.gate_left_right] = '左侧右开门'
+        board_types[$scope.defines.board_types.gate_right_left] = '右侧左开门'
+        board_types[$scope.defines.board_types.gate_right_right] = '右侧右开门'
 
         $scope.$parent.room_options = {
+          middle: _.clone(board_types),
           right: _.clone(board_types),
           front: _.clone(board_types),
           back: _.clone(board_types)
         }
 
-        delete $scope.$parent.room_options.back[$scope.defines.board_types.gate]
-        delete $scope.$parent.room_options.back[$scope.defines.board_types.none]
-        delete $scope.$parent.room_options.back[$scope.defines.board_types.gate_left]
-        delete $scope.$parent.room_options.back[$scope.defines.board_types.gate_right]
-
         if (h != 0) {
           delete $scope.$parent.room_options.back
-        }
-
-        if ($scope.rooms.indexOf(w) == $scope.metadata.width - 1) {
-          delete $scope.$parent.room_options.right[$scope.defines.board_types.gate]
-          delete $scope.$parent.room_options.right[$scope.defines.board_types.none]
-          delete $scope.$parent.room_options.right[$scope.defines.board_types.gate_left]
-          delete $scope.$parent.room_options.right[$scope.defines.board_types.gate_right]
         }
 
         $('#modal-flat').modal('show')
