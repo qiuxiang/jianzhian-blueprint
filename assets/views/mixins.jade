@@ -39,12 +39,14 @@ mixin ruler(placement, width, height, text)
   case placement
     when 'left'
       - transform = 'rotate(90 0,0) translate(0,-' + height + ')'
+    when 'right'
+      - transform = 'rotate(-90 0,0) translate({{-' + width + '}},0)'
 
-  g(transform=transform)
+  g(ng-attr-transform=transform)
     +ng-line(0, 0, 0, height)
     +ng-line(width, 0, width, height)
     +ng-line(0, height+'-6', width, height+'-6')
-    +ng-text(width+'/2', height+'-8')(style='text-anchor: middle;')= text
+    +ng-text(width+'/2', height+'-10')(style='text-anchor: middle;')= text
 
 // 一组标尺
 mixin rulers(type, n)
