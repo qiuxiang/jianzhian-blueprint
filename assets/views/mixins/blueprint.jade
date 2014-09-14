@@ -1,24 +1,21 @@
 mixin ng-rect(x, y, width, height)
-  rect(
-    class=attributes.class||''
-    style=attributes.style||''
-    ng-click=attributes.click||''
-    ng-attr-x='{{'+x+'}}' ng-attr-y='{{'+y+'}}'
-    ng-attr-width='{{'+width+'}}' ng-attr-height='{{'+height+'}}')
+  rect(class=attributes.class||''
+       style=attributes.style||''
+       ng-click=attributes.click||''
+       ng-attr-x='{{'+x+'}}' ng-attr-y='{{'+y+'}}'
+       ng-attr-width='{{'+width+'}}' ng-attr-height='{{'+height+'}}')
 
 mixin ng-line(x1, y1, x2, y2)
-  line(
-    class=attributes.class||''
-    style=attributes.style||''
-    ng-if=attributes.if||'true'
-    ng-attr-x1='{{'+x1+'}}' ng-attr-y1='{{'+y1+'}}'
-    ng-attr-x2='{{'+x2+'}}' ng-attr-y2='{{'+y2+'}}')
+  line(class=attributes.class||''
+       style=attributes.style||''
+       ng-if=attributes.if||'true'
+       ng-attr-x1='{{'+x1+'}}' ng-attr-y1='{{'+y1+'}}'
+       ng-attr-x2='{{'+x2+'}}' ng-attr-y2='{{'+y2+'}}')
 
 mixin ng-text(x, y)
-  text(
-    class=attributes.class||''
-    style=attributes.style||''
-    ng-attr-x='{{'+x+'}}' ng-attr-y='{{'+y+'}}')
+  text(class=attributes.class||''
+       style=attributes.style||''
+       ng-attr-x='{{'+x+'}}' ng-attr-y='{{'+y+'}}')
     block
 
 mixin circle-label(text, placement, length)
@@ -72,20 +69,23 @@ mixin rulers(type, n)
         +circle-label(label_last, 'bottom', 30)
 
 mixin defs
-  marker(id='ArrowMend' overflow='visible' orient="auto")
-    path(
-      id='ArrowPath'
+  marker#ArrowMend(overflow='visible' orient="auto")
+    path#ArrowPath(
       d='M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 Z'
       transform='scale(0.4) rotate(180) translate(10, 0)')
-  pattern(id='StairsPattern' width=100 ng-attr-height='{{scaled.aisle_height / 6}}' patternUnits='userSpaceOnUse')
+  pattern#StairsPattern(
+    width=100 ng-attr-height='{{scaled.aisle_height / 6}}' patternUnits='userSpaceOnUse')
     line(x1=0 y1=0 x2=100 y2=0 stroke='sliver')
-  pattern(id='RailingPattern' width=100 ng-attr-height='{{(scaled.aisle_height + 1) / 4}}' patternUnits='userSpaceOnUse')
+  pattern#RailingPattern(
+    width=100 ng-attr-height='{{(scaled.aisle_height + 1) / 4}}' patternUnits='userSpaceOnUse')
     line(x1=0 y1=0 x2=100 y2=0 stroke-width=5)
-  pattern(id='RoofPattern' ng-attr-width='{{metadata.scale * 310}}' height=100 patternUnits='userSpaceOnUse')
+  pattern#RoofPattern(ng-attr-width='{{metadata.scale * 310}}' height=100 patternUnits='userSpaceOnUse')
     line(x1=0 y1=0 x2=0 y2=100 stroke-width=5)
 
 mixin blueprint(title)
-  svg.blueprint(ng-attr-width='{{defines.blueprint.width}}' ng-attr-height='{{defines.blueprint.height}}')
+  svg.blueprint(
+    ng-attr-width='{{defines.blueprint.width}}'
+    ng-attr-height='{{defines.blueprint.height}}')
     g(fill='white')
       rect(x=0 y=0 ng-attr-width='{{defines.blueprint.width}}' ng-attr-height='{{defines.blueprint.height}}')
       g(transform='translate(10, 10)')
