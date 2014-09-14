@@ -1,0 +1,13 @@
+mixin icon(name, margin)
+  span(class='right-space glyphicon glyphicon-'+name)
+
+mixin modal(id, title)
+  .modal.fade(id='modal-'+id)
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button' data-dismiss='modal')
+            span(aria-hidden='true') &times;
+          h4.modal-title= title
+        .modal-body
+          block
