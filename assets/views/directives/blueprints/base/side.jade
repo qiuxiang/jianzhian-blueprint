@@ -8,6 +8,11 @@ mixin aisle(width, offset)
     x1=0 ng-attr-y1='{{scaled.aisle_height * 0.25 * i}}'
     ng-attr-x2='{{'+width+'}}' ng-attr-y2='{{scaled.aisle_height * 0.25 * i +'+offset+'}}')
 
+mixin aisle-2
+  +aisle('scaled.aisle_width - 2', 0)
+  +ng-line('scaled.aisle_width - 4', 0, 'scaled.aisle_width - 4',
+    'scaled.layer - scaled.P * 3 + scaled.aisle_height')(style=line_border)
+
 g(transform='translate(20, 30)')
   // 地线
   +ng-line(-40, 'scaled.layer', 'scaled.height + 150', 'scaled.layer')
@@ -34,12 +39,16 @@ g(transform='translate(20, 30)')
   // 走廊
   g(ng-if='metadata.layer > 3'
     ng-attr-transform='translate({{scaled.height + 4}}, {{scaled.P * 3 - scaled.aisle_height}})')
-    +aisle('scaled.aisle_width - 2', 0)
-    +ng-line('scaled.aisle_width - 4', 0, 'scaled.aisle_width - 4',
-      'scaled.layer - scaled.P * 3 + scaled.aisle_height')(style=line_border)
+    +aisle-2()
     g(ng-if='metadata.layer > 6'
       ng-attr-transform='translate(0, {{scaled.P * 3}})')
       +aisle('scaled.aisle_width - 2', 0)
+    g(ng-if='has_front_stairs'
+      ng-attr-transform='translate({{scaled.aisle_width - 2}}, 0)')
+      +aisle-2()
+      g(ng-attr-transform='translate(-2, {{scaled.aisle_height}})')
+        +ng-rect(0, 0, 'scaled.aisle_width - 2', 'scaled.P * 3')(
+          style='fill: url(#StairsPattern); stroke: none;')
 
   // 只有两层的楼梯
   g(ng-if='metadata.options.stairs.left && metadata.layer == 6'

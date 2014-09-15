@@ -149,7 +149,7 @@ g(transform='translate(10, 10)')
           +ng-rect('scaled.width - scaled.K -2', -2, 'scaled.K', 'scaled.aisle_width')(style='fill: white; stroke: none;')
           g(ng-attr-transform='translate({{scaled.width - scaled.K}}, 0) rotate(90 0,0)')
             +ng-rect(0, 0, 'scaled.aisle_width', 'scaled.stairs_height')(
-            style='fill: url(#StairsPattern)')
+              style='fill: url(#StairsPattern)')
 
     // 横向标尺
     g(ng-attr-transform='translate(0, {{scaled.height + scaled.aisle_width * (1 + has_front_stairs) + 20}})')

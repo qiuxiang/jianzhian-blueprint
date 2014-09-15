@@ -46,6 +46,10 @@ angular.module('controllers', [])
       })
     }
 
+    $scope.$watch('metadata.options.stairs', function () {
+      $scope.has_front_stairs = $scope.metadata.options.stairs.front_left || $scope.metadata.options.stairs.front_right
+    }, true)
+
     $scope.$watch('metadata.scale', function () {
       $scope.scaled = {
         K: parseInt($scope.defines.K * $scope.metadata.scale),
