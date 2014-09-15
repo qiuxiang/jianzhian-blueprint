@@ -27,67 +27,49 @@ br
     #blueprint-front.tab-pane
       blueprint-simple-front
 
+mixin form-group(label, for_)
+  .form-group
+    label.control-label.col-xs-2(for='input-'+for_)= label
+    .col-xs-9
+      block
+
+mixin radios(key, radios)
+  each name, index in radios.split(',')
+    .radio-inline
+      label
+        input(type='radio' value=index ng-model='metadata.options.'+key)
+        = name
+
 +modal('params', '参数')
   form.form-horizontal
     h5 基础
-    .form-group
-      label.control-label.col-xs-2(for='input-height') 深度
-      .col-xs-9
-        .input-group
-          input#input-height.form-control(type='text' ng-model='metadata.height')
-          span.input-group-addon K
-    .form-group
-      label.control-label.col-xs-2(for='input-width') 长度
-      .col-xs-9
-        .input-group
-          input#input-width.form-control(type='text' ng-model='metadata.width')
-          span.input-group-addon K
-    .form-group
-      label.control-label.col-xs-2(for='input-layer') 高度
-      .col-xs-9
-        .input-group
-          input#input-layer.form-control(type='text' ng-model='metadata.layer')
-          span.input-group-addon P
-    .form-group
-      label.control-label.col-xs-2(for='input-scale') 缩放
-      .col-xs-9
-        input#input-scale.form-control(type='text' ng-model='metadata.scale')
+    +form-group('深度', 'height')
+      .input-group
+        input#input-height.form-control(type='text' ng-model='metadata.height')
+        span.input-group-addon K
+    +form-group('长度', 'width')
+      .input-group
+        input#input-width.form-control(type='text' ng-model='metadata.width')
+        span.input-group-addon K
+    +form-group('高度', 'layer')
+      .input-group
+        input#input-layer.form-control(type='text' ng-model='metadata.layer')
+        span.input-group-addon P
+    +form-group('缩放', 'scale')
+      input#input-scale.form-control(type='text' ng-model='metadata.scale')
 
     br
     h5 选项
-    .form-group
-      label.control-label.col-xs-2 楼梯
-      .col-xs-9
+    +form-group('楼梯')
+      each name, key in {left: '左', right: '右', front_left: '前左', front_right: '前右'}
         .checkbox-inline
           label
-            input(type='checkbox' ng-model='metadata.options.stairs.left')
-            | 左
-        .checkbox-inline
-          label
-            input(type='checkbox' ng-model='metadata.options.stairs.right')
-            | 右
-    .form-group
-      label.control-label.col-xs-2 防火等级
-      .col-xs-9
-        .radio-inline
-          label
-            input(type='radio' value=0 ng-model='metadata.options.fireproof')
-            | 阻燃
-        .radio-inline
-          label
-            input(type='radio' value=1 ng-model='metadata.options.fireproof')
-            | 防火
-    .form-group
-      label.control-label.col-xs-2 门
-      .col-xs-9
-        .radio-inline
-          label
-            input(type='radio' value=0 ng-model='metadata.options.gate')
-            | 防盗门
-        .radio-inline
-          label
-            input(type='radio' value=1 ng-model='metadata.options.gate')
-            | 普通门
+            input(type='checkbox' ng-model='metadata.options.stairs.'+key)
+            = name
+    +form-group('防火等级')
+      +radios('fireproof', '阻燃,防火')
+    +form-group('门')
+      +radios('gate', '防盗门,普通门')
 
     br
     .form-group
@@ -116,7 +98,8 @@ br
         label.col-sm-4.control-label(for='input-room-'+placemnt)= name
         .col-sm-6
           select.form-control(id='input-room-'+placement ng-model='room.'+placement)
-            option(ng-repeat='(value, name) in room_options.'+placement value='{{value}}') {{name}}
+            option(ng-repeat='(value, name) in room_options.'+placement
+                   value='{{value}}') {{name}}
 
 +modal('import', '导入数据')
   form
