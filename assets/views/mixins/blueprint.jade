@@ -52,8 +52,8 @@ mixin rulers(type, n)
       - var label = '{{$index + 1}}'
       - var label_last = '{{$index + 2}}'
     when 'letter'
-      - var label = '{{$index|letter}}'
-      - var label_last = '{{$index + 1|letter}}'
+      - var label = '{{'+n+'-$index|letter}}'
+      - var label_last = '{{0|letter}}'
 
   g(ng-attr-transform='translate({{-metadata.scale * 80}}, 0)')
     +ruler('bottom', '(scaled.K*'+n+'+metadata.scale*160)', 40,
