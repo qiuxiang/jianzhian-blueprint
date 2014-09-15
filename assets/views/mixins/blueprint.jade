@@ -1,6 +1,7 @@
 mixin ng-rect(x, y, width, height)
   rect(class=attributes.class||''
        style=attributes.style||''
+       ng-if=attributes.if||'true'
        ng-click=attributes.click||''
        ng-attr-x='{{'+x+'}}' ng-attr-y='{{'+y+'}}'
        ng-attr-width='{{'+width+'}}' ng-attr-height='{{'+height+'}}')

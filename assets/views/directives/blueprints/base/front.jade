@@ -1,62 +1,33 @@
+include ../../../mixins/blueprint
+
 g(ng-attr-transform='translate({{scaled.aisle_width * (1 + (metadata.layer > 6)) * metadata.options.stairs.left + 10}}, 30)')
-  g(
-    ng-repeat='layer in metadata.rooms'
+  g(ng-repeat='layer in metadata.rooms'
     ng-attr-transform='translate(0, {{scaled.P * (metadata.layer / 3 - $index - 1) * 3}})')
-    // 房间
-    g(
-      fill='transparent'
+    g(fill='transparent'
       ng-repeat='room in layer'
       ng-attr-transform='translate({{scaled.K * $index}}, 0)')
-      // 窗
       g(ng-if='room[metadata.height - 1].front == defines.board_types.window')
-        rect(
-          style='stroke: silver; stroke-width: 3px;'
-          x=0 ng-attr-y='{{scaled.P}}'
-          ng-attr-width='{{scaled.K / 2}}' ng-attr-height='{{scaled.P}}')
-        rect(
-          style='stroke: silver; stroke-width: 3px;'
-          ng-attr-x='{{scaled.K / 2}}' ng-attr-y='{{scaled.P}}'
-          ng-attr-width='{{scaled.K / 2}}' ng-attr-height='{{scaled.P}}')
-        line(
-          style='stroke: silver; stroke-width: 3px;'
-          ng-attr-x1='{{scaled.K * 0.2}}' ng-attr-y1='{{scaled.P * 1.6}}'
-          ng-attr-x2='{{scaled.K * 0.3}}' ng-attr-y2='{{scaled.P * 1.4}}')
-        line(
-          style='stroke: silver; stroke-width: 3px;'
-          ng-attr-x1='{{scaled.K * 0.7}}' ng-attr-y1='{{scaled.P * 1.6}}'
-          ng-attr-x2='{{scaled.K * 0.8}}' ng-attr-y2='{{scaled.P * 1.4}}')
-        g
-          line(
-            style='stroke: silver;'
-            x1=0 ng-attr-y1='{{scaled.P * 0.5}}'
-            ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{scaled.P * 2.5}}')
-          line(
-            style='stroke: silver;'
-            x1=0 ng-attr-y1='{{scaled.P * 2.5}}'
-            ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{scaled.P * 0.5}}')
-      // 门
+        - var stroke = 'stroke-width: 3; stroke: gray;'
+        +ng-rect(0, 'scaled.P', 'scaled.K / 2', 'scaled.P')(style=stroke)
+        +ng-rect('scaled.K / 2', 'scaled.P', 'scaled.K / 2', 'scaled.P')(style=stroke)
+        +ng-line('scaled.K * 0.2', 'scaled.P * 1.6',
+                 'scaled.K * 0.3', 'scaled.P * 1.4')(style=stroke)
+        +ng-line('scaled.K * 0.7', 'scaled.P * 1.6',
+                 'scaled.K * 0.8', 'scaled.P * 1.4')(style=stroke)
+        +ng-line(0, 'scaled.P * 0.5', 'scaled.K', 'scaled.P * 2.5')(style='stroke: gray;')
+        +ng-line(0, 'scaled.P * 2.5', 'scaled.K', 'scaled.P * 0.5')(style='stroke: gray;')
       g(ng-if='room[metadata.height - 1].front == defines.board_types.gate_right_right')
-        line(
-          ng-attr-x1='{{scaled.K / 2}}' y1=0
-          ng-attr-x2='{{scaled.K / 2}}' ng-attr-y2='{{scaled.P * 3}}')
-        line(
-          style='stroke: gray;'
-          ng-attr-x1='{{scaled.K / 2}}' ng-attr-y1='{{metadata.scale * 800}}'
-          ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{metadata.scale * 800}}')
+        +ng-line('scaled.K / 2', 0, 'scaled.K / 2', 'scaled.P * 3')
+        +ng-line('scaled.K / 2', 'metadata.scale * 800',
+                 'scaled.K', 'metadata.scale * 800')(style='stroke: gray;')
         circle(ng-attr-cx='{{scaled.K * 0.6}}' ng-attr-cy='{{scaled.P * 1.9}}' r=2 stroke='gray')
-        line(
-          style='stroke: gray;'
-          ng-attr-x1='{{scaled.K * 0.66}}' ng-attr-y1='{{scaled.P * 1.8}}'
-          ng-attr-x2='{{scaled.K * 0.66}}' ng-attr-y2='{{scaled.P * 2.1}}')
-      // 墙
+        +ng-line('scaled.K * 0.66', 'scaled.P * 1.8',
+                 'scaled.K * 0.66', 'scaled.P * 2.1')(style='stroke: gray;')
       g(ng-if='room.front == defines.board_types.board')
-        line(
-          x1=0 ng-attr-y1='{{scaled.P * 0.5}}'
-          ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{scaled.P * 2.5}}')
-        line(
-          x1=0 ng-attr-y1='{{scaled.P * 2.5}}'
-          ng-attr-x2='{{scaled.K}}' ng-attr-y2='{{scaled.P * 0.5}}')
-      rect(ng-attr-width='{{scaled.K}}' ng-attr-height='{{scaled.P * 3}}')
+        +ng-line(0, 'scaled.P * 0.5', 'scaled.K', 'scaled.P * 2.5')
+        +ng-line(0, 'scaled.P * 2.5', 'scaled.K', 'scaled.P * 0.5')
+      +ng-rect(0, 0, 'scaled.K', 'scaled.P * 3')
+
     // 走廊
     g(ng-if='!$first')
       rect(
@@ -65,153 +36,81 @@ g(ng-attr-transform='translate({{scaled.aisle_width * (1 + (metadata.layer > 6))
         ng-attr-y='{{scaled.P * 3 - scaled.aisle_height}}'
         ng-attr-width='{{scaled.width + (metadata.options.stairs.left + metadata.options.stairs.right + (($index + 1) * 3 != metadata.layer && metadata.layer > 6 && metadata.options.stairs.right) + (($index + 1) * 3 != metadata.layer && metadata.layer > 6 && metadata.options.stairs.left)) * scaled.aisle_width}}'
         ng-attr-height='{{scaled.aisle_height}}')
+
     // 两层以上
     g(ng-if='metadata.layer > 6')
       g(ng-if='!$last')
         // 左楼梯
-        g(ng-if='metadata.options.stairs.left' ng-attr-transform='translate({{-scaled.aisle_width * 2}}, 0)')
-          rect(
-            fill='url(#StairsPattern)'
-            ng-attr-x='{{scaled.aisle_width}}' y=0
-            ng-attr-width='{{scaled.aisle_width}}' ng-attr-height='{{scaled.P * 1.5}}')
-          rect(
-            fill='url(#StairsPattern)'
-            x=0 ng-attr-y='{{scaled.P * 1.5}}'
-            ng-attr-width='{{scaled.aisle_width}}' ng-attr-height='{{scaled.P * 1.5}}')
+        g(ng-if='metadata.options.stairs.left'
+          ng-attr-transform='translate({{-scaled.aisle_width * 2}}, 0)')
+          +ng-rect('scaled.aisle_width', 0, 'scaled.aisle_width', 'scaled.P * 1.5')(
+            style='fill: url(#StairsPattern);')
+          +ng-rect(0, 'scaled.P * 1.5', 'scaled.aisle_width', 'scaled.P * 1.5')(
+            style='fill: url(#StairsPattern);')
+
           // 栏杆
-          g
-            line(
-              stroke-width=3
-              x1=0 ng-attr-y1='{{scaled.P * 1.5 - scaled.aisle_height}}'
-              ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.P * 1.5 - scaled.aisle_height}}')
-            line(
-              stroke-width=3
-              x1=0 ng-attr-y1='{{scaled.P * 1.5 - scaled.aisle_height * 0.25}}'
-              ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.P * 1.5 - scaled.aisle_height * 0.25}}')
-            line(
-              stroke-width=3
-              x1=0 ng-attr-y1='{{scaled.P * 1.5 - scaled.aisle_height * 0.5}}'
-              ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.P * 1.5 - scaled.aisle_height * 0.5}}')
-            line(
-              stroke-width=3
-              x1=0 ng-attr-y1='{{scaled.P * 1.5 - scaled.aisle_height * 0.75}}'
-              ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.P * 1.5 - scaled.aisle_height * 0.75}}')
+          +ng-line(0, 'scaled.P * 1.5 - scaled.aisle_height', 'scaled.aisle_width',
+            'scaled.P * 1.5 - scaled.aisle_height')(style='stroke-width: 3;')
+          +ng-line(0, 'scaled.P * 1.5 - scaled.aisle_height * 0.25', 'scaled.aisle_width',
+            'scaled.P * 1.5 - scaled.aisle_height * 0.25')(style='stroke-width: 3;')
+          +ng-line(0, 'scaled.P * 1.5 - scaled.aisle_height * 0.5', 'scaled.aisle_width',
+            'scaled.P * 1.5 - scaled.aisle_height * 0.5')(style='stroke-width: 3;')
+          +ng-line(0, 'scaled.P * 1.5 - scaled.aisle_height * 0.75', 'scaled.aisle_width',
+            'scaled.P * 1.5 - scaled.aisle_height * 0.75')(style='stroke-width: 3;')
+
         // 右楼梯
-        g(ng-if='metadata.options.stairs.right' ng-attr-transform='translate({{scaled.width}}, 0)')
-          rect(
-            fill='url(#StairsPattern)'
-            x=0 y=0
-            ng-attr-width='{{scaled.aisle_width}}' ng-attr-height='{{scaled.P * 1.5}}')
-          rect(
-            fill='url(#StairsPattern)'
-            ng-attr-x='{{scaled.aisle_width}}' ng-attr-y='{{scaled.P * 1.5}}'
-            ng-attr-width='{{scaled.aisle_width}}' ng-attr-height='{{scaled.P * 1.5}}')
+        g(ng-if='metadata.options.stairs.right'
+          ng-attr-transform='translate({{scaled.width}}, 0)')
+          +ng-rect(0, 0, 'scaled.aisle_width', 'scaled.P * 1.5')(
+            style='fill: url(#StairsPattern);')
+          +ng-rect('scaled.aisle_width', 'scaled.P * 1.5',
+            'scaled.aisle_width', 'scaled.P * 1.5')(style='fill: url(#StairsPattern);')
+
           // 栏杆
-          g
-            line(
-              stroke-width=3
-              ng-attr-x1='{{scaled.aisle_width}}' ng-attr-y1='{{scaled.P * 1.5 - scaled.aisle_height}}'
-              ng-attr-x2='{{scaled.aisle_width * 2}}' ng-attr-y2='{{scaled.P * 1.5 - scaled.aisle_height}}')
-            line(
-              stroke-width=3
-              ng-attr-x1='{{scaled.aisle_width}}' ng-attr-y1='{{scaled.P * 1.5 - scaled.aisle_height * 0.25}}'
-              ng-attr-x2='{{scaled.aisle_width * 2}}' ng-attr-y2='{{scaled.P * 1.5 - scaled.aisle_height * 0.25}}')
-            line(
-              stroke-width=3
-              ng-attr-x1='{{scaled.aisle_width}}' ng-attr-y1='{{scaled.P * 1.5 - scaled.aisle_height * 0.5}}'
-              ng-attr-x2='{{scaled.aisle_width * 2}}' ng-attr-y2='{{scaled.P * 1.5 - scaled.aisle_height * 0.5}}')
-            line(
-              stroke-width=3
-              ng-attr-x1='{{scaled.aisle_width}}' ng-attr-y1='{{scaled.P * 1.5 - scaled.aisle_height * 0.75}}'
-              ng-attr-x2='{{scaled.aisle_width * 2}}' ng-attr-y2='{{scaled.P * 1.5 - scaled.aisle_height * 0.75}}')
-  // 房顶
-  g
-    rect(
-      fill='url(#RoofPattern)'
-      ng-attr-x='{{-metadata.scale * 200}}'
-      ng-attr-y='{{-metadata.scale * 600}}'
-      ng-attr-width='{{scaled.width + metadata.scale * 400}}'
-      ng-attr-height='{{metadata.scale * 600}}')
-  // 屋檐
-  g
-    rect(
-      fill='url(#RoofPattern)'
-      ng-attr-width='{{scaled.width}}'
-      ng-attr-height='{{metadata.scale * 200}}')
+          +ng-line('scaled.aisle_width', 'scaled.P * 1.5 - scaled.aisle_height',
+            'scaled.aisle_width * 2', 'scaled.P * 1.5 - scaled.aisle_height')(style='stroke-width: 3;')
+          +ng-line('scaled.aisle_width', 'scaled.P * 1.5 - scaled.aisle_height * 0.25',
+            'scaled.aisle_width * 2', 'scaled.P * 1.5 - scaled.aisle_height * 0.25')(style='stroke-width: 3;')
+          +ng-line('scaled.aisle_width', 'scaled.P * 1.5 - scaled.aisle_height * 0.5',
+            'scaled.aisle_width * 2', 'scaled.P * 1.5 - scaled.aisle_height * 0.5')(style='stroke-width: 3;')
+          +ng-line('scaled.aisle_width', 'scaled.P * 1.5 - scaled.aisle_height * 0.75',
+            'scaled.aisle_width * 2', 'scaled.P * 1.5 - scaled.aisle_height * 0.75')(style='stroke-width: 3;')
+
+  // 房顶、屋檐
+  +ng-rect('-metadata.scale * 200', '-metadata.scale * 600',
+     'scaled.width + metadata.scale * 400', 'metadata.scale * 600')(
+      style='fill: url(#RoofPattern);')
+  +ng-rect(0, 0, 'scaled.width', 'metadata.scale * 200')(style='fill: url(#RoofPattern);')
+
   // 左楼梯
-  g(
-    ng-if='metadata.options.stairs.left'
+  g(ng-if='metadata.options.stairs.left'
     ng-attr-transform='translate({{-scaled.aisle_width}}, {{scaled.P * 3}})')
-    line(
-      x1=0 ng-attr-y1='{{-scaled.aisle_height}}'
-      x2=0 ng-attr-y2='{{scaled.layer - scaled.P * 3}}')
-    rect(
-      ng-if='metadata.layer == 6'
-      fill='url(#StairsPattern)'
-      x=0 y=0
-      ng-attr-width='{{scaled.aisle_width}}' ng-attr-height='{{scaled.layer - scaled.P * 3}}')
-    // 下标尺
-    g(ng-attr-transform='translate(0, {{scaled.layer - scaled.P * 3 + 15}})')
-      line(x1=0 y1=0 x2=0 y2=20)
-      line(x1=0 y1=15 ng-attr-x2='{{scaled.aisle_width - 4}}' y2=15)
-      text(ng-attr-x='{{scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{defines.aisle_width}}
+    +ng-line(0, '-scaled.aisle_height', 0, 'scaled.layer - scaled.P * 3')
+    +ng-rect(0, 0, 'scaled.aisle_width', 'scaled.layer - scaled.P * 3')(
+      if='metadata.layer == 6' style='fill: url(#StairsPattern);')
+    g(ng-attr-transform='translate(0, {{scaled.layer - scaled.P * 3 + 20}})')
+      +ruler('bottom', '(scaled.aisle_width - metadata.scale * 80)', 20, '{{defines.aisle_width}}')
     g(ng-if='metadata.layer > 6')
-      // 标尺
-      g(ng-attr-transform='translate({{-scaled.aisle_width + 2}}, {{scaled.layer - scaled.P * 3 + 15}})')
-        line(x1=0 y1=0 x2=0 y2=20)
-        line(x1=0 y1=15 ng-attr-x2='{{scaled.aisle_width - 4}}' y2=15)
-        text(ng-attr-x='{{scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{defines.aisle_width}}
-      // 边线
-      line(
-        ng-attr-x1='{{-scaled.aisle_width}}' ng-attr-y1='{{scaled.P * 1.5 - scaled.aisle_height}}'
-        ng-attr-x2='{{-scaled.aisle_width}}' ng-attr-y2='{{scaled.layer - scaled.P * 3}}')
+      g(ng-attr-transform='translate({{-scaled.aisle_width + metadata.scale * 80}}, {{scaled.layer - scaled.P * 3 + 20}})')
+        +ruler('bottom', '(scaled.aisle_width - metadata.scale * 80)', 20, '{{defines.aisle_width}}')
+      +ng-line('-scaled.aisle_width', 'scaled.P * 1.5 - scaled.aisle_height',
+               '-scaled.aisle_width', 'scaled.layer - scaled.P * 3')
 
   // 右楼梯
-  g(
-    ng-if='metadata.options.stairs.right'
+  g(ng-if='metadata.options.stairs.right'
     ng-attr-transform='translate({{scaled.width}}, {{scaled.P * 3}})')
-    line(
-      ng-attr-x1='{{scaled.aisle_width}}' ng-attr-y1='{{-scaled.aisle_height}}'
-      ng-attr-x2='{{scaled.aisle_width}}' ng-attr-y2='{{scaled.layer - scaled.P * 3}}')
-    rect(
-      ng-if='metadata.layer == 6'
-      fill='url(#StairsPattern)'
-      x=0 y=0
-      ng-attr-width='{{scaled.aisle_width}}' ng-attr-height='{{scaled.layer - scaled.P * 3}}')
-    // 下标尺
-    g(ng-attr-transform='translate(0, {{scaled.layer - scaled.P * 3 + 15}})')
-      line(ng-attr-x1='{{scaled.aisle_width}}' y1=0 ng-attr-x2='{{scaled.aisle_width}}' y2=20)
-      line(ng-attr-x1='{{metadata.scale * 80}}' y1=15 ng-attr-x2='{{scaled.aisle_width}}' y2=15)
-      text(ng-attr-x='{{scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{defines.aisle_width}}
+    +ng-line('scaled.aisle_width', '-scaled.aisle_height',
+             'scaled.aisle_width', 'scaled.layer - scaled.P * 3')
+    +ng-rect(0, 0, 'scaled.aisle_width', 'scaled.layer - scaled.P * 3')(
+      if='metadata.layer == 6' style='fill: url(#StairsPattern);')
+    g(ng-attr-transform='translate(0, {{scaled.layer - scaled.P * 3 + 20}})')
+      +ruler('bottom', '(scaled.aisle_width)', 20, '{{defines.aisle_width}}')
     g(ng-if='metadata.layer > 6')
-      // 标尺
-      g(ng-attr-transform='translate({{scaled.aisle_width - 1}}, {{scaled.layer - scaled.P * 3 + 15}})')
-        line(ng-attr-x1='{{scaled.aisle_width}}' y1=0 ng-attr-x2='{{scaled.aisle_width}}' y2=20)
-        line(ng-attr-x1='{{metadata.scale * 80}}' y1=15 ng-attr-x2='{{scaled.aisle_width}}' y2=15)
-        text(ng-attr-x='{{scaled.aisle_width / 2}}' y=10 text-anchor='middle') {{defines.aisle_width}}
-      // 边线
-      line(
-        ng-attr-x1='{{scaled.aisle_width * 2}}' ng-attr-y1='{{scaled.P * 1.5 - scaled.aisle_height}}'
-        ng-attr-x2='{{scaled.aisle_width * 2}}' ng-attr-y2='{{scaled.layer - scaled.P * 3}}')
+      g(ng-attr-transform='translate({{scaled.aisle_width}}, {{scaled.layer - scaled.P * 3 + 20}})')
+        +ruler('bottom', '(scaled.aisle_width)', 20, '{{defines.aisle_width}}')
+      +ng-line('scaled.aisle_width * 2', 'scaled.P * 1.5 - scaled.aisle_height',
+               'scaled.aisle_width * 2', 'scaled.layer - scaled.P * 3')
 
   // 标尺
   g(ng-attr-transform='translate(0, {{scaled.layer + 20}})')
-    line(x1=0 y1=10 ng-attr-x2='{{scaled.width}}' y2=10)
-    line(x1=-4 y1=30 ng-attr-x2='{{scaled.width + 4}}' y2=30)
-    line(x1=-4 y1=0 x2=-4 y2=35)
-    line(ng-attr-x1='{{scaled.width + 4}}' y1=0 ng-attr-x2='{{scaled.width + 4}}' y2=35)
-    text(text-anchor='middle' ng-attr-x='{{scaled.width / 2}}' y=28) {{defines.K * metadata.width + 160}}
-    text(x=-8) 80
-    text(ng-attr-x='{{scaled.width - 2}}') 80
-    g(
-      ng-repeat='i in _.range(metadata.width)'
-      ng-attr-transform='translate({{scaled.K * $index}}, 0)')
-      line(x1=0 y1=0 x2=0 y2=40)
-      line(ng-if='$last' ng-attr-x1='{{scaled.K}}' y1=0 ng-attr-x2='{{scaled.K}}' y2=40)
-      text(ng-attr-x='{{scaled.K / 2}}' y=8 text-anchor='middle') {{$parent.defines.K}}
-      g(transform='translate(0, 50)')
-        circle(cx=0 cy=0 r=8 fill='transparent' stroke='black')
-        text(x=-3 y=3) {{$index + 1}}
-      g(ng-attr-transform='translate({{$parent.scaled.K}}, 50)' ng-if='$last')
-        circle(cx=0 cy=0 r=8 fill='transparent' stroke='black')
-        text(x=-4 y=3) {{$index + 2}}
+    +rulers('number', 'metadata.width')
