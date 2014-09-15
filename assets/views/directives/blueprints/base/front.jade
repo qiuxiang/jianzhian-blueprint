@@ -111,6 +111,28 @@ g(ng-attr-transform='translate({{scaled.aisle_width * (1 + (metadata.layer > 6))
       +ng-line('scaled.aisle_width * 2', 'scaled.P * 1.5 - scaled.aisle_height',
                'scaled.aisle_width * 2', 'scaled.layer - scaled.P * 3')
 
+  // 前置左楼梯
+  g(ng-attr-transform='translate(0, {{scaled.P * 3 - scaled.aisle_height}})')
+    g(ng-if='metadata.options.stairs.front_left'
+      ng-attr-transform='translate({{scaled.K}}, 0)')
+      g(ng-if='metadata.layer == 6')
+        +aisle('scaled.K * 2', 'scaled.P * 3')
+    g(ng-if='metadata.options.stairs.front_right'
+      ng-attr-transform='translate({{scaled.width - scaled.K * 3}}, {{scaled.P * 3}})')
+      g(ng-if='metadata.layer == 6')
+        +aisle('scaled.K * 2', '-scaled.P * 3')
+      g(ng-if='metadata.layer > 6' ng-attr-transform='translate({{scaled.K}}, {{-scaled.P * 1.5}})')
+        +ng-line('-scaled.aisle_width', 0, '-scaled.aisle_width',
+          'scaled.layer - scaled.P * 4.5 + scaled.aisle_height')(style='stroke-width: 3;')
+        g(ng-repeat='layer in metadata.rooms'
+          ng-if='!$last'
+          ng-attr-transform='translate(0, {{$index * scaled.P * 3}})')
+          +aisle('scaled.K', '-scaled.P * 1.5')
+          +aisle('scaled.K', 'scaled.P * 1.5')
+          g(ng-attr-transform='translate({{-scaled.aisle_width}}, 0)')
+            +aisle('scaled.aisle_width', 0)
+            +ng-line(0, 0, 0, 'scaled.aisle_height')
+
   // 标尺
   g(ng-attr-transform='translate(0, {{scaled.layer + 20}})')
     +rulers('number', 'metadata.width')
