@@ -2,16 +2,10 @@ include ../../../mixins/blueprint
 
 - var line_border = 'stroke-width: 3; stroke: gray;'
 
-mixin aisle(width, offset)
-  line.border(
-    ng-repeat='i in _.range(0, 5)'
-    x1=0 ng-attr-y1='{{scaled.aisle_height * 0.25 * i}}'
-    ng-attr-x2='{{'+width+'}}' ng-attr-y2='{{scaled.aisle_height * 0.25 * i +'+offset+'}}')
-
 mixin aisle-2
   +aisle('scaled.aisle_width - 2', 0)
   +ng-line('scaled.aisle_width - 4', 0, 'scaled.aisle_width - 4',
-    'scaled.layer - scaled.P * 3 + scaled.aisle_height')(style=line_border)
+    'scaled.layer - scaled.P * 3 + scaled.aisle_height')(style='stroke-width: 3;')
 
 g(transform='translate(20, 30)')
   // 地线
@@ -42,33 +36,34 @@ g(transform='translate(20, 30)')
     +aisle-2()
     g(ng-if='metadata.layer > 6'
       ng-attr-transform='translate(0, {{scaled.P * 3}})')
-      +aisle('scaled.aisle_width - 2', 0)
+      +aisle('scaled.aisle_width * (1 + has_front_stairs) - 4', 0)
     g(ng-if='has_front_stairs'
       ng-attr-transform='translate({{scaled.aisle_width - 2}}, 0)')
       +aisle-2()
       g(ng-attr-transform='translate(-2, {{scaled.aisle_height}})')
-        +ng-rect(0, 0, 'scaled.aisle_width - 2', 'scaled.P * 3')(
+        +ng-rect(0, 0, 'scaled.aisle_width - 2', 'scaled.layer - scaled.P * 3')(
           style='fill: url(#StairsPattern); stroke: none;')
 
   // 只有两层的楼梯
   g(ng-if='metadata.options.stairs.left && metadata.layer == 6'
-    ng-attr-transform='translate({{scaled.height - scaled.stairs_height}}, {{scaled.layer - scaled.aisle_height}})')
-    +aisle('scaled.stairs_height + 4', '-scaled.K * 1.5 - 6')
-    g(ng-attr-transform='translate(0, {{-scaled.P * 3}})')
-      +ng-line(0, 'scaled.P * 3 + scaled.aisle_height',
-        0, 'scaled.P * 3')(style=line_border)
-      +ng-line('800 * metadata.scale', 'scaled.P * 3 * 0.75 + scaled.aisle_height',
-        '800 * metadata.scale', 'scaled.P * 3 * 0.75')(style=line_border)
-      +ng-line('1600 * metadata.scale', 'scaled.P * 3 * 0.5 + scaled.aisle_height + 1',
-        '1600 * metadata.scale', 'scaled.P * 3 * 0.5 + 1')(style=line_border)
-      +ng-line('2400 * metadata.scale', 'scaled.P * 3 * 0.25 + scaled.aisle_height + 2',
-        '2400 * metadata.scale', 'scaled.P * 3 * 0.25 + 2')(style=line_border)
+    ng-attr-transform='translate({{scaled.height - scaled.K * 2}}, {{scaled.layer - scaled.aisle_height}})')
+    +aisle('scaled.K * 2 + 4', '-scaled.K * 1.5 - 6')
+    // 栏杆竖线
+      g(ng-attr-transform='translate(0, {{-scaled.P * 3}})')
+        +ng-line(0, 'scaled.P * 3 + scaled.aisle_height',
+          0, 'scaled.P * 3')(style=line_border)
+        +ng-line('800 * metadata.scale', 'scaled.P * 3 * 0.75 + scaled.aisle_height',
+          '800 * metadata.scale', 'scaled.P * 3 * 0.75')(style=line_border)
+        +ng-line('1600 * metadata.scale', 'scaled.P * 3 * 0.5 + scaled.aisle_height + 1',
+          '1600 * metadata.scale', 'scaled.P * 3 * 0.5 + 1')(style=line_border)
+        +ng-line('2400 * metadata.scale', 'scaled.P * 3 * 0.25 + scaled.aisle_height + 2',
+          '2400 * metadata.scale', 'scaled.P * 3 * 0.25 + 2')(style=line_border)
 
   // 超过两层的楼梯
   g(ng-if='metadata.options.stairs.left && metadata.layer > 6'
     ng-attr-transform='translate({{scaled.height - scaled.K}}, {{scaled.P * 4.5 - scaled.aisle_height}})')
     +ng-line('-scaled.aisle_width', 0, '-scaled.aisle_width',
-      'scaled.layer - scaled.P * 4.5 + scaled.aisle_height')(style=line_border)
+      'scaled.layer - scaled.P * 4.5 + scaled.aisle_height')(style='stroke-width: 3;')
     g(ng-repeat='layer in metadata.rooms'
       ng-if='!$last'
       ng-attr-transform='translate(0, {{$index * scaled.P * 3}})')
