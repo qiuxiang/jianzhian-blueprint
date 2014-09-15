@@ -26,6 +26,11 @@
       $scope.metadata = $scope.$parent.metadata
       $scope.defines = $scope.$parent.defines
       $scope.attrs = $attrs
+
+      $scope.$watch('metadata.options.stairs', function () {
+        $scope.has_front_stairs = $scope.metadata.options.stairs.front_left || $scope.metadata.options.stairs.front_right
+      }, true)
+
       $scope.clicked = function (room, w, h) {
         var board_types = {}
         board_types[$scope.defines.board_types.none] = '无'

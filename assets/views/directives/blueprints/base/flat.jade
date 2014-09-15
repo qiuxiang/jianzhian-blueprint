@@ -11,7 +11,7 @@ mixin stairs_2(placement)
   +ng-line(0, 'scaled.stairs_height + scaled.aisle_width',
     'scaled.aisle_width', 'scaled.stairs_height + scaled.aisle_width')(style=line_border)
   +ng-line(x, 0, x, 'scaled.stairs_height + scaled.aisle_width')(style=line_border)
-  g(ng-attr-transform='translate(0, {{scaled.stairs_height + scaled.aisle_width + 20}})')
+  g(ng-attr-transform='translate(0, {{scaled.stairs_height + scaled.aisle_width * (1 + has_front_stairs) + 20}})')
     +ruler('bottom', '(scaled.aisle_width - metadata.scale * 80)', 20, '{{defines.aisle_width}}')
 
 // 超过两层的楼梯
@@ -125,14 +125,32 @@ g(transform='translate(10, 10)')
 
     // 走廊
     g(ng-attr-transform='translate(0, {{scaled.height}})')
-      - var style='stroke-width: 3; stroke: gray;'
       +ng-line(0, 'scaled.aisle_width', 'scaled.width', 'scaled.aisle_width')(
-        style=style)
+        style=line_border)
       +ng-line(0, 0, 0, 'scaled.aisle_width')(
-        style=style if='!metadata.options.stairs.left')
+        style=line_border if='!metadata.options.stairs.left')
       +ng-line('scaled.width', 0, 'scaled.width', 'scaled.aisle_width')(
-        style=style if='!metadata.options.stairs.right')
+        style=line_border if='!metadata.options.stairs.right')
+
+      // 前置楼梯
+      g(ng-attr-transform='translate(0, {{scaled.aisle_width}})')
+        g(ng-if='metadata.options.stairs.front_left')
+          +ng-line(0, 0, 0, 'scaled.aisle_width')(style=line_border)
+          +ng-line(0, 'scaled.aisle_width',
+            'scaled.K + scaled.stairs_height', 'scaled.aisle_width')(style=line_border)
+          +ng-rect(2, -2, 'scaled.K', 'scaled.aisle_width')(style='fill: white; stroke: none;')
+          g(ng-attr-transform='translate({{scaled.K}}, {{scaled.aisle_width}}) rotate(-90 0,0)')
+            +ng-rect(0, 0, 'scaled.aisle_width', 'scaled.stairs_height')(
+              style='fill: url(#StairsPattern)')
+        g(ng-if='metadata.options.stairs.front_right')
+          +ng-line('scaled.width', 0, 'scaled.width', 'scaled.aisle_width')(style=line_border)
+          +ng-line('scaled.width', 'scaled.aisle_width',
+            'scaled.width - scaled.K - scaled.stairs_height', 'scaled.aisle_width')(style=line_border)
+          +ng-rect('scaled.width - scaled.K -2', -2, 'scaled.K', 'scaled.aisle_width')(style='fill: white; stroke: none;')
+          g(ng-attr-transform='translate({{scaled.width - scaled.K}}, 0) rotate(90 0,0)')
+            +ng-rect(0, 0, 'scaled.aisle_width', 'scaled.stairs_height')(
+            style='fill: url(#StairsPattern)')
 
     // 横向标尺
-    g(ng-attr-transform='translate(0, {{scaled.height + scaled.aisle_width + 20}})')
+    g(ng-attr-transform='translate(0, {{scaled.height + scaled.aisle_width * (1 + has_front_stairs) + 20}})')
       +rulers('number', 'rooms.length')

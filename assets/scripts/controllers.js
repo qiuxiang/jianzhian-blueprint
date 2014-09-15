@@ -31,7 +31,9 @@ angular.module('controllers', [])
       options: {
         stairs: {
           left: true,
-          right: false
+          right: false,
+          front_left: true,
+          front_right: false
         },
         fireproof: 0,
         gate: 0
