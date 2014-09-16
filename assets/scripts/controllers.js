@@ -32,7 +32,7 @@ angular.module('controllers', [])
         stairs: {
           left: true,
           right: false,
-          front_left: true,
+          front_left: false,
           front_right: false
         },
         fireproof: 0,
