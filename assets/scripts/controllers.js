@@ -9,12 +9,20 @@ angular.module('controllers', [])
       board_types: {
         none: 0,
         window: 1,
+        window_half_left: 10,
+        window_half_right: 11,
         board: 2,
+        board_half_left: 20,
+        board_half_right: 21,
         gate_dual: 3,
         gate_left_left: 4,
         gate_left_right: 5,
         gate_right_left: 6,
-        gate_right_right: 7
+        gate_right_right: 7,
+        gate_left_left_no_border: 40,
+        gate_left_right_no_border: 50,
+        gate_right_left_no_border: 60,
+        gate_right_right_no_border: 70
       },
       aisle_width: 1000, // 走道宽度
       aisle_height: 1000, // 栏杆高度

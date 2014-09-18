@@ -33,11 +33,19 @@
         board_types[$scope.defines.board_types.none] = '无'
         board_types[$scope.defines.board_types.board] = '墙'
         board_types[$scope.defines.board_types.window] = '窗'
+        board_types[$scope.defines.board_types.window_half_left] = '左半窗'
+        board_types[$scope.defines.board_types.window_half_right] = '右半窗'
+        board_types[$scope.defines.board_types.board_half_left] = '左半墙'
+        board_types[$scope.defines.board_types.board_half_right] = '右半墙'
         board_types[$scope.defines.board_types.gate_dual] = '双开门'
         board_types[$scope.defines.board_types.gate_left_left] = '左侧左开门'
         board_types[$scope.defines.board_types.gate_left_right] = '左侧右开门'
         board_types[$scope.defines.board_types.gate_right_left] = '右侧左开门'
         board_types[$scope.defines.board_types.gate_right_right] = '右侧右开门'
+        board_types[$scope.defines.board_types.gate_left_left_no_border] = '左侧左开门（无墙）'
+        board_types[$scope.defines.board_types.gate_left_right_no_border] = '左侧右开门（无墙）'
+        board_types[$scope.defines.board_types.gate_right_left_no_border] = '右侧左开门（无墙）'
+        board_types[$scope.defines.board_types.gate_right_right_no_border] = '右侧右开门（无墙）'
 
         $scope.$parent.room_options = {
           middle: _.clone(board_types),
