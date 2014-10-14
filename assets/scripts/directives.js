@@ -23,9 +23,9 @@
     }]
     , flatCtrl = ['$scope', '$attrs', function ($scope, $attrs) {
       $scope._ = _
-      $scope.metadata = $scope.$parent.metadata
-      $scope.defines = $scope.$parent.defines
-      $scope.has_front_stairs = $scope.$parent.has_front_stairs
+      $scope.metadata = $scope.$parent.$parent.metadata
+      $scope.defines = $scope.$parent.$parent.defines
+      $scope.has_front_stairs = $scope.$parent.$parent.has_front_stairs
       $scope.attrs = $attrs
 
       $scope.clicked = function (room, w, h) {
@@ -47,7 +47,7 @@
         board_types[$scope.defines.board_types.gate_right_left_no_border] = '右侧左开门（无墙）'
         board_types[$scope.defines.board_types.gate_right_right_no_border] = '右侧右开门（无墙）'
 
-        $scope.$parent.room_options = {
+        $scope.$parent.$parent.room_options = {
           middle: _.clone(board_types),
           right: _.clone(board_types),
           front: _.clone(board_types),
@@ -55,17 +55,17 @@
         }
 
         if (h != 0) {
-          delete $scope.$parent.room_options.back
+          delete $scope.$parent.$parent.room_options.back
         }
 
         if ($scope.rooms.indexOf(w) == 0) {
-          $scope.$parent.room_options.left = _.clone(board_types)
+          $scope.$parent.$parent.room_options.left = _.clone(board_types)
         }
 
         $('#modal-flat').modal('show')
         setTimeout(function() {
-          $scope.$parent.$apply(function () {
-            $scope.$parent.room = room
+          $scope.$parent.$parent.$apply(function () {
+            $scope.$parent.$parent.room = room
           })
         }, 100)
       }
@@ -120,7 +120,7 @@
     .directive('blueprintCompleteFlat', function () {
       return {
         restrict: 'E',
-        templateUrl: window.views_dir + '/directives/blueprints/flat.html',
+        templateUrl: window.views_dir + '/directives/blueprints/complete/flat.html',
         controller: flatCtrl
       }
     })

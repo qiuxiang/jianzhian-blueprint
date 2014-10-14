@@ -1,0 +1,28 @@
+@media print {
+  svg {
+    transform: scale(0.62);
+    transform-origin: left top;
+    page-break-after: always;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  .blueprints {
+    overflow: hidden;
+    padding-bottom: 0;
+
+    .tab-pane {
+      padding: 0;
+    }
+  }
+
+  .nav-tabs, a[href="#modal-params"] {
+    display: none;
+  }
+
+  .tab-content > .tab-pane {
+    display: block;
+  }
+}

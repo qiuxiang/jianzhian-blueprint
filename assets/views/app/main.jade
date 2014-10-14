@@ -1,6 +1,5 @@
 include ../mixins/bootstrap
 
-br
 .container
   a.btn.btn-primary.btn-fixed(href='#modal-params' data-toggle='modal')
     span.glyphicon.glyphicon-th-list
@@ -18,14 +17,21 @@ br
 
   .tab-content.blueprints
     #blueprint-foundation.tab-pane.active
-      blueprint-simple-foundation
+      blueprint-simple-foundation(ng-if='metadata.options.display == 0')
+      blueprint-complete-foundation(ng-if='metadata.options.display == 1')
     #blueprint-flat.tab-pane
       blueprint-simple-flat(
+        ng-if='metadata.options.display == 0'
+        ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
+      blueprint-complete-flat(
+        ng-if='metadata.options.display == 1'
         ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
     #blueprint-side.tab-pane
-      blueprint-simple-side
+      blueprint-simple-side(ng-if='metadata.options.display == 0')
+      blueprint-complete-side(ng-if='metadata.options.display == 1')
     #blueprint-front.tab-pane
-      blueprint-simple-front
+      blueprint-simple-front(ng-if='metadata.options.display == 0')
+      blueprint-complete-front(ng-if='metadata.options.display == 1')
 
 mixin form-group(label, for_)
   .form-group
@@ -70,6 +76,9 @@ mixin radios(key, radios)
       +radios('fireproof', '阻燃,防火')
     +form-group('门')
       +radios('gate', '防盗门,普通门')
+    //
+      +form-group('显示')
+        +radios('display', '基本,完整')
 
     br
     .form-group
@@ -95,7 +104,7 @@ mixin radios(key, radios)
   form.form-horizontal
     each name, placement in {front: '前', back: '后', left: '左', right: '右', middle: '中'}
       .form-group(ng-if='room_options.'+placement)
-        label.col-sm-4.control-label(for='input-room-'+placemnt)= name
+        label.col-sm-4.control-label(for='input-room-'+placement)= name
         .col-sm-6
           select.form-control(id='input-room-'+placement ng-model='room.'+placement)
             option(ng-repeat='(value, name) in room_options.'+placement

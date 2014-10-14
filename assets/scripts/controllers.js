@@ -4,7 +4,7 @@ angular.module('controllers', [])
     $scope.defines = {
       blueprint: {
         width: 1140,
-        height: 760
+        height: 720
       },
       board_types: {
         none: 0,
@@ -44,7 +44,8 @@ angular.module('controllers', [])
           front_right: false
         },
         fireproof: 0,
-        gate: 0
+        gate: 0,
+        display: 0
       }
     }
 
