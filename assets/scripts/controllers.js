@@ -3,8 +3,8 @@ angular.module('controllers', [])
     $scope._ = _
     $scope.defines = {
       blueprint: {
-        width: 1140,
-        height: 720
+        width: 1046,
+        height: 736
       },
       board_types: {
         none: 0,

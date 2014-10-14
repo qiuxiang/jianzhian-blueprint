@@ -17,21 +17,23 @@ include ../mixins/bootstrap
 
   .tab-content.blueprints
     #blueprint-foundation.tab-pane.active
-      blueprint-simple-foundation(ng-if='metadata.options.display == 0')
-      blueprint-complete-foundation(ng-if='metadata.options.display == 1')
+      div(blueprint-simple-foundation ng-if='metadata.options.display == 0')
+      div(blueprint-complete-foundation ng-if='metadata.options.display == 1')
     #blueprint-flat.tab-pane
-      blueprint-simple-flat(
+      div(
+        blueprint-simple-flat
         ng-if='metadata.options.display == 0'
         ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
-      blueprint-complete-flat(
+      div(
+        blueprint-complete-flat
         ng-if='metadata.options.display == 1'
         ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
     #blueprint-side.tab-pane
-      blueprint-simple-side(ng-if='metadata.options.display == 0')
-      blueprint-complete-side(ng-if='metadata.options.display == 1')
+      div(blueprint-simple-side ng-if='metadata.options.display == 0')
+      div(blueprint-complete-side ng-if='metadata.options.display == 1')
     #blueprint-front.tab-pane
-      blueprint-simple-front(ng-if='metadata.options.display == 0')
-      blueprint-complete-front(ng-if='metadata.options.display == 1')
+      div(blueprint-simple-front ng-if='metadata.options.display == 0')
+      div(blueprint-complete-front ng-if='metadata.options.display == 1')
 
 mixin form-group(label, for_)
   .form-group
@@ -76,9 +78,8 @@ mixin radios(key, radios)
       +radios('fireproof', '阻燃,防火')
     +form-group('门')
       +radios('gate', '防盗门,普通门')
-    //
-      +form-group('显示')
-        +radios('display', '基本,完整')
+    +form-group('显示')
+      +radios('display', '基本,完整')
 
     br
     .form-group

@@ -74,52 +74,52 @@
   angular.module('directives', [])
     .directive('blueprintSimpleFoundation', function () {
       return {
-        restrict: 'E',
+        restrict: 'E,A',
         templateUrl: window.views_dir + '/directives/blueprints/simple/foundation.html',
         controller: foundationCtrl
       }
     })
     .directive('blueprintCompleteFoundation', function () {
       return {
-        restrict: 'E',
+        restrict: 'E,A,A',
         templateUrl: window.views_dir + '/directives/blueprints/complete/foundation.html',
         controller: foundationCtrl
       }
     })
     .directive('blueprintSimpleSide', function () {
       return {
-        restrict: 'E',
+        restrict: 'E,A',
         templateUrl: window.views_dir + '/directives/blueprints/simple/side.html'
       }
     })
     .directive('blueprintCompleteSide', function () {
       return {
-        restrict: 'E',
+        restrict: 'E,A',
         templateUrl: window.views_dir + '/directives/blueprints/complete/side.html'
       }
     })
     .directive('blueprintSimpleFront', function () {
       return {
-        restrict: 'E',
+        restrict: 'E,A',
         templateUrl: window.views_dir + '/directives/blueprints/simple/front.html'
       }
     })
     .directive('blueprintCompleteFront', function () {
       return {
-        restrict: 'E',
+        restrict: 'E,A',
         templateUrl: window.views_dir + '/directives/blueprints/complete/front.html'
       }
     })
     .directive('blueprintSimpleFlat', function () {
       return {
-        restrict: 'E',
+        restrict: 'E,A',
         templateUrl: window.views_dir + '/directives/blueprints/simple/flat.html',
         controller: flatCtrl
       }
     })
     .directive('blueprintCompleteFlat', function () {
       return {
-        restrict: 'E',
+        restrict: 'E,A',
         templateUrl: window.views_dir + '/directives/blueprints/complete/flat.html',
         controller: flatCtrl
       }
