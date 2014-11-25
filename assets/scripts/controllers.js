@@ -45,6 +45,8 @@ angular.module('controllers', [])
         },
         fireproof: 0,
         gate: 0,
+        tile: 0,
+        awning: 0,
         display: 0
       }
     }
