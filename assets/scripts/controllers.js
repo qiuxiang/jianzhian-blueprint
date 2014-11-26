@@ -44,9 +44,12 @@ angular.module('controllers', [])
           front_right: false
         },
         fireproof: 0,
-        gate: 0,
-        tile: 0,
-        awning: 0,
+        gate_type: 0,
+        board_type: 0,
+        tile_type: 0,
+        tile_class: 0,
+        has_awning: 0,
+        awning_type: 0,
         display: 0
       }
     }
