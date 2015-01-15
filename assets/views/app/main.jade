@@ -111,15 +111,35 @@ mixin radios(key, radios)
             +icon('import')
             | 导入
 
+mixin room-selector(placement, name)
+  .input-group(ng-if='room_options.'+placement)
+    label.input-group-addon(for='input-room-'+placement)= name
+    select.form-control(id='input-room-'+placement ng-model='room.'+placement)
+      option(value=0) 无
+      option(value=3) 双开门
+      optgroup(ng-repeat='(group, options) in room_options.'+placement label='{{group}}')
+        option(ng-repeat='(value, name) in options'
+        value='{{value}}') {{name}}
+
 +modal('flat', '房间设置')
-  form.form-horizontal
-    each name, placement in {front: '前', back: '后', left: '左', right: '右', middle: '中'}
-      .form-group(ng-if='room_options.'+placement)
-        label.col-sm-4.control-label(for='input-room-'+placement)= name
-        .col-sm-6
-          select.form-control(id='input-room-'+placement ng-model='room.'+placement)
-            option(ng-repeat='(value, name) in room_options.'+placement
-                   value='{{value}}') {{name}}
+  table.table-room
+    tr
+      td &nbsp;
+      td
+        +room-selector('back', '后')
+      td &nbsp;
+    tr
+      td
+        +room-selector('left', '左')
+      td
+        +room-selector('middle', '中')
+      td
+        +room-selector('right', '右')
+    tr
+      td &nbsp;
+      td
+        +room-selector('front', '前')
+      td &nbsp;
 
 +modal('import', '导入数据')
   form
