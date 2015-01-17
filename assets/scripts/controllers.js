@@ -32,7 +32,7 @@ angular.module('controllers', [])
     }
 
     $scope.metadata = {
-      width: 10,
+      width: 4,
       height: 3,
       layer: 6,
       scale: 0.04,
@@ -125,6 +125,18 @@ angular.module('controllers', [])
 
     $scope.importMetadata = function (metadata) {
       setMetadata(JSON.parse(metadata))
+    }
+
+    $scope.copy = function (metadata) {
+      metadata.width *= 2
+      _.forEach(metadata.rooms, function (layer) {
+        return _.forEach(layer, function (col) {
+          layer.push(_.map(col, function (room) {
+            delete room['$$hashKey']
+            return room
+          }))
+        })
+      })
     }
 
     function setMetadata(metadata) {

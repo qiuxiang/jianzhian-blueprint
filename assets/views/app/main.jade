@@ -28,6 +28,7 @@ include ../mixins/bootstrap
         blueprint-complete-flat
         ng-if='metadata.options.display == 1'
         ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
+      button.btn.btn-primary(ng-click='copy(metadata)') 复制
     #blueprint-side.tab-pane
       div(blueprint-simple-side ng-if='metadata.options.display == 0')
       div(blueprint-complete-side ng-if='metadata.options.display == 1')
