@@ -148,6 +148,11 @@ angular.module('controllers', [])
     }
 
     function resetRooms() {
+      if ($scope.metadata.rooms &&
+          $scope.metadata.width == $scope.metadata.rooms[0].length) {
+        return
+      }
+
       $scope.metadata.rooms = _.map(_.range(3, Number($scope.metadata.layer) + 1, 3), function () {
         return  _.map(_.range(0, $scope.metadata.width), function (w) {
           return  _.map(_.range(0, $scope.metadata.height), function (h) {
