@@ -28,7 +28,6 @@ include ../mixins/bootstrap
         blueprint-complete-flat
         ng-if='metadata.options.display == 1'
         ng-repeat='rooms in metadata.rooms' layer='{{$index}}')
-      button.btn.btn-primary(ng-click='copy(metadata)') 复制
     #blueprint-side.tab-pane
       div(blueprint-simple-side ng-if='metadata.options.display == 0')
       div(blueprint-complete-side ng-if='metadata.options.display == 1')
@@ -66,6 +65,12 @@ mixin radios(key, radios)
         span.input-group-addon P
     +form-group('缩放', 'scale')
       input#input-scale.form-control(type='text' ng-model='metadata.scale')
+
+    h5 复制
+    +form-group('基数', 'copy-base')
+      input#input-copy-base.form-control(type='text' ng-model='metadata.copy.base')
+    +form-group('次数', 'copy-count')
+      input#input-copy-count.form-control(type='text' ng-model='metadata.copy.count')
 
     br
     h5 选项

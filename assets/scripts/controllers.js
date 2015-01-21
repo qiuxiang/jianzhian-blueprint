@@ -51,6 +51,10 @@ angular.module('controllers', [])
         has_awning: 0,
         awning_type: 0,
         display: 0
+      },
+      copy: {
+        base: 2,
+        count: 1
       }
     }
 
@@ -101,6 +105,25 @@ angular.module('controllers', [])
       }
     })
 
+    $scope.$watch('metadata.copy', function () {
+      $scope.metadata.width = $scope.metadata.copy.base * $scope.metadata.copy.count
+      console.log($scope.metadata.width)
+      $scope.metadata.rooms = _.map($scope.metadata.rooms, function (layer) {
+        return  _.map(_.range(0, $scope.metadata.width), function (row) {
+          return  _.map(_.range(0, $scope.metadata.height), function (h) {
+            var w = row % $scope.metadata.copy.base
+              , room = _.cloneDeep(layer[w][h])
+
+            if (w == 0 && row != 0) {
+              //room.left = $scope.defines.board_types.none
+            }
+
+            return room
+          })
+        })
+      })
+    }, true)
+
     $scope.exportMetadataToFile = function (metadata) {
       metadata.rooms = _.map(metadata.rooms, function (layer) {
         return _.map(layer, function (col) {
@@ -125,18 +148,6 @@ angular.module('controllers', [])
 
     $scope.importMetadata = function (metadata) {
       setMetadata(JSON.parse(metadata))
-    }
-
-    $scope.copy = function (metadata) {
-      metadata.width *= 2
-      _.forEach(metadata.rooms, function (layer) {
-        return _.forEach(layer, function (col) {
-          layer.push(_.map(col, function (room) {
-            delete room['$$hashKey']
-            return room
-          }))
-        })
-      })
     }
 
     function setMetadata(metadata) {
@@ -181,6 +192,11 @@ angular.module('controllers', [])
           })
         })
       })
+
+      $scope.metadata.copy = {
+        base: $scope.metadata.width,
+        count: 1
+      }
     }
 
     function exportFile(fileName, content) {
