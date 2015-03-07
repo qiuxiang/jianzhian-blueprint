@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         expand: true,
         flatten: true,
         src: 'bower_components/bootstrap/fonts/*',
-        dest: 'public/fonts/'
+        dest: 'dist/fonts/'
       }
     },
     concat: {
@@ -21,22 +21,22 @@ module.exports = function(grunt) {
           'bower_components/angular/angular.js',
           'bower_components/angular-route/angular-route.js'
         ],
-        dest: 'public/scripts/vendor.js'
+        dest: 'dist/scripts/vendor.js'
       },
       scripts: {
-        src:  'assets/scripts/*.js',
-        dest: 'public/scripts/app.js'
+        src:  'src/scripts/*.js',
+        dest: 'dist/scripts/app.js'
       }
     },
     jade: {
       index: {
         files: {
-          'public/index.html': 'assets/views/index.jade'
+          'dist/index.html': 'src/views/index.jade'
         }
       },
       views: {
-        files: glob.sync('assets/views/*/**/*.jade').reduce(function (files, file) {
-          files[file.replace('assets', 'public').replace('jade', 'html')] = file
+        files: glob.sync('src/views/*/**/*.jade').reduce(function (files, file) {
+          files[file.replace('src', 'dist').replace('jade', 'html')] = file
           return files
         }, {})
       }
@@ -44,40 +44,40 @@ module.exports = function(grunt) {
     less: {
       app: {
         files: {
-          'public/styles/app.css': 'assets/styles/app.less'
+          'dist/styles/app.css': 'src/styles/app.less'
         }
       }
     },
     uglify: {
       app: {
         files: {
-          'public/scripts/app.js': 'public/scripts/app.js'
+          'dist/scripts/app.js': 'dist/scripts/app.js'
         }
       },
       vendor: {
         files: {
-          'public/scripts/vendor.js': 'public/scripts/vendor.js'
+          'dist/scripts/vendor.js': 'dist/scripts/vendor.js'
         }
       }
     },
     cssmin: {
       css: {
         files: {
-          'public/styles/app.css': 'public/styles/app.css'
+          'dist/styles/app.css': 'dist/styles/app.css'
         }
       }
     },
     watch: {
       scripts: {
-        files: 'assets/scripts/*.js',
+        files: 'src/scripts/*.js',
         tasks: 'concat:scripts'
       },
       jade: {
-        files: 'assets/views/**/*.jade',
+        files: 'src/views/**/*.jade',
         tasks: 'jade'
       },
       less: {
-        files: 'assets/styles/**/*.less',
+        files: 'src/styles/**/*.less',
         tasks: 'less'
       }
     }
