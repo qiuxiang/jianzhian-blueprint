@@ -107,7 +107,6 @@ angular.module('controllers', [])
 
     $scope.$watch('metadata.copy', function () {
       $scope.metadata.width = $scope.metadata.copy.base * $scope.metadata.copy.count
-      console.log($scope.metadata.width)
       $scope.metadata.rooms = _.map($scope.metadata.rooms, function (layer) {
         return  _.map(_.range(0, $scope.metadata.width), function (row) {
           return  _.map(_.range(0, $scope.metadata.height), function (h) {
@@ -160,7 +159,8 @@ angular.module('controllers', [])
 
     function resetRooms() {
       if ($scope.metadata.rooms &&
-          $scope.metadata.width == $scope.metadata.rooms[0].length) {
+          $scope.metadata.width == $scope.metadata.rooms[0].length &&
+          $scope.metadata.layer == $scope.metadata.rooms.length * 3) {
         return
       }
 
