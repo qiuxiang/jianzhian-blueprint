@@ -160,6 +160,7 @@ angular.module('controllers', [])
     function resetRooms() {
       if ($scope.metadata.rooms &&
           $scope.metadata.width == $scope.metadata.rooms[0].length &&
+          $scope.metadata.height == $scope.metadata.rooms[0][0].length &&
           $scope.metadata.layer == $scope.metadata.rooms.length * 3) {
         return
       }
